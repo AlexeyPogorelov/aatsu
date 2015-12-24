@@ -1,0 +1,49 @@
+section#presentation {
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+.foreground-holder {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	-webkit-mask-image: radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
+	mask-image: radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
+	-webkit-mask-mode: luminance;
+	mask-mode: luminance;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position-x: 0px;
+	-webkit-mask-position-y: 0px;
+}
+.background-holder {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}
+.background-holder img,
+.foreground-holder img {
+	display: block;
+	/*height: 100%;*/
+	width: 100%;
+}
+a.main-mailto {
+	font-family: "Circe-Bold", sans-serif;
+	font-size: 25px;
+	color: #443532;
+	font-weight: bold;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	z-index: 10;
+	margin: 0;
+	padding: 0;
+}
