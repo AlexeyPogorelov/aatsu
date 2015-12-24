@@ -22,5 +22,21 @@
 /*
 	SMALL
 */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 564px) {
+	.foreground-holder {
+		-webkit-mask-image: -webkit-radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
+		mask-image: radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
+	}
+}
+/*
+	xSMALL
+*/
+@media screen and (max-width: 400px) {
+	.background-holder img,
+	.foreground-holder img {
+		max-width: 136%;
+	}
+	a.main-mailto {
+		font-size: 18px;
+	}
 }

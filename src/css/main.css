@@ -1,5 +1,6 @@
 section#presentation {
 	overflow: hidden;
+	position: relative;
 	height: 100%;
 	width: 100%;
 }
@@ -11,7 +12,7 @@ section#presentation {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	-webkit-mask-image: radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
+	-webkit-mask-image: -webkit-radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
 	mask-image: radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
 	-webkit-mask-mode: luminance;
 	mask-mode: luminance;
@@ -33,6 +34,7 @@ section#presentation {
 .foreground-holder img {
 	display: block;
 	/*height: 100%;*/
+	min-width: 100%;
 	width: 100%;
 }
 a.main-mailto {

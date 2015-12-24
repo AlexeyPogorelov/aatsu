@@ -12,6 +12,20 @@ function randomInteger(min, max) {
 	rand = Math.round(rand);
 	return rand;
 }
+var preloader = {
+	stages: 2,
+	pgogress: 0,
+	ready: function () {
+		if (++this.pgogress == this.stages) {
+			// hide preloader
+			$('.preloader').animate({
+				'opacity': 0
+			}, 800, function () {
+				$(this).remove();
+			});
+		}
+	}
+};
 
 $(document).on('ready', function () {
 	var $foreground = $('.foreground-holder'),
@@ -19,17 +33,44 @@ $(document).on('ready', function () {
 		winWidth = $(window).width(),
 		winHeight = $(window).height(),
 		randomBgIndex = randomInteger(0, backgrounds.length - 1);
-	$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg');
-	$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg');
-
-	if (winHeight > winWidth) {}
-
-	// hide preloader
-	$('.preloader').animate({
-		'opacity': 0
-	}, 800, function () {
-		$(this).remove();
+	$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
+		$(window).trigger('resize');
+		preloader.ready();
 	});
+	$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', function () {
+		$(window).trigger('resize');
+		preloader.ready();
+	});
+
+	function fillPresentation () {
+		if (winHeight > winWidth) {
+			// TODO
+			$foreground.parent().height(winHeight);
+			$foreground.height(winHeight);
+			$background.height(winHeight);
+			$foreground.find('img').css({
+				'width': 'auto',
+				'height': '100%'
+			});
+			$background.find('img').css({
+				'width': 'auto',
+				'height': '100%'
+			});
+		} else {
+			$foreground.parent().height(winHeight);
+			$foreground.height(winWidth);
+			$background.height(winWidth);
+			$foreground.find('img').css({
+				'height': 'auto',
+				'width': '100%'
+			});
+			$background.find('img').css({
+				'height': 'auto',
+				'width': '100%'
+			});
+		}
+	}
+	fillPresentation ();
 
 	// placing image middle
 	function middlindImage ($child, $parent, offset) {
@@ -43,27 +84,43 @@ $(document).on('ready', function () {
 			offset = 0;
 		}
 		$child.css({
-			'margin-top': ($child.height() - $parent.height()) / 2 + offset
+			'margin-top': -(($child.height() - $parent.height()) / 2),
+			'margin-left': 0
 		});
+		if (winHeight > winWidth) {
+			$child.css({
+				'margin-left': -(($child.width() - $parent.width()) / 2)
+			});
+		}
 	}
-	middlindImage ($foreground.find('img'), null, -60);
-	middlindImage ($background.find('img'), null, -60);
+	middlindImage ($foreground.find('img'), $(window), -60);
+	middlindImage ($background.find('img'), $(window), -60);
 
 	// mouse move
 	$(window).on('mousemove', function (e) {
-		$foreground.css({
-			'-webkit-mask-position-x': e.pageX - winWidth / 2,
-			'-webkit-mask-position-y': e.pageY - winHeight / 2,
-			'mask-position-x': e.pageX - winWidth / 2,
-			'mask-position-y': e.pageY - winHeight / 2
-		});
+		if (winHeight > winWidth) {
+			$foreground.css({
+				'-webkit-mask-position-x': e.pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.pageY - winHeight / 2,
+				'mask-position-x': e.pageX - winWidth / 2,
+				'mask-position-y': e.pageY - winHeight / 2
+			});
+		} else {
+			$foreground.css({
+				'-webkit-mask-position-x': e.pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.pageY - winWidth / 2,
+				'mask-position-x': e.pageX - winWidth / 2,
+				'mask-position-y': e.pageY - winWidth / 2
+			});
+		}
 	});
 
 	// resize
-	$(window).on('resize', function (e) {
+	$(window).on('resize', function () {
 		winWidth = $(window).width();
 		winHeight = $(window).height();
-		middlindImage ($foreground.find('img'), null, -60);
-		middlindImage ($background.find('img'), null, -60);
+		fillPresentation ();
+		middlindImage ($foreground.find('img'), $(window), -60);
+		middlindImage ($background.find('img'), $(window), -60);
 	});
 });
