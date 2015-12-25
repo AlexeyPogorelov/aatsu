@@ -31,31 +31,31 @@
 }
 @font-face {
 	font-family: 'Bender';
-	src: url('../fonts/bender/Bender-Bold.eot');
-	src: url('../fonts/bender/Bender-Bold.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bender/Bender-Bold.woff') format('woff'),
-		 url('../fonts/bender/Bender-Bold.ttf') format('truetype'),
-		 url('../fonts/bender/Bender-Bold.svg#Bender') format('svg');
+	src: url('../fonts/bender/bender-Bold.eot');
+	src: url('../fonts/bender/bender-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/bender/bender-Bold.woff') format('woff'),
+		 url('../fonts/bender/bender-Bold.ttf') format('truetype'),
+		 url('../fonts/bender/bender-Bold.svg#Bender') format('svg');
 	font-style: normal;
 	font-weight: 700;
 }
 @font-face {
 	font-family: 'Bender';
-	src: url('../fonts/bender/Bender-Light.eot');
-	src: url('../fonts/bender/Bender-Light.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bender/Bender-Light.woff') format('woff'),
-		 url('../fonts/bender/Bender-Light.ttf') format('truetype'),
-		 url('../fonts/bender/Bender-Light.svg#Bender') format('svg');
+	src: url('../fonts/bender/bender-Light.eot');
+	src: url('../fonts/bender/bender-Light.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/bender/bender-Light.woff') format('woff'),
+		 url('../fonts/bender/bender-Light.ttf') format('truetype'),
+		 url('../fonts/bender/bender-Light.svg#Bender') format('svg');
 	font-style: normal;
 	font-weight: 200;
 }
 @font-face {
 	font-family: 'Bender';
-	src: url('../fonts/bender/Bender-LightItalic.eot');
-	src: url('../fonts/bender/Bender-LightItalic.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/bender/Bender-LightItalic.woff') format('woff'),
-		 url('../fonts/bender/Bender-LightItalic.ttf') format('truetype'),
-		 url('../fonts/bender/Bender-LightItalic.svg#Bender') format('svg');
+	src: url('../fonts/bender/bender-LightItalic.eot');
+	src: url('../fonts/bender/bender-LightItalic.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/bender/bender-LightItalic.woff') format('woff'),
+		 url('../fonts/bender/bender-LightItalic.ttf') format('truetype'),
+		 url('../fonts/bender/bender-LightItalic.svg#Bender') format('svg');
 	font-style: italic;
 	font-weight: 200;
 }
