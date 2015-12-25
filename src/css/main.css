@@ -12,8 +12,8 @@ section#presentation {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	-webkit-mask-image: -webkit-radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
-	mask-image: radial-gradient(black 0, black 2px, transparent 300px, transparent 1200px);
+	-webkit-mask-image: -webkit-radial-gradient(black 0, black 1px, transparent 140px, transparent 1200px);
+	mask-image: radial-gradient(black 0, black 1px, transparent 140px, transparent 1200px);
 	-webkit-mask-mode: luminance;
 	mask-mode: luminance;
 	-webkit-mask-repeat: no-repeat;
@@ -38,14 +38,15 @@ section#presentation {
 	width: 100%;
 }
 a.main-mailto {
-	font-family: "Circe-Bold", sans-serif;
-	font-size: 25px;
-	color: #443532;
-	font-weight: bold;
+	color: #dcdbda;
+	font-family: 'Bender', sans-serif;
+	font-size: 15px;
+	font-weight: 400;
 	position: fixed;
+	text-align: center;
 	bottom: 10px;
-	right: 10px;
-	z-index: 10;
 	margin: 0;
 	padding: 0;
+	width: 100%;
+	z-index: 10;
 }
