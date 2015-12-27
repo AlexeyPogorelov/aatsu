@@ -1,3 +1,22 @@
+.portrait-orientation {
+	background-color: #000000;
+	color: #ffffff;
+	display: none;
+	font-family: 'Bender', sans-serif;
+	position: absolute;
+	padding: 20px;
+	text-align: center;
+	height: 100%;
+	font-size: 22px;
+	line-height: 36px;
+	vertical-align: middle;
+	width: 100%;
+	z-index: 999;
+}
+.portrait-orientation span {
+	display: table-cell;
+	vertical-align: middle;
+}
 section#presentation {
 	overflow: hidden;
 	position: relative;
@@ -12,8 +31,8 @@ section#presentation {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	-webkit-mask-image: -webkit-radial-gradient(black 0, black 1px, transparent 140px, transparent 1200px);
-	mask-image: radial-gradient(black 0, black 1px, transparent 140px, transparent 1200px);
+	-webkit-mask-image: -webkit-radial-gradient(black 0, black 1px, transparent 180px, transparent 1200px);
+	mask-image: radial-gradient(black 0, black 1px, transparent 180px, transparent 1200px);
 	-webkit-mask-mode: luminance;
 	mask-mode: luminance;
 	-webkit-mask-repeat: no-repeat;

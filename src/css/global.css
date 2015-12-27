@@ -5,6 +5,7 @@
 	padding: 0;
 }
 body {
+	font: 14px Arial, sans-serif;
 }
 .wrapper {}
 .lightbox-cell::-webkit-scrollbar-corner,

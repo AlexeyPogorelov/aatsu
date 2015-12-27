@@ -40,3 +40,9 @@
 		font-size: 18px;
 	}
 }
+
+@media only screen and (orientation:portrait) {
+	.portrait-orientation {
+		display: table;
+	}
+}
