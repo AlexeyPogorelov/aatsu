@@ -18,8 +18,8 @@ section#presentation {
 	mask-mode: luminance;
 	-webkit-mask-repeat: no-repeat;
 	mask-repeat: no-repeat;
-	-webkit-mask-position-x: 0px;
-	-webkit-mask-position-y: 0px;
+	-webkit-mask-position-x: -3000px;
+	-webkit-mask-position-y: -3000px;
 }
 .background-holder {
 	display: block;
@@ -40,7 +40,7 @@ section#presentation {
 a.main-mailto {
 	color: #dcdbda;
 	font-family: 'Bender', sans-serif;
-	font-size: 15px;
+	font-size: 18px;
 	font-weight: 400;
 	position: fixed;
 	text-align: center;

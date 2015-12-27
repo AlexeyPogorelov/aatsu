@@ -123,4 +123,51 @@ $(document).on('ready', function () {
 		middlindImage ($foreground.find('img'), $(window), -60);
 		middlindImage ($background.find('img'), $(window), -60);
 	});
+
+	// touch move
+	$(window).on('touchmove', function (e) {
+		if (winHeight > winWidth) {
+			$foreground.css({
+				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
+				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
+			});
+		} else {
+			$foreground.css({
+				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
+				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
+			});
+		}
+	});
+
+	// touch end
+	$(window).on('touchend', function (e) {
+		if (winHeight > winWidth) {
+			$foreground.css({
+				'-webkit-mask-position-x': -3000,
+				'-webkit-mask-position-y': -3000,
+				'mask-position-x': -3000,
+				'mask-position-y': -3000
+			});
+		} else {
+			$foreground.css({
+				'-webkit-mask-position-x': -3000,
+				'-webkit-mask-position-y': -3000,
+				'mask-position-x': -3000,
+				'mask-position-y': -3000
+			});
+		}
+	});
+
+	// resize
+	$(window).on('resize', function () {
+		winWidth = $(window).width();
+		winHeight = $(window).height();
+		fillPresentation ();
+		middlindImage ($foreground.find('img'), $(window), -60);
+		middlindImage ($background.find('img'), $(window), -60);
+	});
 });
