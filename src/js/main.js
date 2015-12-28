@@ -1,11 +1,11 @@
 var backgrounds = [
-	[1, 2],
-	[3, 4],
-	[5, 6],
+	[2, 1],
+	[4, 3],
+	[6, 5],
 	[7, 8],
 	[9, 10],
-	[11, 12],
-	[13, 14]
+	[12, 11],
+	[14, 13]
 ];
 function randomInteger(min, max) {
 	var rand = min + Math.random() * (max - min);
