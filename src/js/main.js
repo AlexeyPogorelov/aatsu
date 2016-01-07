@@ -98,19 +98,20 @@ $(document).on('ready', function () {
 
 	// mouse move
 	$(window).on('mousemove', function (e) {
+		// console.log(e);
 		if (winHeight > winWidth) {
 			$foreground.css({
-				'-webkit-mask-position-x': e.pageX - winWidth / 2,
-				'-webkit-mask-position-y': e.pageY - winHeight / 2,
-				'mask-position-x': e.pageX - winWidth / 2,
-				'mask-position-y': e.pageY - winHeight / 2
+				'-webkit-mask-position-x': e.clientX - winWidth / 2,
+				'-webkit-mask-position-y': e.clientY - winHeight / 2,
+				'mask-position-x': e.clientX - winWidth / 2,
+				'mask-position-y': e.clientY - winHeight / 2
 			});
 		} else {
 			$foreground.css({
-				'-webkit-mask-position-x': e.pageX - winWidth / 2,
-				'-webkit-mask-position-y': e.pageY - winWidth / 2,
-				'mask-position-x': e.pageX - winWidth / 2,
-				'mask-position-y': e.pageY - winWidth / 2
+				'-webkit-mask-position-x': e.clientX - winWidth / 2,
+				'-webkit-mask-position-y': e.clientY - winWidth / 2,
+				'mask-position-x': e.clientX - winWidth / 2,
+				'mask-position-y': e.clientY - winWidth / 2
 			});
 		}
 	});
@@ -169,5 +170,16 @@ $(document).on('ready', function () {
 		fillPresentation ();
 		middlindImage ($foreground.find('img'), $(window), -60);
 		middlindImage ($background.find('img'), $(window), -60);
+	});
+
+	// scroll
+	$(document).on('scroll', function (e) {
+		var top = $(e.target).scrollTop();
+		if (top < 400) {
+			$('#presentation').css({
+				'-webkit-filter': 'blur(' + ( top / 20 ) + 'px)',
+				'filter': 'blur(' + ( top / 20 ) + 'px)'
+			});
+		};
 	});
 });

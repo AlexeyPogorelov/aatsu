@@ -5,6 +5,7 @@
 	padding: 0;
 }
 body {
+	background: #111;
 	font: 14px Arial, sans-serif;
 }
 .wrapper {}
@@ -29,9 +30,9 @@ body {
 }
 section {
 	display: block;
-/*	position: relative;
+	position: relative;
 	width: 100%;
-	z-index: 1;*/
+	z-index: 1;
 }
 section#footer .container {
 	width: auto;
