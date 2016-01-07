@@ -28,11 +28,47 @@ var preloader = {
 };
 
 $(document).on('ready', function () {
-	var $foreground = $('.foreground-holder'),
+	var $presentation = $('#presentation'),
+		$foreground = $('.foreground-holder'),
 		$background = $('.background-holder'),
 		winWidth = $(window).width(),
 		winHeight = $(window).height(),
-		randomBgIndex = randomInteger(0, backgrounds.length - 1);
+		randomBgIndex = randomInteger(0, backgrounds.length - 1),
+		deviceInspector = (function () {
+			var newDevice;
+			function deviseChanged (device) {
+				switch (device) {
+					case 'mobile':
+						break;
+					case 'tablet':
+						break;
+					case 'pc':
+						break;
+					case 'large':
+						break;
+				}
+			}
+			return function (){
+				var currentWidth = winWidth;
+				if (currentWidth <= 780){
+					newDevice = 'mobile';
+				} else if (currentWidth <= 1000) {
+					newDevice = 'tablet';
+				} else if (currentWidth <= 1278) {
+					newDevice = 'pc';
+				} else {
+					newDevice = 'large';
+				}
+				if (!window._currentDevice){
+					window._currentDevice = newDevice;
+					deviseChanged(newDevice);
+				}
+				if (newDevice != window._currentDevice) {
+					window._currentDevice = newDevice;
+					deviseChanged(newDevice);
+				}
+			}
+		})();
 	$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
 		$(window).trigger('resize');
 		preloader.ready();
@@ -116,15 +152,6 @@ $(document).on('ready', function () {
 		}
 	});
 
-	// resize
-	$(window).on('resize', function () {
-		winWidth = $(window).width();
-		winHeight = $(window).height();
-		fillPresentation ();
-		middlindImage ($foreground.find('img'), $(window), -60);
-		middlindImage ($background.find('img'), $(window), -60);
-	});
-
 	// touch move
 	$(window).on('touchmove', function (e) {
 		if (winHeight > winWidth) {
@@ -170,16 +197,25 @@ $(document).on('ready', function () {
 		fillPresentation ();
 		middlindImage ($foreground.find('img'), $(window), -60);
 		middlindImage ($background.find('img'), $(window), -60);
+		deviceInspector();
+		$('.full-height').css({
+			'min-height': winHeight
+		});
 	});
 
 	// scroll
 	$(document).on('scroll', function (e) {
 		var top = $(e.target).scrollTop();
 		if (top < 400) {
-			$('#presentation').css({
+			$presentation.css({
 				'-webkit-filter': 'blur(' + ( top / 20 ) + 'px)',
 				'filter': 'blur(' + ( top / 20 ) + 'px)'
 			});
-		};
+		} else {
+			$presentation.css({
+				'-webkit-filter': 'blur(20px)',
+				'filter': 'blur(20px)'
+			});
+		}
 	});
 });

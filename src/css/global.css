@@ -6,7 +6,8 @@
 }
 body {
 	background: #111;
-	font: 14px Arial, sans-serif;
+	color: white;
+	font: 14px 'Bender', Arial, sans-serif;
 }
 .wrapper {}
 .lightbox-cell::-webkit-scrollbar-corner,
@@ -52,7 +53,7 @@ h1 {
 	color: #ee2151;
 	font-family: 'BebasNeue', sans-serif;
 	font-size: 40px;
-	letter-spacing: 1.1px;
+	letter-spacing: 1px;
 	word-spacing: 1px;
 	margin: 33px 0;
 	text-transform: uppercase;
@@ -90,12 +91,17 @@ hr {
 	margin-bottom: 20px;
 }
 
+p.type-1 {
+	font-size: 24px;
+	letter-spacing: 11px;
+	text-align: center;
+}
+
 /*	SELECT	*/
 select {
 	/*background-image: url('../img/icons/drop-down-icon.png');*/
-	background-position: right center;
 	background-position-x: calc(100% - 20px);
-	background-repeat: no-repeat;
+	background: no-repeat right center;
 	border: 1px solid #fff;
 	outline-color: #080808;
 	height: 48px;
@@ -103,7 +109,8 @@ select {
 	-moz-appearance: none;
 	-ms-appearance: none;
 	appearance: none !important;
-	text-indent: 0.01px;
+	/* TODO indent */
+	/*text-indent: 0.01px;*/
 	text-overflow: '';
 }
 select:-moz-focusring {
@@ -112,8 +119,7 @@ select:-moz-focusring {
 }
 select option {
 	/*line-height: 31px;*/
-	padding: 1px;
-	padding-left: 20px;
+	padding: 1px 1px 1px 20px;
 	/*height: 34px;*/
 	vertical-align: middle;
 }
@@ -136,8 +142,7 @@ textarea:-moz-placeholder {
 /*	END SELECT	*/
 
 input {
-	outline-width: 5px;
-	outline-color: transparent;
+	outline: transparent 5px;
 	padding-left: 16px;
 	padding-right: 16px;
 	transition: outline-color .4s;
@@ -402,12 +407,14 @@ input[type='number'] {
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+	transform-origin: 50%;
 	top: 50%;
 	left: 50%;
 }
 /*	GRID	*/
 .container {
 	margin: 0 auto;
+	width: 960px;
 }
 .text-center {
 	text-align: center;
@@ -437,7 +444,7 @@ input[type='number'] {
 .table .bottom {
 	vertical-align: bottom;
 }
-/*	NAVIIGATION */
+/*	NAVIGATION */
 .navbar-toggle {
 	display: none;
 }

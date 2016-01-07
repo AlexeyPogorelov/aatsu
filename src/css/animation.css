@@ -14,3 +14,28 @@
 		opacity: 1;
 	}
 }
+
+@-webkit-keyframes rotateAround {
+	from {
+		-webkit-transform: translateX(-50%) translateY(-50%) rotate(0deg);
+		transform: translateX(-50%) translateY(-50%) rotate(0deg);
+	}
+	to {
+		-webkit-transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+		transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+	}
+}
+@keyframes rotateAround {
+	from {
+		-webkit-transform: translateX(-50%) translateY(-50%) rotate(0deg);
+		transform: translateX(-50%) translateY(-50%) rotate(0deg);
+	}
+	to {
+		-webkit-transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+		transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+	}
+}
+.preloader img {
+	-webkit-animation: rotateAround 2s linear 0s infinite;
+	animation: rotateAround 2s linear 0s infinite;
+}
