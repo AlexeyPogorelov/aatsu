@@ -13,24 +13,45 @@ function randomInteger(min, max) {
 	return rand;
 }
 var preloader = {
-	stages: 2,
-	pgogress: 0,
-	ready: function () {
-		if (++this.pgogress == this.stages) {
-			// hide preloader
-			$('.preloader').animate({
-				'opacity': 0
-			}, 800, function () {
-				$(this).remove();
-			});
+		stages: 2,
+		pgogress: 0,
+		ready: function () {
+			if (++this.pgogress == this.stages) {
+				// hide preloader
+				$('.preloader').animate({
+					'opacity': 0
+				}, 800, function () {
+					$(this).remove();
+				});
+			}
 		}
-	}
-};
+	},
+	bodyOverflow = {
+		fixBody: function () {
+			$('body').width($('body').width())
+				.css({
+					'overflow': 'hidden'
+				});
+		},
+		unfixBody: function () {
+			$('body')
+				.css({
+					'overflow': 'auto',
+					'overflow-y': 'scroll',
+					'width': 'initial'
+				});
+		},
+		resize: function () {
+			this.unfixBody();
+		}.bind(this)
+	};
+
 
 $(document).on('ready', function () {
 	var $presentation = $('#presentation'),
 		$foreground = $('.foreground-holder'),
 		$background = $('.background-holder'),
+		$body = $('body'),
 		winWidth = $(window).width(),
 		winHeight = $(window).height(),
 		randomBgIndex = randomInteger(0, backgrounds.length - 1),
@@ -201,11 +222,15 @@ $(document).on('ready', function () {
 		$('.full-height').css({
 			'min-height': winHeight
 		});
+		bodyOverflow.unfixBody();
 	});
 
 	// scroll
 	$(document).on('scroll', function (e) {
 		var top = $(e.target).scrollTop();
+		if (top + winHeight >= $body.height()) {
+			bodyOverflow.fixBody();
+		}
 		if (top < 400) {
 			$presentation.css({
 				'-webkit-filter': 'blur(' + ( top / 20 ) + 'px)',

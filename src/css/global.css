@@ -9,6 +9,10 @@ body {
 	color: white;
 	font: 14px 'Bender', Arial, sans-serif;
 }
+body::-webkit-scrollbar {
+	height: 0;
+	width: 0;
+}
 .wrapper {}
 .lightbox-cell::-webkit-scrollbar-corner,
 .dropdown::-webkit-scrollbar-corner,
@@ -92,9 +96,12 @@ hr {
 }
 
 p.type-1 {
+	/*background: rgba(0, 0, 0, 0.1);*/
 	font-size: 24px;
-	letter-spacing: 11px;
+	letter-spacing: 9px;
+	padding: 100px 50px;
 	text-align: center;
+	font-weight: 100;
 }
 
 /*	SELECT	*/
@@ -403,9 +410,6 @@ input[type='number'] {
 .preloader img {
 	position: absolute;
 	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	transform-origin: 50%;
 	top: 50%;

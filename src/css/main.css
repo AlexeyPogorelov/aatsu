@@ -7,7 +7,7 @@
 	padding: 20px;
 	text-align: center;
 	height: 100%;
-	font-size: 22px;
+	font-size: 14px;
 	line-height: 36px;
 	vertical-align: middle;
 	width: 100%;
@@ -34,8 +34,8 @@ section#presentation {
 	top: 0;
 	height: 100%;
 	width: 100%;
-	-webkit-mask-image: -webkit-radial-gradient(black 0, black 1px, black 120px, transparent 220px, transparent 1200px);
-	mask-image: radial-gradient(black 0, black 1px, transparent 180px, transparent 1200px);
+	-webkit-mask-image: -webkit-radial-gradient(black 0, black 1px, black 50px, transparent 140px, transparent 1200px);
+	mask-image: -webkit-radial-gradient(black 0, black 1px, black 50px, transparent 140px, transparent 1200px);
 	-webkit-mask-mode: luminance;
 	mask-mode: luminance;
 	-webkit-mask-repeat: no-repeat;
@@ -60,17 +60,15 @@ section#presentation {
 	width: 100%;
 }
 a.main-mailto {
-	bottom: 0;
 	color: #dcdbda;
+	display: block;
 	font-family: 'Bender', sans-serif;
-	font-size: 24px;
+	font-size: 14px;
 	font-weight: 400;
-	letter-spacing: 11px;
-	margin: 0 0 180px;
+	letter-spacing: 9px;
 	padding: 0;
-	position: absolute;
 	text-align: center;
-	width: 100%;
+	/*width: 100%;*/
 	z-index: 10;
 }
 section.screen-1 {
@@ -78,15 +76,19 @@ section.screen-1 {
 }
 section.screen-2 {
 	position: relative;
-	margin-bottom: 180px;
+	/*margin-bottom: 180px;*/
 }
 section.screen-1,
-section.screen-2 {
+section.screen-2,
+section.screen-3 {
 	display: table;
+	position: relative;
 }
 section.screen-1 .container,
-section.screen-2 .container {
+section.screen-2 .container,
+section.screen-3 .container {
 	display: table-cell;
+	text-align: center;
 	vertical-align: middle;
 }
 
