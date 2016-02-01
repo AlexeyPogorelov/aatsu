@@ -24,6 +24,20 @@
 	.container {
 		width: 100%;
 	}
+	p.type-1 {
+		font-size: 12px;
+		padding-left: 20px;
+		padding-right: 20px;
+		line-height: 24px;
+	}
+	p.type-1,
+	a.main-mailto {
+		letter-spacing: 6px;
+		line-height: 24px;
+	}
+	a.main-mailto {
+		font-size: 14px;
+	}
 }
 /*
 	SMALL
@@ -33,15 +47,6 @@
 	.foreground-holder {
 		-webkit-mask-image: -webkit-radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
 		mask-image: radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
-	}
-	p.type-1 {
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-	p.type-1,
-	a.main-mailto {
-		font-size: 18px;
-		letter-spacing: 6px;
 	}
 }
 /*
