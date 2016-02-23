@@ -533,3 +533,16 @@ button:focus,
 .btn:focus {
 	outline: none;
 }
+
+.slider-viewport {
+	overflow: hidden;
+}
+.slider-viewport .slider-holder {
+	transition: transform .3s ease-out;
+}
+.slider-viewport .slide {
+	float: left;
+}
+.slider-viewport .slide-wrapper {
+	transform: translateZ(0);
+}

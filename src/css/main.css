@@ -24,7 +24,15 @@ section#presentation {
 	width: 100%;
 	z-index: 0;
 }
-
+.presentation {
+	overflow: hidden;
+}
+.presentation .slider-viewport {
+	overflow: visible;
+}
+.presentation .slider-viewport .slide {
+	padding: 0 50px;
+}
 /*noinspection CssInvalidPropertyValue*/
 .foreground-holder {
 	display: block;
