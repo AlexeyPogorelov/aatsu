@@ -317,7 +317,7 @@ $(document).on('ready', function () {
 								return max;
 							})(DOM.$slides) + 26
 						);
-					state.slideWidth = DOM.$slides.eq(0).outerWidth() + 12;
+					state.slideWidth = DOM.$slides.eq(0).outerWidth();
 					DOM.$sliderHolder.width(state.slideWidth * state.slides);
 					plg.toSlide(opt.startSlide);
 				},
@@ -342,8 +342,8 @@ $(document).on('ready', function () {
 						return;
 					}
 					DOM.$sliderHolder.css({
-						'-webkit-transform': 'translateX( -' + (state.sliderWidth * id) + 'px)',
-						'transform': 'translateX( -' + (state.sliderWidth * id) + 'px)'
+						'-webkit-transform': 'translateX( -' + (state.sliderWidth * id) + 'px) translateZ(0)',
+						'transform': 'translateX( -' + (state.sliderWidth * id) + 'px) translateZ(0)'
 					});
 					DOM.$slides.eq(id).addClass('active').siblings().removeClass('active');
 					DOM.$pagination.find('.page').eq(id).addClass('active').siblings().removeClass('active');

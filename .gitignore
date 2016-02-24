@@ -1,0 +1,23 @@
+*.zip
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.log
+*.pdf
+*.psd
+*.iml
+*.idea
+
+Thumbs.db
+
+idea/*
+bower_components/*
+node_modules/*
+dist/*
+libs/*
+templates/*
+src/img/bg/New folder/*

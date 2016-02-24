@@ -31,6 +31,9 @@ section#presentation {
 	overflow: visible;
 }
 .presentation .slider-viewport .slide {
+	/*padding: 0 50px;*/
+}
+.presentation .slider-viewport .slide > * {
 	padding: 0 50px;
 }
 /*noinspection CssInvalidPropertyValue*/
@@ -100,4 +103,7 @@ section.screen-3 .container {
 	vertical-align: middle;
 }
 
-
+#gallery-slider {
+	-webkit-mask-image: -webkit-linear-gradient(transparent 0, black 100%);
+	mask-image: linear-gradient(transparent 0, black 100%);
+}
