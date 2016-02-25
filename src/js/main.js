@@ -220,9 +220,6 @@ $(document).on('ready', function () {
 		middlindImage ($foreground.find('img'), $(window), -60);
 		middlindImage ($background.find('img'), $(window), -60);
 		deviceInspector();
-		$('.full-height').css({
-			'min-height': winHeight
-		});
 		bodyOverflow.unfixBody();
 	});
 
@@ -286,11 +283,12 @@ $(document).on('ready', function () {
 			var plg = {
 				cacheDOM: function () {
 					DOM.$slider = $(self);
+					DOM.$section = $(self).closest('section');
 					DOM.$preloader = DOM.$slider.find('.slider-preloader');
 					DOM.$viewport = DOM.$slider.find('.slider-viewport');
 					DOM.$sliderHolder = DOM.$viewport.find('.slider-holder');
 					DOM.$slides = DOM.$sliderHolder.find('.slide');
-					DOM.$slides.eq(0).addClass('active')
+					DOM.$slides.eq(0).addClass('active');
 				},
 				init: function () {
 					state.cur = state.cur || 0;
@@ -432,6 +430,63 @@ $(document).on('ready', function () {
 					}
 				}
 			});
+			// DOM.$slider.on('ondragstart', function (e) {
+			// 	e.preventDefault();
+			// 	return false;
+			// });
+			DOM.$slider.find('img').each(function () {
+				this.ondragstart = function() {
+					return false;
+				};
+			});
+			// DOM.$slides.on('ondragstart', function (e) {
+			// });
+			DOM.$section.on('mousedown', function (e) {
+				DOM.$sliderHolder.addClass('touched');
+				state.touchStart.xPos = e.pageX;
+				state.touchStart.yPos = e.pageY;
+				state.touchStart.trfX = -parseInt( DOM.$sliderHolder.css('transform').split(',')[4] );
+					// console.log( state.touchStart.trfX );
+
+			});
+
+			DOM.$section.on('mousemove', function (e) {
+				if (e.buttons < 1) {
+					touchendCleaner ();
+				} else if (state.touchStart.xPos) {
+					state.shiftX = state.touchStart.trfX + state.touchStart.xPos - e.pageX;
+
+					// console.log( state.shiftX );
+					// console.log( state.touchStart.trfX );
+					// console.log( state.touchStart.xPos - e.pageX );
+
+					DOM.$sliderHolder.css({
+						'-webkit-transform': 'translateX( -' + state.shiftX + 'px) translateZ(0)',
+						'transform': 'translateX( -' + state.shiftX + 'px) translateZ(0)'
+					});
+				}
+			});
+
+			DOM.$section.on('mouseup mouseleave', function (e) {
+				// console.log(state.shiftX);
+				if (Math.abs(state.touchStart.xPos - e.pageX) > state.slideWidth / 4 && state.shiftX > 10) {
+					if (state.touchStart.xPos - e.pageX > 0) {
+						plg.nextSlide();
+					} else {
+						plg.prevSlide();
+					}
+				} else {
+					plg.toSlide(state.cur);
+				}
+				touchendCleaner ();
+			});
+
+			function touchendCleaner () {
+				DOM.$sliderHolder.removeClass('touched');
+				state.touchStart.yPos = 0;
+				state.touchStart.xPos = 0;
+				state.shiftX = 0;
+			}
 
 			$(window).on('resize', plg.resize.bind(plg));
 			plg.init();

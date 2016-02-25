@@ -1,3 +1,7 @@
+.full-height {
+	height: 100vh;
+
+}
 .portrait-orientation {
 	background-color: #000000;
 	color: #ffffff;
@@ -26,6 +30,7 @@ section#presentation {
 }
 .presentation {
 	overflow: hidden;
+	position: relative;
 }
 .presentation .slider-viewport {
 	overflow: visible;
@@ -35,7 +40,56 @@ section#presentation {
 }
 .presentation .slider-viewport .slide > * {
 	padding: 0 50px;
+	/*pointer-events: none;*/
 }
+.presentation > * {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+.presentation .slider-viewport .slide img {
+	/*pointer-events: none;*/
+}
+.presentation .paginator-holder {}
+.presentation .paginator-holder .prev-slide,
+.presentation .paginator-holder .next-slide {
+	/*background: #eee;*/
+	/*pointer-events: none;*/
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 20%;
+}
+.presentation .paginator-holder .prev-slide {
+	left: 0;
+}
+.presentation .paginator-holder .next-slide {
+	right: 0;
+}
+
+#gallery-slider {
+	cursor: grab;
+	cursor: -webkit-grab;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100vw;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-mask-image: -webkit-linear-gradient(transparent 0, black 100%);
+	mask-image: linear-gradient(transparent 0, black 100%);
+}
+#gallery-slider .slider-viewport {
+	margin: auto;
+	width: 80%;
+}
+#gallery-slider .slider-holder.touched {
+	cursor: grabbing;
+	cursor: -webkit-grabbing;
+	-webkit-transition: none;
+	transition: none;
+}
+
 /*noinspection CssInvalidPropertyValue*/
 .foreground-holder {
 	display: block;
@@ -103,7 +157,5 @@ section.screen-3 .container {
 	vertical-align: middle;
 }
 
-#gallery-slider {
-	-webkit-mask-image: -webkit-linear-gradient(transparent 0, black 100%);
-	mask-image: linear-gradient(transparent 0, black 100%);
-}
+
+

@@ -23,7 +23,7 @@ body::-webkit-scrollbar {
 .dropdown::-webkit-scrollbar,
 .mobile-navbar-holder::-webkit-scrollbar {
 	width: 6px;
-    height: 0;
+	height: 0;
 	background-color: #fff;
 	border: none;
 }
@@ -34,6 +34,7 @@ body::-webkit-scrollbar {
 	border: 1px solid #e5e5e5;
 }
 section {
+	cursor: none;
 	display: block;
 	position: relative;
 	width: 100%;
@@ -47,7 +48,7 @@ a {
 	text-decoration: none;
 }
 img {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 li {
 	list-style: none;
@@ -86,7 +87,7 @@ h4 {
 	font-size: 25px;
 }
 h5 {
-    font-weight: 400;
+	font-weight: 400;
 }
 hr {
 	border: 0;
@@ -198,18 +199,18 @@ input:-ms-input-placeholder {
 /* checked mark aspect */
 .checkbox input[type="checkbox"]:not(:checked) + label:after,
 .checkbox input[type="checkbox"]:checked + label:after {
-    border: 2px solid #000;
-    border-left-color: transparent;
-    border-top-color: transparent;
+	border: 2px solid #000;
+	border-left-color: transparent;
+	border-top-color: transparent;
 	content: '';
-    color: #000;
+	color: #000;
 	position: absolute;
-    top: 2px;
-    left: 7px;
-    font-size: 18px;
-    transition: all .2s;
-    height: 10px;
-    width: 3px;
+	top: 2px;
+	left: 7px;
+	font-size: 18px;
+	transition: all .2s;
+	height: 10px;
+	width: 3px;
 }
 /* checked mark aspect changes */
 .checkbox input[type="checkbox"]:not(:checked) + label:after {
@@ -311,7 +312,7 @@ input:-ms-input-placeholder {
 /*	INPUT FILE	*/
 .input-file {
 	cursor: pointer;
-    position: relative;
+	position: relative;
 }
 .input-file label {
 	cursor: pointer;
@@ -319,13 +320,13 @@ input:-ms-input-placeholder {
 	transition: all .4s;
 }
 .input-file input {
-    position: absolute;
+	position: absolute;
 	pointer-events: none;
-    display: inline-block;
-    left: 0;
-    top: 0;
-    opacity: 0.01;
-    cursor: pointer;
+	display: inline-block;
+	left: 0;
+	top: 0;
+	opacity: 0.01;
+	cursor: pointer;
 }
 .input-file input:hover + label,
 .input-file input:focus + label {
