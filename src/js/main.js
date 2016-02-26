@@ -276,6 +276,7 @@ $(document).on('ready', function () {
 				'pagination': false,
 				'clickToNext': false,
 				'startSlide': 0,
+				'autoHeight': false,
 				'slidesOnPage': 1
 			}, opt);
 
@@ -303,18 +304,20 @@ $(document).on('ready', function () {
 						plg.init();
 					}
 					DOM.$slides.width( DOM.$viewport.width() / opt.slidesOnPage);
-					DOM.$slides.height(
-							(function ($slides) {
-								var max = 1;
-								$slides.each(function () {
-									var height = $(this).find('> div').outerHeight();
-									if (height > max) {
-										max = height;
-									}
-								});
-								return max;
-							})(DOM.$slides)
-						);
+					if (opt.autoHeight) {
+						DOM.$slides.height(
+								(function ($slides) {
+									var max = 1;
+									$slides.each(function () {
+										var height = $(this).find('> div').outerHeight();
+										if (height > max) {
+											max = height;
+										}
+									});
+									return max;
+								})(DOM.$slides)
+							);
+					}
 					state.slideWidth = DOM.$slides.eq(0).outerWidth();
 					DOM.$sliderHolder.width(state.slideWidth * state.slides);
 					plg.toSlide(opt.startSlide);
