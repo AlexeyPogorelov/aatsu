@@ -313,7 +313,7 @@ $(document).on('ready', function () {
 									}
 								});
 								return max;
-							})(DOM.$slides) + 26
+							})(DOM.$slides)
 						);
 					state.slideWidth = DOM.$slides.eq(0).outerWidth();
 					DOM.$sliderHolder.width(state.slideWidth * state.slides);
@@ -469,7 +469,7 @@ $(document).on('ready', function () {
 
 			DOM.$section.on('mouseup mouseleave', function (e) {
 				// console.log(state.shiftX);
-				if (Math.abs(state.touchStart.xPos - e.pageX) > state.slideWidth / 4 && state.shiftX > 10) {
+				if (Math.abs(state.touchStart.xPos - e.pageX) > 40 && state.shiftX > 10) {
 					if (state.touchStart.xPos - e.pageX > 0) {
 						plg.nextSlide();
 					} else {

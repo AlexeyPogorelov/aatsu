@@ -21,6 +21,44 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+#main-navigation {
+	color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 40px;
+	width: 100%;
+	z-index: 2;
+}
+#main-navigation ul {
+	text-align: center;
+}
+#main-navigation li {
+	display: inline-block;
+	margin: 76px 120px 0;
+}
+#main-navigation li:first-child {
+	margin-left: 0;
+}
+#main-navigation li:last-child {
+	margin-right: 0;
+}
+#main-navigation li:nth-child(2) {
+	margin-right: 200px;
+}
+#main-navigation li a {
+	color: #fff;
+	font-size: 17px;
+}
+#main-navigation .logo {
+	background-color: black;
+	position: absolute;
+	left: 50%;
+	height: 147px;
+	width: 134px;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
 section#presentation {
 	overflow: hidden;
 	position: fixed;
@@ -31,6 +69,7 @@ section#presentation {
 .presentation {
 	overflow: hidden;
 	position: relative;
+	-webkit-mask-image: -webkit-gradient( linear, left 50%, right 50%, color-stop(0.00, rgba(0,0,0,0)), color-stop(0.25, rgba(0,0,0,1)), color-stop(0.75, rgba(0,0,0,1)), color-stop(1.00, rgba(0,0,0,0)));
 }
 .presentation .slider-viewport {
 	overflow: visible;
@@ -76,8 +115,6 @@ section#presentation {
 	width: 100vw;
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
-	-webkit-mask-image: -webkit-linear-gradient(transparent 0, black 100%);
-	mask-image: linear-gradient(transparent 0, black 100%);
 }
 #gallery-slider .slider-viewport {
 	margin: auto;

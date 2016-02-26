@@ -7,7 +7,7 @@
 body {
 	background: #111;
 	color: white;
-	font: 14px 'Bender', Arial, sans-serif;
+	font: 14px/1.5em 'Bender', Arial, sans-serif;
 }
 body::-webkit-scrollbar {
 	height: 0;
