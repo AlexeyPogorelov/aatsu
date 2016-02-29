@@ -19,5 +19,6 @@ bower_components/*
 node_modules/*
 dist/*
 libs/*
+src/libs/*
 templates/*
 src/img/bg/New folder/*

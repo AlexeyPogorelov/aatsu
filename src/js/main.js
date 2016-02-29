@@ -229,6 +229,7 @@ $(document).on('ready', function () {
 		if (top + winHeight >= $body.height()) {
 			bodyOverflow.fixBody();
 		}
+		// animation blur
 		if (top < 400) {
 			$presentation.css({
 				'-webkit-filter': 'blur(' + ( top / 20 ) + 'px)',
