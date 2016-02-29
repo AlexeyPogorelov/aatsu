@@ -7,7 +7,6 @@ if (isTouchDevice || isTouch) {
 
 var pagesState = {};
 pagesState.lastScrollTime = new Date().getTime() - 1000;
-// console.log(pagesState.lastScrollTime)
 
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
@@ -19,7 +18,7 @@ $(window).load(function(){
 
 /* CACHE DOM */
 cacheDom.$sections = $('.full-height');
-cacheDom.$menu = $('#menu');
+cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
 $(window).resize(function () {
@@ -39,7 +38,7 @@ $(window).on('mousewheel wheel', function (e) {
 	// console.log(pagesState.lastScrollTime - 50 < new Date().getTime())
 	// console.log(pagesState.animatedBool)
 	// console.log(" --- ")
-	if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+	if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
 		if (delta > 40) {
 			scrollPages.prevPage();
 		} else if (delta < -40) {
@@ -96,11 +95,10 @@ $(document).on('keydown', function (e) {
 	}
 });
 
-
 var scrollPages = (function () {
 	pagesState.currentPage;
 	pagesState.pages = [];
-	speed = 600;
+	speed = 1000;
 	var plg = {
 		init: function () {
 			this.definePages();
@@ -113,6 +111,7 @@ var scrollPages = (function () {
 					'id': cacheDom.$sections[i].id,
 					'classes': cacheDom.$sections[i].classList,
 					'top': cacheDom.$sections[i].offsetTop,
+					'leave': cacheDom.$sections.eq(i).attr('data-leave'),
 					'before': cacheDom.$sections.eq(i).attr('data-before'),
 					'after': cacheDom.$sections.eq(i).attr('data-after')
 				});
@@ -120,51 +119,67 @@ var scrollPages = (function () {
 			}
 		},
 		toPage: function (id, resize) {
+
+			var before, after, top;
+
+			if (!pagesState.pages.length) {
+				return;
+			}
+
 			// console.log(id)
-			var before, after;
 
 			if (id === undefined) {
 				id = this.getIdFromHash();
+				if (pagesState.pages[id] && pagesState.pages[id].before ) {
+					window[ pagesState.pages[id].before ]();
+				}
 			}
-			var top;
-			if (pagesState.pages[id] === undefined && pagesState.pages.length > 0) {
+
+			if (pagesState.pages[id] === undefined) {
 				top = pagesState.pages[0].top + windowHeight;
 				pagesState.currentPage = 0;
-			} else if (pagesState.pages.length > 0) {
-				top = pagesState.pages[id].top;
 			} else {
-				top = 0;
+				top = pagesState.pages[id].top;
 			}
 
 			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
 				pagesState.leave();
 				pagesState.leave = false;
 			}
+			if (pagesState.pages[id] && pagesState.pages[id].leave ) {
+				pagesState.leave = window[ pagesState.pages[id].leave ];
+			}
 
 			if (pagesState.pages[id] && pagesState.pages[id].before) {
-				before = window[pagesState.pages[id].before];
+				before = window[ pagesState.pages[id].before ];
 			}
 
 			if (pagesState.pages[id] && pagesState.pages[id].after) {
-				after = window[pagesState.pages[id].after];
+				after = window[ pagesState.pages[id].after ];
 			}
 
 			if (!pagesState.animatedBool) {
+
 				pagesState.animatedBool = true;
-				// console.log('scroll started');
+
 				if (typeof before === 'function') {
 					before();
 				}
+
 				$('body')
 					.stop(false, false)
 					.animate({'scrollTop': top}, speed, function () {
 						pagesState.animatedBool = false;
-						// console.log('scroll ended');
+						pagesState.currentPage = id;
+						// document.location.hash = '#' + pagesState.pages[id].id;
+						history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id)
 						if (typeof after === 'function') {
 							after();
 						}
 					});
+
 			}
+
 		},
 		nextPage: function () {
 			if (pagesState.currentPage + 1 < pagesState.pagesCount) {
@@ -190,8 +205,7 @@ var scrollPages = (function () {
 			};
 			return id;
 		},
-		navigation: function () {
-			var $self = $(this);
+		navigation: function ($self) {
 			if ( $self.attr('href') ) {
 				if ( document.location.hash != $self.attr('href') ) {
 					var id = plg.getIdFromHash($self.attr('href').substr(1));
@@ -211,6 +225,9 @@ var scrollPages = (function () {
 				}
 			});
 		},
+		getCurrent: function () {
+			return pagesState.currentPage;
+		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {
 				pagesState.pages[i].top = cacheDom.$sections[i].offsetTop;
@@ -221,6 +238,25 @@ var scrollPages = (function () {
 			this.toPage(pagesState.currentPage, true);
 		}
 	};
+
+	$(window).on('resize', function () {
+		plg.resize();
+	})
+
+	// $(window).on('popstate', function (e) {
+	// 	e.preventDefault();
+	// 	// history.go(-1);
+	// 	plg.toPage();
+	// });
+
+	cacheDom.$menu.find('a').on('click', function (e) {
+		e.preventDefault();
+		if (/[#][\s]+/.test( $(this).attr('href') ) ) {
+			alert();
+		}
+		plg.navigation($(this));
+	})
+
 	return plg;
 })();
 

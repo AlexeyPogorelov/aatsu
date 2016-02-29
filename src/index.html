@@ -18,6 +18,7 @@
 </head>
 <body>
 	<div class="preloader">
+		<div class="after"></div>
 		<img src="img/icons/preloader.svg" alt="preloader">
 	</div>
 	<div class="portrait-orientation">
@@ -73,16 +74,16 @@
 		</div>
 		<ul>
 			<li>
-				<a href="#page-1">SERIES</a>
+				<a href="#series">SERIES</a>
 			</li>
 			<li>
-				<a href="#page-2">BLOG</a>
+				<a href="#blog">BLOG</a>
 			</li>
 			<li>
-				<a href="#page-3">ABOUT</a>
+				<a href="#about">ABOUT</a>
 			</li>
 			<li>
-				<a href="#page-4">CONTACT</a>
+				<a href="#contact">CONTACT</a>
 			</li>
 		</ul>
 	</div>
@@ -95,19 +96,19 @@
 		</div>
 	</section>
 
-	<section class="empty full-height">
+	<section id="clean" class="empty full-height" data-before="invisibleControls" data-leave="visibleControls">
 	</section>
 
-	<section class="empty full-height">
+	<section id="blur" class="empty full-height" data-before="hideControls" data-leave="showControls">
 	</section>
 
-	<section class="screen-1 full-height">
+	<section id="intro" class="screen-1 full-height">
 		<div class="container">
 			<p class="type-1">AATSU III is a footwear brand made using unique  technology that was developed after more  than 5 years of hands on, shoemaking  experience. It is that mindful and masterful approach to shoemaking that gives this brand thehighest value.</p>
 		</div>
 	</section>
 
-	<section class="presentation full-height">
+	<section id="series" class="presentation full-height">
 		<div class="gallery-slider" id="gallery-slider">
 			<div class="slider-viewport">
 				<div class="slider-holder">
@@ -156,13 +157,62 @@
 		</div>
 	</section>
 
-	<section class="screen-2 full-height" data-before="test1" data-after="test2">
+	<section id="blog" class="presentation full-height">
+		<div class="gallery-slider" id="blog-slider">
+			<div class="slider-viewport">
+				<div class="slider-holder">
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-8.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-7.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-6.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-5.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-4.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-3.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-2.jpg" alt="">
+						</div>
+					</div>
+					<div class="slide">
+						<div class="image-holder">
+							<img src="img/content/sale-1.jpg" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="screen-3 full-height">
 		<div class="container">
 			<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
 		</div>
 	</section>
 
-	<section class="screen-3 full-height">
+	<section id="contact" class="screen-3 full-height">
 		<div class="container">
 			<a class="main-mailto" href="mailto:ANDY.GONZA@AATSU.COM&lt;">ANDY.GONZA@AATSU.COM</a>
 		</div>

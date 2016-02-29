@@ -416,6 +416,18 @@ input[type='number'] {
 	top: 50%;
 	left: 50%;
 }
+.preloader .after {
+	background: #fff;
+	position: absolute;
+	opacity: .4;
+	top: 0;
+	left: 0;
+	height: 4px;
+	width: 1px;
+	z-index: 2;
+	-webkit-transition: width .4s ease-out;
+	transition: width .4s ease-out;
+}
 /*	GRID	*/
 .container {
 	margin: 0 auto;
