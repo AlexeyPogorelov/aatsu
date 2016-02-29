@@ -20,5 +20,6 @@ node_modules/*
 dist/*
 libs/*
 src/libs/*
+src/img/content/*
 templates/*
 src/img/bg/New folder/*

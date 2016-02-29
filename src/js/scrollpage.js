@@ -6,7 +6,8 @@ if (isTouchDevice || isTouch) {
 };
 
 var pagesState = {};
-pagesState.lastScrollTime = new Date().getTime();
+pagesState.lastScrollTime = new Date().getTime() - 1000;
+// console.log(pagesState.lastScrollTime)
 
 var windowWidth = $(window).width();
 var windowHeight = $(window).height();
@@ -18,6 +19,7 @@ $(window).load(function(){
 
 /* CACHE DOM */
 cacheDom.$sections = $('.full-height');
+cacheDom.$menu = $('#menu');
 
 /* IF RESIZE */
 $(window).resize(function () {
@@ -34,8 +36,10 @@ $(window).on('mousewheel wheel', function (e) {
 	// console.log(delta)
 	// console.log(e.originalEvent.wheelDelta)
 	// console.info(e.originalEvent.wheelDeltaY)
-	// console.log(pagesState.lastScrollTime + 1000 > new Date().getTime())
-	if (!pagesState.animatedBool && pagesState.lastScrollTime + 400 < new Date().getTime()) {
+	// console.log(pagesState.lastScrollTime - 50 < new Date().getTime())
+	// console.log(pagesState.animatedBool)
+	// console.log(" --- ")
+	if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
 		if (delta > 40) {
 			scrollPages.prevPage();
 		} else if (delta < -40) {
@@ -53,7 +57,7 @@ $(window).on('DOMMouseScroll', function (e) {
 	// console.log(delta)
 	// console.log(e.originalEvent.wheelDelta)
 	// console.info(e.originalEvent.wheelDeltaY)
-	if (!pagesState.animatedBool && pagesState.lastScrollTime + 400 < new Date().getTime()) {
+	if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
 		if (delta > 0) {
 			scrollPages.prevPage();
 		} else if (delta < -0) {
@@ -108,13 +112,16 @@ var scrollPages = (function () {
 				pagesState.pages.push({
 					'id': cacheDom.$sections[i].id,
 					'classes': cacheDom.$sections[i].classList,
-					'top': cacheDom.$sections[i].offsetTop
+					'top': cacheDom.$sections[i].offsetTop,
+					'before': cacheDom.$sections.eq(i).attr('data-before'),
+					'after': cacheDom.$sections.eq(i).attr('data-after')
 				});
 				pagesState.pagesCount++;
 			}
 		},
-		toPage: function (id, resize, before, after) {
+		toPage: function (id, resize) {
 			// console.log(id)
+			var before, after;
 
 			if (id === undefined) {
 				id = this.getIdFromHash();
@@ -122,19 +129,33 @@ var scrollPages = (function () {
 			var top;
 			if (pagesState.pages[id] === undefined && pagesState.pages.length > 0) {
 				top = pagesState.pages[0].top + windowHeight;
-				pagesState.currentPage = pagesState.pages.length;
+				pagesState.currentPage = 0;
 			} else if (pagesState.pages.length > 0) {
 				top = pagesState.pages[id].top;
 			} else {
 				top = 0;
 			}
+
+			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
+				pagesState.leave();
+				pagesState.leave = false;
+			}
+
+			if (pagesState.pages[id] && pagesState.pages[id].before) {
+				before = window[pagesState.pages[id].before];
+			}
+
+			if (pagesState.pages[id] && pagesState.pages[id].after) {
+				after = window[pagesState.pages[id].after];
+			}
+
 			if (!pagesState.animatedBool) {
 				pagesState.animatedBool = true;
 				// console.log('scroll started');
 				if (typeof before === 'function') {
 					before();
 				}
-				$('body, html')
+				$('body')
 					.stop(false, false)
 					.animate({'scrollTop': top}, speed, function () {
 						pagesState.animatedBool = false;
@@ -156,7 +177,7 @@ var scrollPages = (function () {
 			}
 		},
 		getIdFromHash: function (hash) {
-			var id,
+			var id = 0,
 				curHash = hash || window.location.hash.substr(1);
 			for (var i = 0; i < pagesState.pages.length; i++) {
 				if (pagesState.pages[i].id == curHash) {
@@ -168,6 +189,27 @@ var scrollPages = (function () {
 				}
 			};
 			return id;
+		},
+		navigation: function () {
+			var $self = $(this);
+			if ( $self.attr('href') ) {
+				if ( document.location.hash != $self.attr('href') ) {
+					var id = plg.getIdFromHash($self.attr('href').substr(1));
+					plg.toPage(id);
+				}
+			}
+		},
+		makeActiveNav: function (hash) {
+			cacheDom.$menu.find('a').each(function () {
+				var $self = $(this);
+				if ($self.attr('href') == "#" + hash) {
+					$self
+						.parent()
+						.addClass('active')
+						.siblings()
+						.removeClass('active');
+				}
+			});
 		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {

@@ -12,6 +12,12 @@ function randomInteger(min, max) {
 	rand = Math.round(rand);
 	return rand;
 }
+function test1 () {
+	alert(1);
+}
+function test2 () {
+	alert(2);
+}
 var preloader = {
 		stages: 2,
 		pgogress: 0,
