@@ -1,3 +1,5 @@
+
+
 var backgrounds = [
 	[2, 1],
 	[4, 3],
@@ -50,15 +52,16 @@ var preloader = {
 					return;
 				}
 
-				$(window).trigger('resize');
+				$(window).trigger('resize').trigger('scroll');
 
 				// hide preloader
-				preloader.preloader.animate({}).delay(100).animate({
+				preloader.preloader.css({opacity: 1}).animate({opacity: 1}, 100).delay(600).animate({
 					'opacity': 0
 				}, 600, function () {
 					preloader.status(0);
 					$(this).detach();
 					preloader.finished = true;
+					$('#main-navigation').removeClass('stop-animation');
 				});
 			}
 		},
@@ -288,6 +291,95 @@ $(document).on('ready', function () {
 	$('#main-navigation').find('.logo').on('click', function () {
 		if (scrollPages.getCurrent() > 0) {
 			scrollPages.toPage(0);
+		}
+	})
+
+	// modals
+
+	var modals = {
+		openModal: function ($modal) {
+
+			$modal.addClass('opened');
+			$modal.parent().addClass('opened');
+
+			$('#main-navigation').addClass('disabled');
+
+			$('section').addClass('invisible');
+
+			pagesState.animatedBool = true;
+
+		},
+		closeModal: function ($modal) {
+
+			$('#main-navigation').removeClass('disabled');
+
+			$modal.removeClass('opened');
+			$modal.parent().removeClass('opened');
+			$('section').removeClass('invisible');
+
+			pagesState.animatedBool = false;
+
+		}
+	}
+
+	$('[data-modal]').on('mousedown', function (e) {
+		e.preventDefault();
+
+		$(this).data('down', {
+			'time': e.timeStamp,
+			'x': e.originalEvent.clientX,
+			'y': e.originalEvent.clientY
+		})
+
+	}).on('mouseup', function (e) {
+		e.preventDefault();
+
+		// console.log( e.originalEvent );
+		// console.log( Math.abs(e.originalEvent.clientX - $(this).data('down').x) );
+
+		if (e.timeStamp - $(this).data('down').time < 250 && Math.abs(e.originalEvent.clientX - $(this).data('down').x) < 20 && Math.abs(e.originalEvent.clientY - $(this).data('down').y) < 20 ) {
+
+			var $self = $(this),
+				target = $self.attr('data-modal'),
+				$target = $(target);
+
+			if ($target.length) {
+
+				modals.openModal($target);
+
+			}
+		
+		}
+
+	});
+
+	$('[data-close]').on('click', function (e) {
+		e.preventDefault();
+		var $self = $(this),
+			target = $self.attr('data-close'),
+			$target;
+
+		if (target) {
+
+			$target = $(target);
+
+			if ($target.length) {
+
+				$target.removeClass('opened');
+
+			}
+
+		} else {
+
+			$self.closest('.opened').removeClass('opened');
+
+		}
+
+	});
+
+	$('.modal-holder').on('click', function (e) {
+		if (e.target === this) {
+			modals.closeModal( $(this).find('.opened') );
 		}
 	})
 

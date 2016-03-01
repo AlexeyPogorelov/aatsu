@@ -12,17 +12,27 @@
 /*--------------------------------------------------------------------------
 	TABLET
 --------------------------------------------------------------------------*/
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1199px) {
+	.modal-holder .modal-content .container,
 	.container {
+		/*padding: 0 40px;*/
 		width: 760px;
 	}
 }
 /*
 	MOBILE
 */
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 840px) {
+	.modal-holder .modal-content .container,
 	.container {
+		padding: 0 40px;
 		width: 100%;
+	}
+	.modal-container {
+		font-size: 12px;
+	}
+	.modal-holder .modal-content .container {
+		padding: 40px;
 	}
 	p.type-1 {
 		font-size: 12px;
@@ -38,15 +48,80 @@
 	a.main-mailto {
 		font-size: 14px;
 	}
+	
+	#main-navigation .logo {
+		left: 0;
+		margin: 0 20px;
+		-webkit-transform: none;
+		transform: none;
+	}
+	#main-navigation.closed .logo {
+		left: 50%;
+		-webkit-transform: translateX(-50%) translateY( -webkit-calc(50vh - 50%) );
+		transform: translateX(-50%) translateY( calc(50vh - 50%) );
+	}
+	#main-navigation ul {
+		text-align: right;
+		padding-right: 20px;
+	}
+	#main-navigation li:last-child {
+		margin-right: 0;
+	}
+	#main-navigation li:nth-child(2),
+	#main-navigation li {
+		margin: 10px 20px 0;
+	}
+	.modal-holder .modal-content {
+		top: 20px;
+		bottom: 20px;
+	}
+	.modal-holder .modal-content .container {
+		height: 100%;
+
+		background: rgba(255,255,255,.2);
+		background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0.4) 90%, rgba(255,255,255,0) 100%);
+		background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 10%,rgba(255,255,255,0.4) 90%,rgba(255,255,255,0) 100%);
+		background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.4) 10%,rgba(255,255,255,0.4) 90%,rgba(255,255,255,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+	}
+	section.screen-3 .container .col-left, section.screen-3 .container .col-right {
+		max-height: initial;
+	}
+	.gallery-slider .slider-viewport {
+		width: 60%;
+	}
+	.presentation .slider-viewport .slide > * {
+		padding: 20px;
+	}
 }
 /*
 	SMALL
 */
-@media screen and (max-width: 564px) {
+@media screen and (max-width: 570px) {
 	/*noinspection CssInvalidPropertyValue*/
 	.foreground-holder {
 		-webkit-mask-image: -webkit-radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
 		mask-image: radial-gradient(black 0, black 2px, transparent 80px, transparent 140px);
+	}
+	#main-navigation li:nth-child(2),
+	#main-navigation li {
+		margin: 10px 10px 0;
+	}
+	#main-navigation .logo {
+		left: 0;
+		margin: 0 10px;
+		height: 60px;
+		width: 40px;
+		-webkit-transform: none;
+		transform: none;
+	}
+	#main-navigation .logo svg, #main-navigation .logo img {
+		padding: 6px 6px 2px;
+	}
+	#main-navigation .logo .lines-holder .line {
+		margin: 0 2px;
+		height: 16px;
+		width: 2px;
 	}
 }
 /*

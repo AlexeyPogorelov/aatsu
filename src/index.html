@@ -5,6 +5,7 @@
 	<title>AATSU</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<meta name="mobile-web-app-capable" content="yes">
 	<!--<link rel="stylesheet" href="css/animate.min.css">-->
 	<!--<link rel="stylesheet" href="css/normalize.css">-->
 	<!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
@@ -27,7 +28,7 @@
 			<img src="img/icons/rotate.svg" alt="rotate"/>
 		</span>
 	</div>
-	<div id="main-navigation">
+	<div id="main-navigation" class="stop-animation">
 		<div class="logo">
 			<!-- <img src="img/icons/main-logo.svg"> -->
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -45,26 +46,30 @@
 				version="1.1"
 				inkscape:version="0.91 r13725"
 				sodipodi:docname="main-logo.svg">
+
 				<sodipodi:namedview
-				borderopacity="1"
-				objecttolerance="10"
-				gridtolerance="10"
-				guidetolerance="10"
-				id="namedview12"
-				showgrid="false"
+					borderopacity="1"
+					objecttolerance="10"
+					gridtolerance="10"
+					guidetolerance="10"
+					id="namedview12"
+					showgrid="false"
 				/>
+
 				<defs id="defs6">
-				<clipPath
-				id="clipPath18"
-				clipPathUnits="userSpaceOnUse"><path
-					id="path16"
-					d="m 0,5867.721 4251.971,0 L 4251.971,0 0,0 Z"
-					inkscape:connector-curvature="0" /></clipPath>
+					<clipPath
+						id="clipPath18"
+						clipPathUnits="userSpaceOnUse" >
+						<path
+							id="path16"
+							d="m 0,5867.721 4251.971,0 L 4251.971,0 0,0 Z"
+							inkscape:connector-curvature="0" />
+					</clipPath>
 				</defs>
 				<path id="path22"
-				style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-				d="m 70.522224,100.63164 20.02415,-53.696005 -9.453626,-26.3192 -30.85486,80.015205 c -0.02768,0.052 20.284336,0 20.284336,0 m 39.471866,0 -10.090514,-27.4002 -10.089814,27.4002 z m 19.29965,0 c 0,0 20.2921,0.052 20.27958,0 l -30.86244,-80.015205 -9.46121,26.3192 z M 62.769508,2.35e-4 l 29.34204,0 7.792028,20.9716 7.768584,-20.9716 29.55833,0 L 200,159.66004 l -27.24045,0 -16.46209,-42.5698 -20.88422,0 15.96147,42.5698 -19.99595,0 c -4.59081,-12.3436 -15.46136,-42.5258 -15.46136,-42.5258 l -32.039278,0 -15.469122,42.5258 -19.98008,0 15.961466,-42.5698 -20.772628,0 -16.581788,42.5698 -27.03597,0 z"
-				inkscape:connector-curvature="0" />
+					style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+					d="m 70.522224,100.63164 20.02415,-53.696005 -9.453626,-26.3192 -30.85486,80.015205 c -0.02768,0.052 20.284336,0 20.284336,0 m 39.471866,0 -10.090514,-27.4002 -10.089814,27.4002 z m 19.29965,0 c 0,0 20.2921,0.052 20.27958,0 l -30.86244,-80.015205 -9.46121,26.3192 z M 62.769508,2.35e-4 l 29.34204,0 7.792028,20.9716 7.768584,-20.9716 29.55833,0 L 200,159.66004 l -27.24045,0 -16.46209,-42.5698 -20.88422,0 15.96147,42.5698 -19.99595,0 c -4.59081,-12.3436 -15.46136,-42.5258 -15.46136,-42.5258 l -32.039278,0 -15.469122,42.5258 -19.98008,0 15.961466,-42.5698 -20.772628,0 -16.581788,42.5698 -27.03597,0 z"
+					inkscape:connector-curvature="0" />
 			</svg>
 			<div class="lines-holder">
 				<span class="line"></span>
@@ -87,14 +92,14 @@
 			</li>
 		</ul>
 	</div>
-	<section id="presentation">
+	<div id="presentation">
 		<div class="background-holder">
 			<img src="" alt="stone">
 		</div>
 		<div class="foreground-holder">
 			<img src="" alt="stone">
 		</div>
-	</section>
+	</div>
 
 	<section id="clean" class="empty full-height" data-before="invisibleControls" data-leave="visibleControls">
 	</section>
@@ -113,32 +118,32 @@
 			<div class="slider-viewport">
 				<div class="slider-holder">
 					<div class="slide">
-						<div class="image-holder">
+						<div class="image-holder" data-modal="#slide-1">
 							<img src="img/content/sale-1.jpg" alt="">
 						</div>
 					</div>
-					<div class="slide">
+					<div class="slide" data-modal="#slide-2">
 						<div class="image-holder">
 							<img src="img/content/sale-2.jpg" alt="">
 						</div>
 					</div>
-					<div class="slide">
+					<div class="slide" data-modal="#slide-3">
 						<div class="image-holder">
 							<img src="img/content/sale-3.jpg" alt="">
 						</div>
 					</div>
-					<div class="slide">
+					<div class="slide" data-modal="#slide-4">
 						<div class="image-holder">
 							<img src="img/content/sale-4.jpg" alt="">
 						</div>
 					</div>
-					<div class="slide">
+					<div class="slide" data-modal="#slide-5">
 						<div class="image-holder">
 							<img src="img/content/sale-5.jpg" alt="">
 						</div>
 					</div>
 					<div class="slide">
-						<div class="image-holder">
+						<div class="image-holder" data-modal="#slide-6">
 							<img src="img/content/sale-6.jpg" alt="">
 						</div>
 					</div>
@@ -208,15 +213,74 @@
 
 	<section id="about" class="screen-3 full-height">
 		<div class="container">
-			<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
+			<div class="content-holder">
+			</div>
+			<!-- <div class="col-full"> -->
+
+				<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
+
+			<!-- </div> -->
 		</div>
 	</section>
 
 	<section id="contact" class="screen-3 full-height">
 		<div class="container">
-			<a class="main-mailto" href="mailto:ANDY.GONZA@AATSU.COM&lt;">ANDY.GONZA@AATSU.COM</a>
+			<div class="content-holder">
+			</div>
+			<div class="col-left">
+				<h3>AATSU</h3>
+				<p>Ukraine&International</p>
+				<p>31, Kazimira Malevicha str</p>
+				<p>03680 Kiev</p>
+				<p>+38(0)9 19 36 35 82</p>
+			</div>
+			<div class="col-right">
+				<h3>COMMUNICATION</h3>
+
+				<p>Press Office:</p>
+				<p><a href="mailto:press@aatsu.com">press@aatsu.com</a></p>
+
+				<p>Social Media:</p>
+				<p><a href="mailto:support@aatsu.com">support@aatsu.com</a></p>
+
+				<p>General Inquires</p>
+				<p><a href="mailto:andy.gonza@aatsu.com">andy.gonza@aatsu.com</a></p>
+
+			</div>
 		</div>
 	</section>
+
+	<div class="modal-holder">
+		<!-- <div class="close-modal" data-close></div> -->
+
+		<div class="modal-content" id="slide-1">
+			<div class="modal-container">
+				<div class="container">
+					<h3>AATSU pop-up 1</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maxime accusantium veritatis, fuga porro? Magnam, sit. Veniam eligendi labore, placeat, explicabo odit cumque nulla iusto alias debitis ullam libero sint doloribus accusantium in quo, unde rem, nam sed temporibus excepturi modi. Illo consequuntur ipsum accusantium aut similique minus maiores sit dicta, non dolorum, libero consectetur, modi doloremque earum. Illum, sequi.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-content" id="slide-2">
+			<div class="modal-container">
+				<div class="container">
+					<p class="type-1">AATSU pop-up 2</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-content" id="slide-3">
+			<div class="modal-container">
+				<div class="container">
+					<p class="type-1">AATSU pop-up 3</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 	<script src="../libs/jquery-2.1.4/jquery-2.1.4.min.js"></script>
 	<script src="js/scrollpage.js"></script>
