@@ -190,7 +190,7 @@ if (jQuery.browser.name === 'mozilla' ) {
 var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
 var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
 if (isTouchDevice || isTouch) {
-	$('body').css('overflow', 'auto');
+	// $('body').css('overflow', 'auto');
 };
 
 var pagesState = {},

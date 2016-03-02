@@ -88,7 +88,7 @@ $(window).on('load', function () {
 });
 $('img').each(function () {
 	if (!this.naturalWidth || true) {
-		preloader.trg ++;
+		preloader.trg++;
 		$(this).one('load', preloader.loaded)
 	}
 });
@@ -138,11 +138,11 @@ $(document).on('ready', function () {
 		})();
 	$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
 		$(window).trigger('resize');
-		preloader.ready();
+		preloader.loaded();
 	});
 	$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', function () {
 		$(window).trigger('resize');
-		preloader.ready();
+		preloader.loaded();
 	});
 
 	function fillPresentation () {
