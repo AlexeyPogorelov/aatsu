@@ -427,6 +427,8 @@ input[type='number'] {
 	transform-origin: 50%;
 	top: 50%;
 	left: 50%;
+	height: 80px;
+	width: 80px;
 }
 .preloader .after {
 	background: #fff;

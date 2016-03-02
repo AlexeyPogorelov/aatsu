@@ -29,6 +29,7 @@
 		width: 100%;
 	}
 	.modal-container {
+		height: 100%;
 		font-size: 12px;
 	}
 	.modal-holder .modal-content .container {
@@ -71,6 +72,9 @@
 	#main-navigation li {
 		margin: 10px 20px 0;
 	}
+	#main-navigation.disabled {
+		opacity: .1;
+	}
 	.modal-holder .modal-content {
 		top: 20px;
 		bottom: 20px;
@@ -92,6 +96,10 @@
 	}
 	.presentation .slider-viewport .slide > * {
 		padding: 20px;
+	}
+	.content-holder {
+		bottom: 20px;
+		top: 40px;
 	}
 }
 /*

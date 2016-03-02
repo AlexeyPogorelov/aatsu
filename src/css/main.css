@@ -20,6 +20,9 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+.portrait-orientation span img {
+	width: 120px;
+}
 #main-navigation {
 	cursor: default;
 	color: #fff;

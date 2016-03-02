@@ -30,7 +30,7 @@ function visibleControls () {
 
 var preloader = {
 			avgTime: 3000,
-			trg: 1,
+			trg: 0,
 			state: 0,
 			preloader: $('body > .preloader'),
 			loaded: function () {
@@ -542,14 +542,24 @@ $(document).on('ready', function () {
 
 			// drag events
 			DOM.$slider.on('touchstart', function (e) {
-				state.touchStart.xPos = e.originalEvent.touches[0].clientX;
-				state.touchStart.yPos = e.originalEvent.touches[0].clientY;
+				// state.touchStart.xPos = e.originalEvent.touches[0].clientX;
+				// state.touchStart.yPos = e.originalEvent.touches[0].clientY;
 				state.touchStart.timeStamp = e.timeStamp;
 				// console.log('-----');
 			});
 			DOM.$slider.on('touchmove', function (e) {
 				state.touchEnd.xPos = e.originalEvent.touches[0].clientX;
 				state.touchEnd.yPos = e.originalEvent.touches[0].clientY;
+
+				if (!state.touchStart.xPos) {
+					state.touchStart.xPos = e.originalEvent.touches[0].clientX;
+				}
+
+				if (!state.touchStart.yPos) {
+					state.touchStart.yPos = e.originalEvent.touches[0].clientY;
+				}
+
+
 				// console.log('-----');
 			});
 			DOM.$slider.on('touchend', function (e) {
@@ -573,6 +583,12 @@ $(document).on('ready', function () {
 						plg.prevSlide();
 					}
 				}
+				deltaX = null;
+				deltaY = null;
+				state.touchEnd.xPos = null;
+				state.touchEnd.yPos = null;
+				state.touchStart.xPos = null;
+				state.touchStart.yPos = null;
 			});
 			// DOM.$slider.on('ondragstart', function (e) {
 			// 	e.preventDefault();
