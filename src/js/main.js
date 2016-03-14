@@ -1,5 +1,3 @@
-
-
 var backgrounds = [
 	[2, 1],
 	[4, 3],
@@ -30,11 +28,13 @@ function visibleControls () {
 
 var preloader = {
 			avgTime: 3000,
-			trg: 0,
+			trg: 1,
 			state: 0,
 			preloader: $('body > .preloader'),
 			loaded: function () {
-				if(++preloader.state == preloader.trg) {
+				console.log('trg: ' + preloader.trg);
+				console.log('state: ' + preloader.state);
+				if(++preloader.state >= preloader.trg) {
 					preloader.status(1);
 					setTimeout(preloader.ready, 500);
 				} else {
@@ -42,7 +42,7 @@ var preloader = {
 				}
 			},
 			status: function (mult) {
-				// console.log(mult);
+				console.info(mult);
 				preloader.preloader.find('> .after').css({
 					'width': mult * 100 + '%'
 				});
@@ -82,14 +82,20 @@ var preloader = {
 			}.bind(this)
 		};
 
-$(window).on('load', function () {
+$('body').on('load', function () {
 	preloader.status(1);
-	setTimeout(preloader.done, 500);
+	setTimeout(preloader.ready, 500);
 });
+
+setTimeout(function () {
+	preloader.status(1);
+	setTimeout(preloader.ready, 500);
+}, 10000);
+
 $('img').each(function () {
-	if (!this.naturalWidth || true) {
+	if (!this.naturalWidth) {
 		preloader.trg++;
-		$(this).one('load', preloader.loaded)
+		$(this).one('load', preloader.loaded);
 	}
 });
 

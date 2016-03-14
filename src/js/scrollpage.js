@@ -185,7 +185,6 @@ if (jQuery.browser.name === 'mozilla' ) {
 	htmlBody = 'html';
 }
 
-
 	/* GLOBAL */
 var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
 var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
@@ -226,106 +225,165 @@ cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
 $(window).resize(function () {
+
 	windowWidth = $(window).width();
 	windowHeight = $(window).height();
 	scrollPages.resize(pagesState.currentPage, true);
+
 });
 
-$(window).on('mousewheel', function (e) {
-	e.preventDefault();
-	e.stopPropagation();
-	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
-	// console.log(e)
-	// console.log(delta)
-	// console.log(e.originalEvent.wheelDelta)
-	// console.info(e.originalEvent.wheelDeltaY)
-	// console.log(pagesState.lastScrollTime - 50 < new Date().getTime())
-	// console.log(pagesState.animatedBool)
-	// console.log(" --- ")
-	if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
-		if (delta > 40) {
-			scrollPages.prevPage();
-		} else if (delta < -40) {
-			scrollPages.nextPage();
+if (!isTouchDevice || !isTouch) {
+
+	$(window).on('mousewheel', function (e) {
+
+		e.preventDefault();
+		e.stopPropagation();
+		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+		if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+			if (delta > 40) {
+				scrollPages.prevPage();
+			} else if (delta < -40) {
+				scrollPages.nextPage();
+			}
 		}
-	}
-	pagesState.lastScrollTime = new Date().getTime();
-});
+		pagesState.lastScrollTime = new Date().getTime();
 
-$(window).on('DOMMouseScroll wheel', function (e) {
-	e.preventDefault();
-	e.stopPropagation();
-	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
-	// console.log(e)
-	// console.log(delta)
-	// console.log(e.originalEvent.wheelDelta)
-	// console.info(e.originalEvent.wheelDeltaY)
-	if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
-		if (delta > 0) {
-			scrollPages.prevPage();
-		} else if (delta < 0) {
-			scrollPages.nextPage();
+	});
+
+	$(window).on('DOMMouseScroll wheel', function (e) {
+
+		e.preventDefault();
+		e.stopPropagation();
+		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
+		if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+			if (delta > 0) {
+				scrollPages.prevPage();
+			} else if (delta < 0) {
+				scrollPages.nextPage();
+			}
 		}
-	}
-	pagesState.lastScrollTime = new Date().getTime();
-});
+		pagesState.lastScrollTime = new Date().getTime();
 
-// 
-$('body').on('touchstart', function (e) {
-	// touchState.touchStart.xPos = e.originalEvent.touches[0].clientX;
-	// touchState.touchStart.yPos = e.originalEvent.touches[0].clientY;
-	touchState.touchStart.timeStamp = e.timeStamp;
-	// console.log('-----');
-});
-$('body').on('touchmove', function (e) {
-	e.preventDefault();
-	touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
-	touchState.touchEnd.yPos = e.originalEvent.touches[0].clientY;
+	});
 
-	if (!touchState.touchStart.xPos) {
-		touchState.touchStart.xPos = touchState.touchEnd.xPos;
-	}
-	if (!touchState.touchStart.yPos) {
-		touchState.touchStart.yPos = touchState.touchEnd.yPos;
-	}
-	// console.log('-----');
-});
-$('body').on('touchend', function (e) {
-	if (pagesState.animatedBool) {
-		return;
-	}
-	var distance = 70,
-		speed = 200,
-		deltaX = touchState.touchEnd.xPos - touchState.touchStart.xPos,
-		deltaY = touchState.touchEnd.yPos - touchState.touchStart.yPos;
+	$('body').on('touchstart', function (e) {
 
-	// if (!deltaX || !deltaY) {
-	// 	return;
-	// }
-		// time = e.timeStamp - touchState.touchStart.timeStamp;
-	// console.log('-----');
-	// console.log(time);
-	// console.log(deltaX);
-	// console.log(deltaY);
-	// console.log(touchState.touchEnd.xPos);
-	// console.log(touchState.touchEnd.yPos);
+		touchState.touchStart.timeStamp = e.timeStamp;
 
-	if (deltaY > distance || deltaY < -distance) {
-		if (deltaY < 0) {
-			scrollPages.nextPage();
-		} else {
-			scrollPages.prevPage();
+	});
+	$('body').on('touchmove', function (e) {
+
+		e.preventDefault();
+		touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
+		touchState.touchEnd.yPos = e.originalEvent.touches[0].clientY;
+
+		if (!touchState.touchStart.xPos) {
+			touchState.touchStart.xPos = touchState.touchEnd.xPos;
 		}
-	}
+		if (!touchState.touchStart.yPos) {
+			touchState.touchStart.yPos = touchState.touchEnd.yPos;
+		}
 
-	touchState.touchEnd.xPos = null;
-	touchState.touchEnd.yPos = null;
-	touchState.touchStart.xPos = null;
-	touchState.touchStart.yPos = null;
-	deltaX = null;
-	deltaY = null;
+	});
+	$('body').on('touchend', function (e) {
+		if (pagesState.animatedBool) {
+			return;
+		}
+		var distance = 70,
+			speed = 200,
+			deltaX = touchState.touchEnd.xPos - touchState.touchStart.xPos,
+			deltaY = touchState.touchEnd.yPos - touchState.touchStart.yPos;
 
-});
+		if (deltaY > distance || deltaY < -distance) {
+			if (deltaY < 0) {
+				scrollPages.nextPage();
+			} else {
+				scrollPages.prevPage();
+			}
+		}
+
+		touchState.touchEnd.xPos = null;
+		touchState.touchEnd.yPos = null;
+		touchState.touchStart.xPos = null;
+		touchState.touchStart.yPos = null;
+		deltaX = null;
+		deltaY = null;
+
+	});
+
+} else {
+	$('body').css('overflow', 'auto');
+	var landingNav = (function (i) {
+	
+			var DOM = {},
+				state = {},
+				array = [],
+				$self = $(this),
+				$self = $('#main-navigation');
+				// TODO selectior here
+	
+			// options
+			var opt;
+			if (!opt) {
+				opt = {
+					'linkClass': 'a'
+				};
+			}
+			opt = $.extend({
+			}, opt);
+	
+			// methods
+			var plg = {
+				init: function () {
+					DOM.$lnks = $self.find(opt.linkClass);
+					plg.resize();
+				},
+				scroll: function (top) {
+					for (var y = 0; y < array.length; y++) {
+						if (top < array[y].val && y) {
+							plg.avtive(array[y - 1].$elem);
+							return;
+						} else if (y == array.length - 1) {
+							plg.avtive(array[y].$elem);
+						}
+					};
+				},
+				avtive: function ($el) {
+					if ($el !== state.$active) {
+						DOM.$lnks.removeClass('active');
+						$el.addClass('active');
+						state.$active = $el;
+					}
+				},
+				resize: function () {
+					DOM.$lnks.each(function (i, elem) {
+							array[i] = {};
+							array[i]['$elem'] = $(elem);
+							array[i]['trg'] = $(elem).attr('href') || $(elem).data('target');
+							array[i]['val'] = $(array[i]['trg']).offset().top;
+						});
+				}
+			};
+
+			plg.init();
+			plg.resize();
+			$(window).on('scroll', function () {
+				plg.scroll( $(this).scrollTop() );
+			})
+
+			$(window).on('resize', function () {
+				plg.resize();
+			})
+
+			return plg;
+		})();
+
+		setTimeout(function () {
+			$('#main-navigation').removeClass('closed');
+			$('#main-navigation').removeClass('invisible');
+		}, 1000)
+
+}
 
 $('.modal-container, .col-left, .col-right, .col-full').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
 	e.stopPropagation();
@@ -433,18 +491,22 @@ var scrollPages = (function () {
 
 				plg.makeActiveNav(pagesState.pages[id].id);
 
-				$(htmlBody)
-					.stop(false, false)
-					.animate({'scrollTop': top}, speed, function () {
-						pagesState.animatedBool = false;
-						pagesState.currentPage = id;
-						pagesAnimation(id);
-						// document.location.hash = '#' + pagesState.pages[id].id;
-						history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id)
-						if (typeof after === 'function') {
-							after();
-						}
-					});
+				if (!landingNav) {
+
+					$(htmlBody)
+						.stop(false, false)
+						.animate({'scrollTop': top}, speed, function () {
+							pagesState.animatedBool = false;
+							pagesState.currentPage = id;
+							pagesAnimation(id);
+							// document.location.hash = '#' + pagesState.pages[id].id;
+							history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id)
+							if (typeof after === 'function') {
+								after();
+							}
+						});
+
+				}
 
 			}
 
