@@ -100,13 +100,13 @@ $('img').each(function () {
 });
 
 $(document).on('ready', function () {
-	var $presentation = $('#presentation'),
+	var $window = $(window),
+		$presentation = $('#presentation'),
 		$foreground = $('.foreground-holder'),
 		$background = $('.background-holder'),
 		$body = $('body'),
-		winWidth = $(window).width(),
-		winHeight = $(window).height(),
-		randomBgIndex = randomInteger(0, backgrounds.length - 1),
+		winWidth = $window.width(),
+		winHeight = $window.height(),
 		deviceInspector = (function () {
 			var newDevice;
 			function deviseChanged (device) {
@@ -140,16 +140,26 @@ $(document).on('ready', function () {
 					window._currentDevice = newDevice;
 					deviseChanged(newDevice);
 				}
-			}
+			};
 		})();
-	$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
-		$(window).trigger('resize');
-		preloader.loaded();
-	});
-	$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', function () {
-		$(window).trigger('resize');
-		preloader.loaded();
-	});
+
+	// randomize background
+	function randomBackground () {
+
+		var randomBgIndex = randomInteger(0, backgrounds.length - 1);
+
+		$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
+			$window.trigger('resize');
+			preloader.loaded();
+		});
+
+		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', function () {
+			$window.trigger('resize');
+			preloader.loaded();
+		});
+
+	}
+	randomBackground();
 
 	function fillPresentation () {
 		if (winHeight > winWidth) {
@@ -203,11 +213,11 @@ $(document).on('ready', function () {
 			});
 		}
 	}
-	middlindImage ($foreground.find('img'), $(window), -60);
-	middlindImage ($background.find('img'), $(window), -60);
+	middlindImage ($foreground.find('img'), $window, -60);
+	middlindImage ($background.find('img'), $window, -60);
 
 	// mouse move
-	$(window).on('mousemove', function (e) {
+	$window.on('mousemove', function (e) {
 		// console.log(e);
 		if (winHeight > winWidth) {
 			$foreground.css({
@@ -227,7 +237,7 @@ $(document).on('ready', function () {
 	});
 
 	// touch move
-	$(window).on('touchmove', function (e) {
+	$window.on('touchmove', function (e) {
 		if (winHeight > winWidth) {
 			$foreground.css({
 				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
@@ -246,7 +256,7 @@ $(document).on('ready', function () {
 	});
 
 	// touch end
-	$(window).on('touchend', function (e) {
+	$window.on('touchend', function (e) {
 		if (winHeight > winWidth) {
 			$foreground.css({
 				'-webkit-mask-position-x': -3000,
@@ -265,12 +275,12 @@ $(document).on('ready', function () {
 	});
 
 	// resize
-	$(window).on('resize', function () {
-		winWidth = $(window).width();
-		winHeight = $(window).height();
+	$window.on('resize', function () {
+		winWidth = $window.width();
+		winHeight = $window.height();
 		fillPresentation ();
-		middlindImage ($foreground.find('img'), $(window), -60);
-		middlindImage ($background.find('img'), $(window), -60);
+		middlindImage ($foreground.find('img'), $window, -60);
+		middlindImage ($background.find('img'), $window, -60);
 		deviceInspector();
 		bodyOverflow.unfixBody();
 	});
@@ -298,7 +308,7 @@ $(document).on('ready', function () {
 		if (scrollPages.getCurrent() > 0) {
 			scrollPages.toPage(0);
 		}
-	})
+	});
 
 	// modals
 
@@ -326,7 +336,7 @@ $(document).on('ready', function () {
 			pagesState.animatedBool = false;
 
 		}
-	}
+	};
 
 	$('[data-modal]').on('mousedown', function (e) {
 		e.preventDefault();
@@ -335,7 +345,7 @@ $(document).on('ready', function () {
 			'time': e.timeStamp,
 			'x': e.originalEvent.clientX,
 			'y': e.originalEvent.clientY
-		})
+		});
 
 	}).on('mouseup', function (e) {
 		e.preventDefault();
@@ -387,7 +397,7 @@ $(document).on('ready', function () {
 		if (e.target === this) {
 			modals.closeModal( $(this).find('.opened') );
 		}
-	})
+	});
 
 	// init plugins
 	$('.gallery-slider').simpleSlider();
@@ -404,7 +414,8 @@ $(document).on('ready', function () {
 					'touchStart': {},
 					'touchEnd': {}
 				},
-				self = this;
+				self = this,
+				$window = $(window);
 
 			// options
 			if (!opt) {
@@ -446,7 +457,7 @@ $(document).on('ready', function () {
 				},
 				resize: function () {
 					state.sliderWidth = DOM.$viewport.width();
-					if ($(window).width() > 300 && opt.slidesOnPage > 1 && $(window).width() <= 700) {
+					if ($window.width() > 300 && opt.slidesOnPage > 1 && $window.width() <= 700) {
 						opt.slidesOnPage = Math.floor( opt.slidesOnPage / 2 );
 						plg.init();
 					}
@@ -528,7 +539,7 @@ $(document).on('ready', function () {
 			plg.resize();
 
 			// resize
-			$(window).on('resize', function () {
+			$window.on('resize', function () {
 				plg.resize();
 			});
 
@@ -654,7 +665,7 @@ $(document).on('ready', function () {
 				state.shiftX = 0;
 			}
 
-			$(window).on('resize', plg.resize.bind(plg));
+			$window.on('resize', plg.resize.bind(plg));
 			plg.init();
 
 			return plg;
