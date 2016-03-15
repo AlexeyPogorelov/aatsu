@@ -7,6 +7,8 @@ var backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
+$presentation = $('#presentation');
+
 function randomInteger(min, max) {
 	var rand = min + Math.random() * (max - min);
 	rand = Math.round(rand);
@@ -14,14 +16,22 @@ function randomInteger(min, max) {
 }
 function hideControls () {
 	$('#main-navigation').addClass('closed');
+	$('#main-navigation').addClass('invisible');
 }
 function showControls () {
 	$('#main-navigation').removeClass('closed');
+	$('#main-navigation').removeClass('invisible');
 }
-function invisibleControls () {
+function state1 () {
 	$('#main-navigation').addClass('invisible');
-	$('#main-navigation').addClass('closed');
+	$('#presentation').removeClass('blured');
 }
+function state2 () {
+	$('#presentation').addClass('blured');
+}
+function state3 () {
+}
+
 function visibleControls () {
 	$('#main-navigation').removeClass('invisible');
 }
@@ -32,8 +42,8 @@ var preloader = {
 			state: 0,
 			preloader: $('body > .preloader'),
 			loaded: function () {
-				console.log('trg: ' + preloader.trg);
-				console.log('state: ' + preloader.state);
+				// console.log('trg: ' + preloader.trg);
+				// console.log('state: ' + preloader.state);
 				if(++preloader.state >= preloader.trg) {
 					preloader.status(1);
 					setTimeout(preloader.ready, 500);
@@ -42,10 +52,36 @@ var preloader = {
 				}
 			},
 			status: function (mult) {
-				console.info(mult);
+				// console.info(mult);
 				preloader.preloader.find('> .after').css({
 					'width': mult * 100 + '%'
 				});
+			},
+			showPreloader: function (callback) {
+
+				preloader.preloader.css({opacity: 0}).insertBefore('body').animate({
+					'opacity': 1
+				}, 600, function () {
+					preloader.status(0);
+					if (typeof callback === 'function') {
+						callback();
+					}
+				});
+
+			},
+			hidePreloader: function (callback) {
+
+				preloader.preloader.css({opacity: 1}).animate({opacity: 1}, 10).delay(600).animate({
+					'opacity': 0
+				}, 600, function () {
+					preloader.status(0);
+					$(this).detach();
+					preloader.finished = true;
+					if (typeof callback === 'function') {
+						callback();
+					}
+				});
+
 			},
 			ready: function () {
 				if (preloader.finished) {
@@ -55,12 +91,7 @@ var preloader = {
 				$(window).trigger('resize').trigger('scroll');
 
 				// hide preloader
-				preloader.preloader.css({opacity: 1}).animate({opacity: 1}, 100).delay(600).animate({
-					'opacity': 0
-				}, 600, function () {
-					preloader.status(0);
-					$(this).detach();
-					preloader.finished = true;
+				preloader.hidePreloader(function () {
 					$('#main-navigation').removeClass('stop-animation');
 				});
 			}
@@ -101,9 +132,8 @@ $('img').each(function () {
 
 $(document).on('ready', function () {
 	var $window = $(window),
-		$presentation = $('#presentation'),
-		$foreground = $('.foreground-holder'),
-		$background = $('.background-holder'),
+		$foreground = $('#presentation > .foreground-holder'),
+		$background = $('#presentation > .background-holder'),
 		$body = $('body'),
 		winWidth = $window.width(),
 		winHeight = $window.height(),
@@ -121,7 +151,7 @@ $(document).on('ready', function () {
 						break;
 				}
 			}
-			return function (){
+			return function () {
 				var currentWidth = winWidth;
 				if (currentWidth <= 780){
 					newDevice = 'mobile';
@@ -144,19 +174,29 @@ $(document).on('ready', function () {
 		})();
 
 	// randomize background
-	function randomBackground () {
+	function randomBackground (callback) {
 
-		var randomBgIndex = randomInteger(0, backgrounds.length - 1);
+		var randomBgIndex = randomInteger(0, backgrounds.length - 1),
+			bgLoaded = 0;
 
-		$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', function () {
-			$window.trigger('resize');
+		function bgReady () {
 			preloader.loaded();
-		});
+			if ( ++bgLoaded >= 2 ) {
+				bgLoaded = 0;
+				if ( typeof callback === 'function') {
+					setTimeout(function () {
 
-		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', function () {
-			$window.trigger('resize');
-			preloader.loaded();
-		});
+						$window.trigger('resize');
+
+					}, 1000);
+					callback();
+				}
+			}
+		}
+
+		$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', bgReady);
+
+		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
 
 	}
 	randomBackground();
@@ -286,27 +326,30 @@ $(document).on('ready', function () {
 	});
 
 	// scroll
-	$(document).on('scroll', function (e) {
-		var top = $(e.target).scrollTop();
-
+	// $(document).on('scroll', function (e) {
+	// 	var top = $(e.target).scrollTop();
 		// animation blur
-		if (top < winHeight) {
-			$presentation.css({
-				'-webkit-filter': 'blur(' + ( top / winHeight * 20 ) + 'px)',
-				'filter': 'blur(' + ( top / winHeight * 20 ) + 'px)'
-			});
-		} else {
-			$presentation.css({
-				'-webkit-filter': 'blur(20px)',
-				'filter': 'blur(20px)'
-			});
-		}
-	});
+		// if (top < winHeight) {
+		// 	$presentation.css({
+		// 		'-webkit-filter': 'blur(' + ( top / winHeight * 20 ) + 'px)',
+		// 		'filter': 'blur(' + ( top / winHeight * 20 ) + 'px)'
+		// 	});
+		// } else {
+		// 	$presentation.css({
+		// 		'-webkit-filter': 'blur(20px)',
+		// 		'filter': 'blur(20px)'
+		// 	});
+		// }
+	// });
 
 	// logo click
 	$('#main-navigation').find('.logo').on('click', function () {
 		if (scrollPages.getCurrent() > 0) {
 			scrollPages.toPage(0);
+			// setTimeout(function () {
+			// 	preloader.preloader
+			// }, 300);
+			preloader.showPreloader( randomBackground.bind( preloader, preloader.hidePreloader ) );
 		}
 	});
 
@@ -339,6 +382,7 @@ $(document).on('ready', function () {
 	};
 
 	$('[data-modal]').on('mousedown', function (e) {
+
 		e.preventDefault();
 
 		$(this).data('down', {
@@ -348,6 +392,7 @@ $(document).on('ready', function () {
 		});
 
 	}).on('mouseup', function (e) {
+
 		e.preventDefault();
 
 		// console.log( e.originalEvent );
@@ -649,16 +694,12 @@ $(document).on('ready', function () {
 			});
 
 			DOM.$section.on('mouseup mouseleave', function (e) {
-				console.log(state.shiftD);
+				// console.log(state.shiftD);
 				if ( Math.abs(state.shiftD) > 40 ) {
 					if (state.shiftD > 0) {
-						// TODO
 						plg.nextSlide();
-						// setTimeout(plg.nextSlide.bind( plg ), 100);
 					} else {
-						// TODO
 						plg.prevSlide();
-						// setTimeout(plg.prevSlide.bind( plg ), 100);
 					}
 				} else {
 					plg.toSlide(state.cur);

@@ -20,16 +20,19 @@
 	<link rel="stylesheet" href="css/media.css">
 </head>
 <body>
+
 	<div class="preloader">
 		<div class="after"></div>
 		<img src="img/icons/preloader.svg" alt="preloader">
 	</div>
+
 	<div class="portrait-orientation">
 		<span>
 			<!--Разверните телефон в ландшафтный режим-->
 			<img src="img/icons/rotate.svg" alt="rotate"/>
 		</span>
 	</div>
+
 	<div id="main-navigation" class="stop-animation">
 		<div class="logo">
 			<!-- <img src="img/icons/main-logo.svg"> -->
@@ -94,7 +97,9 @@
 			</li>
 		</ul>
 	</div>
-	<div id="presentation">
+
+	<div id="presentation" class="blured">
+		<!-- backgrounds -->
 		<div class="background-holder">
 			<img src="" alt="stone">
 		</div>
@@ -103,156 +108,192 @@
 		</div>
 	</div>
 
-	<section id="clean" class="empty full-height" data-before="invisibleControls" data-leave="visibleControls">
-	</section>
+	<div id="horizontal-viewport">
 
-	<section id="blur" class="empty full-height" data-before="hideControls" data-leave="showControls">
-	</section>
-
-	<section id="about" class="screen-3 full-height">
-		<div class="container">
-			<div class="content-holder">
+			<div id="animatedLogo">
+				<img src="img/icons/main-logo.svg">
 			</div>
 
-			<p class="">AATSU III is a footwear brand made using unique  technology that was developed after more  than 5 years of hands on, shoemaking  experience. It is that mindful and masterful approach to shoemaking that gives this brand thehighest value.</p>
+		<section id="vertical-viewport">
 
-		</div>
-	</section>
+			<section id="blur" class="empty full-height" data-before="state1" >
+			</section>
 
-	<section id="series" class="presentation full-height">
-		<div class="gallery-slider" id="gallery-slider">
-			<div class="slider-viewport">
-				<div class="slider-holder">
-					<div class="slide">
-						<div class="image-holder" data-modal="#slide-1">
-							<img src="img/content/sale-1.jpg" alt="">
-						</div>
+			<section id="logotype" class="empty full-height" data-before="state2">
+			</section>
+
+			<section id="logo" class="empty full-height" data-before="state3" >
+			</section>
+
+			<section id="screen-1" class="screen-3 full-height" data-before="state4">
+				<div class="container">
+
+					<div class="content-holder">
 					</div>
-					<div class="slide" data-modal="#slide-2">
-						<div class="image-holder">
-							<img src="img/content/sale-2.jpg" alt="">
-						</div>
+
+					<p>AATSU III is a footwear brand made using unique  technology that was developed after more  than 5 years of hands on, shoemaking  experience. It is that mindful and masterful approach to shoemaking that gives this brand thehighest value.</p>
+
+				</div>
+			</section>
+
+			<section id="screen-2" class="screen-3 full-height" data-before="state5">
+				<div class="container">
+
+					<div class="content-holder">
 					</div>
-					<div class="slide" data-modal="#slide-3">
-						<div class="image-holder">
-							<img src="img/content/sale-3.jpg" alt="">
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+				</div>
+			</section>
+
+			<section id="clean" class="empty full-height" data-before="showControls" data-leave="hideControls">
+
+			</section>
+
+		</section>
+
+		<section id="series" class="presentation full-height">
+			<div class="gallery-slider" id="gallery-slider">
+				<div class="slider-viewport">
+					<div class="slider-holder">
+						<div class="slide">
+							<div class="image-holder" data-modal="#slide-1">
+								<img src="img/content/sale-1.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide" data-modal="#slide-4">
-						<div class="image-holder">
-							<img src="img/content/sale-4.jpg" alt="">
+						<div class="slide" data-modal="#slide-2">
+							<div class="image-holder">
+								<img src="img/content/sale-2.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide" data-modal="#slide-5">
-						<div class="image-holder">
-							<img src="img/content/sale-5.jpg" alt="">
+						<div class="slide" data-modal="#slide-3">
+							<div class="image-holder">
+								<img src="img/content/sale-3.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder" data-modal="#slide-6">
-							<img src="img/content/sale-6.jpg" alt="">
+						<div class="slide" data-modal="#slide-4">
+							<div class="image-holder">
+								<img src="img/content/sale-4.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-7.jpg" alt="">
+						<div class="slide" data-modal="#slide-5">
+							<div class="image-holder">
+								<img src="img/content/sale-5.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-8.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder" data-modal="#slide-6">
+								<img src="img/content/sale-6.jpg" alt="">
+							</div>
+						</div>
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-7.jpg" alt="">
+							</div>
+						</div>
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-8.jpg" alt="">
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section id="blog" class="presentation full-height">
-		<div class="gallery-slider" id="blog-slider">
-			<div class="slider-viewport">
-				<div class="slider-holder">
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-8.jpg" alt="">
+		<section id="blog" class="presentation full-height">
+			<div class="gallery-slider" id="blog-slider">
+				<div class="slider-viewport">
+					<div class="slider-holder">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-8.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-7.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-7.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-6.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-6.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-5.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-5.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-4.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-4.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-3.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-3.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-2.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-2.jpg" alt="">
+							</div>
 						</div>
-					</div>
-					<div class="slide">
-						<div class="image-holder">
-							<img src="img/content/sale-1.jpg" alt="">
+						<div class="slide">
+							<div class="image-holder">
+								<img src="img/content/sale-1.jpg" alt="">
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section id="about" class="screen-3 full-height">
-		<div class="container">
-			<div class="content-holder">
-			</div>
+		<section id="about" class="screen-3 full-height">
+			<div class="container">
+				<div class="content-holder">
+				</div>
 
-			<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
-
-		</div>
-	</section>
-
-	<section id="contact" class="screen-3 full-height">
-		<div class="container">
-			<div class="content-holder">
-			</div>
-			<div class="col-left">
-				<h3>AATSU</h3>
-				<p>Ukraine&International</p>
-				<p>31, Kazimira Malevicha str</p>
-				<p>03680 Kiev</p>
-				<p>+38(0)9 19 36 35 82</p>
-			</div>
-			<div class="col-right">
-				<h3>COMMUNICATION</h3>
-
-				<p>Press Office:</p>
-				<p><a href="mailto:press@aatsu.com">press@aatsu.com</a></p>
-
-				<p>Social Media:</p>
-				<p><a href="mailto:support@aatsu.com">support@aatsu.com</a></p>
-
-				<p>General Inquires</p>
-				<p><a href="mailto:andy.gonza@aatsu.com">andy.gonza@aatsu.com</a></p>
+				<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
 
 			</div>
-		</div>
-	</section>
+		</section>
+
+		<section id="contact" class="screen-3 full-height">
+			<div class="container">
+				<div class="content-holder">
+				</div>
+				<div class="col-left">
+					<h3>AATSU</h3>
+					<p>Ukraine&International</p>
+					<p>31, Kazimira Malevicha str</p>
+					<p>03680 Kiev</p>
+					<p>+38(0)9 19 36 35 82</p>
+				</div>
+				<div class="col-right">
+					<h3>COMMUNICATION</h3>
+
+					<p>Press Office:</p>
+					<p><a href="mailto:press@aatsu.com">press@aatsu.com</a></p>
+
+					<p>Social Media:</p>
+					<p><a href="mailto:support@aatsu.com">support@aatsu.com</a></p>
+
+					<p>General Inquires</p>
+					<p><a href="mailto:andy.gonza@aatsu.com">andy.gonza@aatsu.com</a></p>
+
+				</div>
+			</div>
+		</section>
+
+	</div>
 
 	<div class="modal-holder">
 		<!-- <div class="close-modal" data-close></div> -->
@@ -260,10 +301,13 @@
 		<div class="modal-content" id="slide-1">
 			<div class="modal-container">
 				<div class="container">
+
 					<h3>AATSU pop-up 1</h3>
+
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maxime accusantium veritatis, fuga porro? Magnam, sit. Veniam eligendi labore, placeat, explicabo odit cumque nulla iusto alias debitis ullam libero sint doloribus accusantium in quo, unde rem, nam sed temporibus excepturi modi. Illo consequuntur ipsum accusantium aut similique minus maiores sit dicta, non dolorum, libero consectetur, modi doloremque earum. Illum, sequi.
 					</p>
+
 				</div>
 			</div>
 		</div>
@@ -271,7 +315,9 @@
 		<div class="modal-content" id="slide-2">
 			<div class="modal-container">
 				<div class="container">
+
 					<p class="type-1">AATSU pop-up 2</p>
+
 				</div>
 			</div>
 		</div>
@@ -279,7 +325,9 @@
 		<div class="modal-content" id="slide-3">
 			<div class="modal-container">
 				<div class="container">
+
 					<p class="type-1">AATSU pop-up 3</p>
+
 				</div>
 			</div>
 		</div>

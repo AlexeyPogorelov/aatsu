@@ -178,19 +178,49 @@
 }));
 
 // crossbrowser
-var htmlBody = 'body';
-if (jQuery.browser.name === 'mozilla' ) {
-	htmlBody = 'html';
-} else if (jQuery.browser.name == 'msie') {
-	htmlBody = 'html';
-}
+var animationPrefix = (function () {
+			var t,
+			el = document.createElement("fakeelement");
+			var transitions = {
+				"transition": "animationend",
+				"OTransition": "oAnimationEnd",
+				"MozTransition": "animationend",
+				"WebkitTransition": "webkitAnimationEnd"
+			};
+			for (t in transitions){
+				if (el.style[t] !== undefined){
+					return transitions[t];
+				}
+			}
+		})(),
+		transitionPrefix = (function () {
+			var t,
+			el = document.createElement("fakeelement");
+			var transitions = {
+				"transition": "transitionend",
+				"OTransition": "oTransitionEnd",
+				"MozTransition": "transitionend",
+				"WebkitTransition": "webkitTransitionEnd"
+			};
+			for (t in transitions){
+				if (el.style[t] !== undefined){
+					return transitions[t];
+				}
+			}
+		})();
+	// htmlBody = 'body';
+// if (jQuery.browser.name === 'mozilla' ) {
+// 	htmlBody = 'html';
+// } else if (jQuery.browser.name == 'msie') {
+// 	htmlBody = 'html';
+// }
 
 	/* GLOBAL */
 var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
 var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
 if (isTouchDevice || isTouch) {
 	// $('body').css('overflow', 'auto');
-};
+}
 
 var pagesState = {},
 	touchState = {
@@ -207,7 +237,7 @@ var pagesAnimation = (function  (id) {
 		} else {
 			$foreground.show();
 		}
-	}
+	};
 	return plg;
 })();
 
@@ -220,7 +250,9 @@ $(window).load(function(){
 });
 
 /* CACHE DOM */
-cacheDom.$sections = $('.full-height');
+cacheDom.$verticalViewport = $('#vertical-viewport');
+cacheDom.$sections = $('#vertical-viewport > .full-height');
+cacheDom.$horizontal = $('#horizontal-viewport > .full-height');
 cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
@@ -318,10 +350,10 @@ if (!isTouchDevice || !isTouch) {
 			var DOM = {},
 				state = {},
 				array = [],
-				$self = $(this),
+				// $self = $(this),
 				$self = $('#main-navigation');
 				// TODO selectior here
-	
+
 			// options
 			var opt;
 			if (!opt) {
@@ -331,7 +363,7 @@ if (!isTouchDevice || !isTouch) {
 			}
 			opt = $.extend({
 			}, opt);
-	
+
 			// methods
 			var plg = {
 				init: function () {
@@ -346,7 +378,7 @@ if (!isTouchDevice || !isTouch) {
 						} else if (y == array.length - 1) {
 							plg.avtive(array[y].$elem);
 						}
-					};
+					}
 				},
 				avtive: function ($el) {
 					if ($el !== state.$active) {
@@ -358,9 +390,9 @@ if (!isTouchDevice || !isTouch) {
 				resize: function () {
 					DOM.$lnks.each(function (i, elem) {
 							array[i] = {};
-							array[i]['$elem'] = $(elem);
-							array[i]['trg'] = $(elem).attr('href') || $(elem).data('target');
-							array[i]['val'] = $(array[i]['trg']).offset().top;
+							array[i].$elem = $(elem);
+							array[i].trg = $(elem).attr('href') || $(elem).data('target');
+							array[i].val = $(array[i].trg).offset().top;
 						});
 				}
 			};
@@ -369,11 +401,11 @@ if (!isTouchDevice || !isTouch) {
 			plg.resize();
 			$(window).on('scroll', function () {
 				plg.scroll( $(this).scrollTop() );
-			})
+			});
 
 			$(window).on('resize', function () {
 				plg.resize();
-			})
+			});
 
 			return plg;
 		})();
@@ -381,7 +413,7 @@ if (!isTouchDevice || !isTouch) {
 		setTimeout(function () {
 			$('#main-navigation').removeClass('closed');
 			$('#main-navigation').removeClass('invisible');
-		}, 1000)
+		}, 1000);
 
 }
 
@@ -419,13 +451,17 @@ $(document).on('keydown', function (e) {
 });
 
 var scrollPages = (function () {
-	pagesState.currentPage;
+	// pagesState.currentPage;
 	pagesState.pages = [];
 	speed = 1000;
 	var plg = {
 		init: function () {
+			this.organizePages();
 			this.definePages();
 			this.resize();
+		},
+		organizePages: function () {
+			//
 		},
 		definePages: function () {
 			pagesState.pagesCount = 0;
@@ -434,16 +470,19 @@ var scrollPages = (function () {
 					'id': cacheDom.$sections[i].id,
 					'classes': cacheDom.$sections[i].classList,
 					'top': cacheDom.$sections[i].offsetTop,
+					'left': cacheDom.$sections[i].offsetLeft,
 					'leave': cacheDom.$sections.eq(i).attr('data-leave'),
 					'before': cacheDom.$sections.eq(i).attr('data-before'),
 					'after': cacheDom.$sections.eq(i).attr('data-after')
 				});
 				pagesState.pagesCount++;
 			}
+			// TODO remove it
+			console.log(pagesState.pages);
 		},
 		toPage: function (id, resize) {
 
-			var before, after, top;
+			var before, after, top, left;
 
 			if (!pagesState.pages.length || pagesState.animatedBool) {
 				return;
@@ -463,6 +502,7 @@ var scrollPages = (function () {
 				pagesState.currentPage = 0;
 			} else {
 				top = pagesState.pages[id].top;
+				left = pagesState.pages[id].left;
 			}
 
 			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
@@ -483,7 +523,8 @@ var scrollPages = (function () {
 
 			if (!pagesState.animatedBool) {
 
-				pagesState.animatedBool = true;
+				// TODO here is temp comment
+				// pagesState.animatedBool = true;
 
 				if (typeof before === 'function') {
 					before();
@@ -492,19 +533,28 @@ var scrollPages = (function () {
 				plg.makeActiveNav(pagesState.pages[id].id);
 
 				if (!landingNav) {
+					var animationDone = function () {
+						pagesState.animatedBool = false;
+						pagesState.currentPage = id;
+						pagesAnimation(id);
+						// document.location.hash = '#' + pagesState.pages[id].id;
+						history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+						if (typeof after === 'function') {
+							after();
+						}
+					};
+					animationDone();
+					// TODO old ver
+					// $(htmlBody)
+					// 	.stop(false, false)
+					// 	.animate({'scrollTop': top}, speed, animationDone);
 
-					$(htmlBody)
-						.stop(false, false)
-						.animate({'scrollTop': top}, speed, function () {
-							pagesState.animatedBool = false;
-							pagesState.currentPage = id;
-							pagesAnimation(id);
-							// document.location.hash = '#' + pagesState.pages[id].id;
-							history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id)
-							if (typeof after === 'function') {
-								after();
-							}
-						});
+					// console.log(top);
+
+					$(cacheDom.$verticalViewport).css({
+						'-webkit-transform': 'translateY(' + -top + 'px)',
+						'transform': 'translateY(' + -top + 'px)'
+					}).one(transitionPrefix, animationDone);
 
 				}
 
@@ -532,7 +582,7 @@ var scrollPages = (function () {
 					id = 0;
 					pagesState.currentPage = 0;
 				}
-			};
+			}
 			return id;
 		},
 		navigation: function ($self) {
@@ -573,7 +623,7 @@ var scrollPages = (function () {
 
 	$(window).on('resize', function () {
 		plg.resize();
-	})
+	});
 
 	// $(window).on('popstate', function (e) {
 	// 	e.preventDefault();
@@ -587,7 +637,7 @@ var scrollPages = (function () {
 			alert();
 		}
 		plg.navigation($(this));
-	})
+	});
 
 	return plg;
 })();

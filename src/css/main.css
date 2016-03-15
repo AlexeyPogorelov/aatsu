@@ -5,6 +5,29 @@
 	min-height: 1000px;
 }*/
 
+#vertical-viewport {
+	-webkit-transition: transform .3s ease-out;
+	transition: transform .3s ease-out;
+}
+#horizontal-viewport {
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	-webkit-transition: transform .3s ease-out;
+	transition: transform .3s ease-out;
+}
+#horizontal-viewport > section {
+	float: left;
+	width: 100%;
+}
+#animatedLogo {
+	position: absolute;
+	display: none;
+}
+
 * {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -90,6 +113,8 @@
 	background: transparent;
 	height: 14px;
 	width: 4px;
+	-webkit-transition: background .3s;
+	transition: background .3s;
 }
 #main-navigation li.active a {
 	color: #000;
@@ -99,6 +124,8 @@
 }
 #main-navigation li.active a:before {
 	background: #fff;
+	-webkit-transition: background .3s;
+	transition: background .3s;
 }
 #main-navigation li a:hover {
 	/*color: #000;*/
@@ -128,6 +155,9 @@
 	transition: all .1s;
 	-webkit-transform: translateY(0px);
 	transform: translateY(0px);
+}
+#main-navigation.invisible .logo {
+	pointer-events: none;
 }
 #main-navigation .logo {
 	background-color: black;
@@ -184,8 +214,10 @@
 }
 #main-navigation.closed .logo {
 	background-color: transparent;
-	-webkit-transform: translateX(-50%) translateY( -webkit-calc(50vh - 50%) );
-	transform: translateX(-50%) translateY( calc(50vh - 50%) );
+	/*-webkit-transform: translateX(-50%) translateY( -webkit-calc(50vh - 50%) );*/
+	/*transform: translateX(-50%) translateY( calc(50vh - 50%) );*/
+	-webkit-transform: translateX(-50%) translateY( -150% );
+	transform: translateX(-50%) translateY( -150% );
 	-webkit-transition: transform 1s, background 1s, left 1s;
 	transition: transform 1s, background 1s, left 1s;
 }
@@ -255,8 +287,22 @@
 	height: 100%;
 	width: 100%;
 	z-index: 0;
-	/*filter: none !important;*/
-	/*-webkit-filter: none !important;*/
+	-webkit-filter: blur(0);
+	filter: blur(0);
+	transition: 0.6s filter linear;
+	-webkit-transition: 0.6s -webkit-filter linear;
+	-moz-transition: 0.6s -moz-filter linear;
+	-ms-transition: 0.6s -ms-filter linear;
+	-o-transition: 0.6s -o-filter linear;
+}
+#presentation.blured {
+	-webkit-filter: blur(20px);
+	filter: blur(20px);
+	transition: 0.6s filter linear;
+	-webkit-transition: 0.6s -webkit-filter linear;
+	-moz-transition: 0.6s -moz-filter linear;
+	-ms-transition: 0.6s -ms-filter linear;
+	-o-transition: 0.6s -o-filter linear;
 }
 .presentation {
 	overflow: hidden;

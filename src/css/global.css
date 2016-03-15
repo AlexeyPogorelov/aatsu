@@ -675,8 +675,8 @@ button:focus,
 	transition: opacity .3s ease-out, transform .2s, visibility .4s;
 	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s; }
 	.modal-holder.opened {
-	left: 0;
-	top: 0;
+	/*left: 0;*/
+	/*top: 0;*/
 	opacity: 1;
 	visibility: visible; }
 	.modal-holder.opened .modal-content {
