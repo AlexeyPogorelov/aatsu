@@ -484,6 +484,7 @@ $(document).on('ready', function () {
 					var id = state.cur - 1;
 					if (id < 0) {
 						// this.toSlide(state.pages - 1);
+						this.toSlide(0);
 						return;
 					}
 					this.toSlide(id);
@@ -492,11 +493,13 @@ $(document).on('ready', function () {
 					var id = state.cur + 1;
 					if (id >= state.pages) {
 						// this.toSlide(0);
+						this.toSlide(state.pages - 1);
 						return;
 					}
 					this.toSlide(id);
 				},
 				toSlide: function (id) {
+
 					if ( id < 0 || id >= state.pages ) {
 						return;
 					}
@@ -631,26 +634,31 @@ $(document).on('ready', function () {
 				if (e.buttons < 1) {
 					touchendCleaner ();
 				} else if (state.touchStart.xPos) {
-					state.shiftX = state.touchStart.trfX + state.touchStart.xPos - e.pageX;
+					state.shiftD = state.touchStart.xPos - e.pageX;
+					state.shiftX = state.touchStart.trfX + state.shiftD;
 
 					// console.log( state.shiftX );
 					// console.log( state.touchStart.trfX );
 					// console.log( state.touchStart.xPos - e.pageX );
 
 					DOM.$sliderHolder.css({
-						'-webkit-transform': 'translateX( -' + state.shiftX + 'px) translateZ(0)',
-						'transform': 'translateX( -' + state.shiftX + 'px) translateZ(0)'
+						'-webkit-transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)',
+						'transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)'
 					});
 				}
 			});
 
 			DOM.$section.on('mouseup mouseleave', function (e) {
-				// console.log(state.shiftX);
-				if (Math.abs(state.touchStart.xPos - e.pageX) > 40 && state.shiftX > 10) {
-					if (state.touchStart.xPos - e.pageX > 0) {
+				console.log(state.shiftD);
+				if ( Math.abs(state.shiftD) > 40 ) {
+					if (state.shiftD > 0) {
+						// TODO
 						plg.nextSlide();
+						// setTimeout(plg.nextSlide.bind( plg ), 100);
 					} else {
+						// TODO
 						plg.prevSlide();
+						// setTimeout(plg.prevSlide.bind( plg ), 100);
 					}
 				} else {
 					plg.toSlide(state.cur);
@@ -663,6 +671,7 @@ $(document).on('ready', function () {
 				state.touchStart.yPos = 0;
 				state.touchStart.xPos = 0;
 				state.shiftX = 0;
+				state.shiftD = 0;
 			}
 
 			$window.on('resize', plg.resize.bind(plg));
