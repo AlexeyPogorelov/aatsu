@@ -346,6 +346,7 @@ $(document).on('ready', function () {
 	$('#main-navigation').find('.logo').on('click', function () {
 		if (scrollPages.getCurrent() > 0) {
 			scrollPages.toPage(0);
+			horizontalSlider.toPage(0);
 			// setTimeout(function () {
 			// 	preloader.preloader
 			// }, 300);

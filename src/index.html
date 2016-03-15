@@ -33,7 +33,7 @@
 		</span>
 	</div>
 
-	<div id="main-navigation" class="stop-animation">
+	<div id="main-navigation" class="stop-animation closed invisible">
 		<div class="logo">
 			<!-- <img src="img/icons/main-logo.svg"> -->
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -84,16 +84,16 @@
 		</div>
 		<ul>
 			<li>
-				<a href="#series">SERIES</a>
+				<a href="#series" data-page="1">SERIES</a>
 			</li>
 			<li>
-				<a href="#blog">BLOG</a>
+				<a href="#blog" data-page="2">BLOG</a>
 			</li>
 			<li>
-				<a href="#about">ABOUT</a>
+				<a href="#about" data-page="3">ABOUT</a>
 			</li>
 			<li>
-				<a href="#contact">CONTACT</a>
+				<a href="#contact" data-page="4">CONTACT</a>
 			</li>
 		</ul>
 	</div>
@@ -108,192 +108,194 @@
 		</div>
 	</div>
 
-	<div id="horizontal-viewport">
+	<div id="application-holder">
 
-			<div id="animatedLogo">
-				<img src="img/icons/main-logo.svg">
-			</div>
-
-		<section id="vertical-viewport">
-
-			<section id="blur" class="empty full-height" data-before="state1" >
+		<div id="horizontal-viewport">
+		
+				<div id="animatedLogo">
+					<img src="img/icons/main-logo.svg">
+				</div>
+		
+			<section id="vertical-viewport" class="full-height">
+		
+				<section id="blur" class="empty full-height" data-before="state1" >
+				</section>
+		
+				<section id="logotype" class="empty full-height" data-before="state2">
+				</section>
+		
+				<section id="logo" class="empty full-height" data-before="state3" >
+				</section>
+		
+				<section id="screen-1" class="screen-3 full-height" data-before="state4">
+					<div class="container">
+		
+						<div class="content-holder">
+						</div>
+		
+						<p>AATSU III is a footwear brand made using unique  technology that was developed after more  than 5 years of hands on, shoemaking  experience. It is that mindful and masterful approach to shoemaking that gives this brand thehighest value.</p>
+		
+					</div>
+				</section>
+		
+				<section id="screen-2" class="screen-3 full-height" data-before="state5">
+					<div class="container">
+		
+						<div class="content-holder">
+						</div>
+		
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		
+					</div>
+				</section>
+		
+				<section id="clean" class="empty full-height" data-before="showControls" data-leave="hideControls">
+		
+				</section>
+		
 			</section>
-
-			<section id="logotype" class="empty full-height" data-before="state2">
+		
+			<section id="series" class="presentation full-height">
+				<div class="gallery-slider" id="gallery-slider">
+					<div class="slider-viewport">
+						<div class="slider-holder">
+							<div class="slide">
+								<div class="image-holder" data-modal="#slide-1">
+									<img src="https://unsplash.it/600/600/?image=975" alt="">
+								</div>
+							</div>
+							<div class="slide" data-modal="#slide-2">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=971" alt="">
+								</div>
+							</div>
+							<div class="slide" data-modal="#slide-3">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=964" alt="">
+								</div>
+							</div>
+							<div class="slide" data-modal="#slide-4">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=953" alt="">
+								</div>
+							</div>
+							<div class="slide" data-modal="#slide-5">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=952" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder" data-modal="#slide-6">
+									<img src="https://unsplash.it/600/600/?image=934" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=928" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=929" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</section>
-
-			<section id="logo" class="empty full-height" data-before="state3" >
+		
+			<section id="blog" class="presentation full-height">
+				<div class="gallery-slider" id="blog-slider">
+					<div class="slider-viewport">
+						<div class="slider-holder">
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1042" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1033" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1032" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1031" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1021" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=1019" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=999" alt="">
+								</div>
+							</div>
+							<div class="slide">
+								<div class="image-holder">
+									<img src="https://unsplash.it/600/600/?image=990" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</section>
-
-			<section id="screen-1" class="screen-3 full-height" data-before="state4">
+		
+			<section id="about" class="screen-3 full-height">
 				<div class="container">
-
 					<div class="content-holder">
 					</div>
-
-					<p>AATSU III is a footwear brand made using unique  technology that was developed after more  than 5 years of hands on, shoemaking  experience. It is that mindful and masterful approach to shoemaking that gives this brand thehighest value.</p>
-
+		
+					<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
+		
 				</div>
 			</section>
-
-			<section id="screen-2" class="screen-3 full-height" data-before="state5">
+		
+			<section id="contact" class="screen-3 full-height">
 				<div class="container">
-
 					<div class="content-holder">
 					</div>
-
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-				</div>
-			</section>
-
-			<section id="clean" class="empty full-height" data-before="showControls" data-leave="hideControls">
-
-			</section>
-
-		</section>
-
-		<section id="series" class="presentation full-height">
-			<div class="gallery-slider" id="gallery-slider">
-				<div class="slider-viewport">
-					<div class="slider-holder">
-						<div class="slide">
-							<div class="image-holder" data-modal="#slide-1">
-								<img src="img/content/sale-1.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide" data-modal="#slide-2">
-							<div class="image-holder">
-								<img src="img/content/sale-2.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide" data-modal="#slide-3">
-							<div class="image-holder">
-								<img src="img/content/sale-3.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide" data-modal="#slide-4">
-							<div class="image-holder">
-								<img src="img/content/sale-4.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide" data-modal="#slide-5">
-							<div class="image-holder">
-								<img src="img/content/sale-5.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder" data-modal="#slide-6">
-								<img src="img/content/sale-6.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-7.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-8.jpg" alt="">
-							</div>
-						</div>
+					<div class="col-left">
+						<h3>AATSU</h3>
+						<p>Ukraine&International</p>
+						<p>31, Kazimira Malevicha str</p>
+						<p>03680 Kiev</p>
+						<p>+38(0)9 19 36 35 82</p>
+					</div>
+					<div class="col-right">
+						<h3>COMMUNICATION</h3>
+		
+						<p>Press Office:</p>
+						<p><a href="mailto:press@aatsu.com">press@aatsu.com</a></p>
+		
+						<p>Social Media:</p>
+						<p><a href="mailto:support@aatsu.com">support@aatsu.com</a></p>
+		
+						<p>General Inquires</p>
+						<p><a href="mailto:andy.gonza@aatsu.com">andy.gonza@aatsu.com</a></p>
+		
 					</div>
 				</div>
-			</div>
-		</section>
-
-		<section id="blog" class="presentation full-height">
-			<div class="gallery-slider" id="blog-slider">
-				<div class="slider-viewport">
-					<div class="slider-holder">
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-8.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-7.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-6.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-5.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-4.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-3.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-2.jpg" alt="">
-							</div>
-						</div>
-						<div class="slide">
-							<div class="image-holder">
-								<img src="img/content/sale-1.jpg" alt="">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="about" class="screen-3 full-height">
-			<div class="container">
-				<div class="content-holder">
-				</div>
-
-				<p class="type-1">AATSU is a platform where an idea goes through stages from conceptualization to realization</p>
-
-			</div>
-		</section>
-
-		<section id="contact" class="screen-3 full-height">
-			<div class="container">
-				<div class="content-holder">
-				</div>
-				<div class="col-left">
-					<h3>AATSU</h3>
-					<p>Ukraine&International</p>
-					<p>31, Kazimira Malevicha str</p>
-					<p>03680 Kiev</p>
-					<p>+38(0)9 19 36 35 82</p>
-				</div>
-				<div class="col-right">
-					<h3>COMMUNICATION</h3>
-
-					<p>Press Office:</p>
-					<p><a href="mailto:press@aatsu.com">press@aatsu.com</a></p>
-
-					<p>Social Media:</p>
-					<p><a href="mailto:support@aatsu.com">support@aatsu.com</a></p>
-
-					<p>General Inquires</p>
-					<p><a href="mailto:andy.gonza@aatsu.com">andy.gonza@aatsu.com</a></p>
-
-				</div>
-			</div>
-		</section>
-
-	</div>
+			</section>
+		
+		</div>
 
 	<div class="modal-holder">
 		<!-- <div class="close-modal" data-close></div> -->

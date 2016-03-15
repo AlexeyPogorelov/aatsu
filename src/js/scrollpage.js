@@ -230,13 +230,12 @@ var pagesState = {},
 
 pagesState.lastScrollTime = new Date().getTime() - 1000;
 var pagesAnimation = (function  (id) {
-	var $foreground = $('.foreground-holder');
 	var plg = function (id) {
-		if (id > 1) {
-			$foreground.hide();
-		} else {
-			$foreground.show();
-		}
+		// if (id > 1) {
+		// 	$foreground.hide();
+		// } else {
+		// 	$foreground.show();
+		// }
 	};
 	return plg;
 })();
@@ -251,8 +250,9 @@ $(window).load(function(){
 
 /* CACHE DOM */
 cacheDom.$verticalViewport = $('#vertical-viewport');
-cacheDom.$sections = $('#vertical-viewport > .full-height');
-cacheDom.$horizontal = $('#horizontal-viewport > .full-height');
+cacheDom.$horizontalViewport = $('#horizontal-viewport');
+cacheDom.$sections = cacheDom.$verticalViewport.find(' > .full-height');
+cacheDom.$horizontal = cacheDom.$horizontalViewport.find(' > .full-height');
 cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
@@ -451,7 +451,6 @@ $(document).on('keydown', function (e) {
 });
 
 var scrollPages = (function () {
-	// pagesState.currentPage;
 	pagesState.pages = [];
 	speed = 1000;
 	var plg = {
@@ -470,7 +469,7 @@ var scrollPages = (function () {
 					'id': cacheDom.$sections[i].id,
 					'classes': cacheDom.$sections[i].classList,
 					'top': cacheDom.$sections[i].offsetTop,
-					'left': cacheDom.$sections[i].offsetLeft,
+					// 'left': cacheDom.$sections[i].offsetLeft,
 					'leave': cacheDom.$sections.eq(i).attr('data-leave'),
 					'before': cacheDom.$sections.eq(i).attr('data-before'),
 					'after': cacheDom.$sections.eq(i).attr('data-after')
@@ -478,7 +477,7 @@ var scrollPages = (function () {
 				pagesState.pagesCount++;
 			}
 			// TODO remove it
-			console.log(pagesState.pages);
+			// console.log(pagesState.pages);
 		},
 		toPage: function (id, resize) {
 
@@ -492,7 +491,7 @@ var scrollPages = (function () {
 
 			if (id === undefined) {
 				id = this.getIdFromHash();
-				if (pagesState.pages[id] && pagesState.pages[id].before ) {
+				if (pagesState.pages[id] && typeof pagesState.pages[id].before === 'function' ) {
 					window[ pagesState.pages[id].before ]();
 				}
 			}
@@ -523,9 +522,6 @@ var scrollPages = (function () {
 
 			if (!pagesState.animatedBool) {
 
-				// TODO here is temp comment
-				// pagesState.animatedBool = true;
-
 				if (typeof before === 'function') {
 					before();
 				}
@@ -533,28 +529,15 @@ var scrollPages = (function () {
 				plg.makeActiveNav(pagesState.pages[id].id);
 
 				if (!landingNav) {
-					var animationDone = function () {
-						pagesState.animatedBool = false;
-						pagesState.currentPage = id;
-						pagesAnimation(id);
-						// document.location.hash = '#' + pagesState.pages[id].id;
-						history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
-						if (typeof after === 'function') {
-							after();
-						}
-					};
-					animationDone();
-					// TODO old ver
-					// $(htmlBody)
-					// 	.stop(false, false)
-					// 	.animate({'scrollTop': top}, speed, animationDone);
 
-					// console.log(top);
+					pagesState.animatedBool = true;
 
-					$(cacheDom.$verticalViewport).css({
+					$(cacheDom.$verticalViewport).off(transitionPrefix).css({
 						'-webkit-transform': 'translateY(' + -top + 'px)',
 						'transform': 'translateY(' + -top + 'px)'
-					}).one(transitionPrefix, animationDone);
+					}).one(transitionPrefix, this.animationDone.bind(this, id, after));
+
+					this.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), 1000);
 
 				}
 
@@ -610,6 +593,18 @@ var scrollPages = (function () {
 		getCurrent: function () {
 			return pagesState.currentPage;
 		},
+		animationDone: function (id, callback) {
+			pagesState.animatedBool = false;
+			pagesState.currentPage = id;
+			pagesAnimation(id);
+			clearTimeout( this.animatedBoolTimeout );
+
+			// document.location.hash = '#' + pagesState.pages[id].id;
+			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+			if (typeof callback === 'function') {
+				callback();
+			}
+		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {
 				pagesState.pages[i].top = cacheDom.$sections[i].offsetTop;
@@ -631,14 +626,201 @@ var scrollPages = (function () {
 	// 	plg.toPage();
 	// });
 
-	cacheDom.$menu.find('a').on('click', function (e) {
-		e.preventDefault();
-		if (/[#][\s]+/.test( $(this).attr('href') ) ) {
-			alert();
-		}
-		plg.navigation($(this));
-	});
-
 	return plg;
 })();
 
+// horizontal slider
+var horizontalSlider = (function () {
+
+	var pagesState, plg, speed;
+
+	pagesState = {};
+	pagesState.pages = [];
+	speed = 1000;
+
+	plg = {
+		init: function () {
+			this.buildSlider();
+			this.definePages();
+			this.resize();
+		},
+		buildSlider: function () {
+			//
+			if ( cacheDom.$horizontal.length ) {
+				// console.log(  );
+				cacheDom.$horizontalViewport.width( cacheDom.$horizontal.length * windowWidth );
+				cacheDom.$horizontal.width( windowWidth );
+			}
+		},
+		definePages: function () {
+			pagesState.pagesCount = 0;
+			for (var i = 0; i < cacheDom.$horizontal.length; i++) {
+				pagesState.pages.push({
+					'id': cacheDom.$horizontal[i].id,
+					'classes': cacheDom.$horizontal[i].classList,
+					// 'top': cacheDom.$horizontal[i].offsetTop,
+					'left': cacheDom.$horizontal[i].offsetLeft,
+					'leave': cacheDom.$horizontal.eq(i).attr('data-leave'),
+					'before': cacheDom.$horizontal.eq(i).attr('data-before'),
+					'after': cacheDom.$horizontal.eq(i).attr('data-after')
+				});
+				pagesState.pagesCount++;
+			}
+			// TODO remove it
+			console.log(pagesState.pages);
+		},
+		toPage: function (id, resize) {
+
+			var before, after, left, top;
+
+			if (!pagesState.pages.length || pagesState.animatedBool) {
+				return;
+			}
+
+			// console.log(id)
+
+			if (id === undefined) {
+				id = this.getIdFromHash();
+				if (pagesState.pages[id] && typeof pagesState.pages[id].before === 'function' ) {
+					window[ pagesState.pages[id].before ]();
+				}
+			}
+
+			if (pagesState.pages[id] === undefined) {
+				left = pagesState.pages[0].left + windowHeight;
+				pagesState.currentPage = 0;
+			} else {
+				left = pagesState.pages[id].left;
+				left = pagesState.pages[id].left;
+			}
+
+			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
+				pagesState.leave();
+				pagesState.leave = false;
+			}
+			if (pagesState.pages[id] && pagesState.pages[id].leave ) {
+				pagesState.leave = window[ pagesState.pages[id].leave ];
+			}
+
+			if (pagesState.pages[id] && pagesState.pages[id].before) {
+				before = window[ pagesState.pages[id].before ];
+			}
+
+			if (pagesState.pages[id] && pagesState.pages[id].after) {
+				after = window[ pagesState.pages[id].after ];
+			}
+
+			if (!pagesState.animatedBool) {
+
+				if (typeof before === 'function') {
+					before();
+				}
+
+				plg.makeActiveNav(pagesState.pages[id].id);
+
+				if (!landingNav) {
+
+					pagesState.animatedBool = true;
+
+					$(cacheDom.$horizontalViewport).off(transitionPrefix).css({
+						'-webkit-transform': 'translateX(' + -left + 'px)',
+						'transform': 'translateX(' + -left + 'px)'
+					}).one(transitionPrefix, this.animationDone.bind(this, id, after));
+
+					this.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), 1000);
+
+				}
+
+			}
+
+		},
+		nextPage: function () {
+			if (pagesState.currentPage + 1 < pagesState.pagesCount) {
+				this.toPage(++pagesState.currentPage);
+			}
+		},
+		prevPage: function () {
+			if (pagesState.currentPage > 0) {
+				this.toPage(--pagesState.currentPage);
+			}
+		},
+		getIdFromHash: function (hash) {
+			var id = 0,
+				curHash = hash || window.location.hash.substr(1);
+			for (var i = 0; i < pagesState.pages.length; i++) {
+				if (pagesState.pages[i].id == curHash) {
+					pagesState.currentPage = i;
+					return i;
+				} else {
+					id = 0;
+					pagesState.currentPage = 0;
+				}
+			}
+			return id;
+		},
+		navigation: function ($self) {
+			if ( $self.attr('href') ) {
+				if ( document.location.hash != $self.attr('href') ) {
+					var id = plg.getIdFromHash($self.attr('href').substr(1));
+					plg.toPage(id);
+				}
+			}
+		},
+		makeActiveNav: function (hash) {
+			cacheDom.$menu.find('.active').removeClass('active');
+			cacheDom.$menu.find('a').each(function () {
+				var $self = $(this);
+				if ($self.attr('href') == "#" + hash) {
+					$self
+						.parent()
+						.addClass('active')
+						.siblings()
+						.removeClass('active');
+					return false;
+				}
+			});
+		},
+		getCurrent: function () {
+			return pagesState.currentPage;
+		},
+		animationDone: function (id, callback) {
+			pagesState.animatedBool = false;
+			pagesState.currentPage = id;
+			pagesAnimation(id);
+			clearTimeout( this.animatedBoolTimeout );
+
+			// document.location.hash = '#' + pagesState.pages[id].id;
+			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+			if (typeof callback === 'function') {
+				callback();
+			}
+		},
+		resize: function () {
+			for (var i = 0; i < pagesState.pages.length; i++) {
+				pagesState.pages[i].top = cacheDom.$sections[i].offsetTop;
+				if (pagesState.pages[i].full) {
+					cacheDom.$sections.eq(i).height(windowHeight);
+				}
+			}
+			this.toPage(pagesState.currentPage, true);
+		}
+	};
+
+	plg.init();
+
+
+	// main menu click
+	cacheDom.$menu.find('a').on('click', function (e) {
+		e.preventDefault();
+		// if (/[#][\s]+/.test( $(this).attr('href') ) ) {
+		// 	alert();
+		// }
+		var $self = $(this);
+
+		plg.toPage( $self.data('page') );
+		plg.navigation( $self );
+	});
+
+	return plg;
+
+})();
