@@ -108,6 +108,12 @@ hr {
 	margin-bottom: 20px;
 }
 
+p {
+	font-size: 18px;
+	letter-spacing: 9px;
+	font-weight: 100;
+}
+
 p.type-1 {
 	/*background: rgba(0, 0, 0, 0.1);*/
 	font-size: 18px;
@@ -640,7 +646,7 @@ button:focus,
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 100%;
+	/*height: 100%;*/
 	visibility: hidden;
 	width: 100%;
 	z-index: 10;
@@ -663,8 +669,8 @@ button:focus,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 
 	position: absolute;
-	top: 150px;
-	bottom:150px;
+	/*top: 150px;*/
+	/*bottom:150px;*/
 	left: 0px;
 	right: 0px;
 	overflow: auto;
@@ -675,8 +681,10 @@ button:focus,
 	transition: opacity .3s ease-out, transform .2s, visibility .4s;
 	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s; }
 	.modal-holder.opened {
-	/*left: 0;*/
-	/*top: 0;*/
+	left: 0;
+	right: 0;
+	top: 150px;
+	bottom: 150px;
 	opacity: 1;
 	visibility: visible; }
 	.modal-holder.opened .modal-content {

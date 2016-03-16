@@ -17,10 +17,12 @@ function randomInteger(min, max) {
 function hideControls () {
 	$('#main-navigation').addClass('closed');
 	$('#main-navigation').addClass('invisible');
+	scrollPages.blockScroll(false, true);
 }
 function showControls () {
 	$('#main-navigation').removeClass('closed');
 	$('#main-navigation').removeClass('invisible');
+	scrollPages.blockScroll(true, true);
 }
 function state1 () {
 	$('#main-navigation').addClass('invisible');
@@ -345,12 +347,14 @@ $(document).on('ready', function () {
 	// logo click
 	$('#main-navigation').find('.logo').on('click', function () {
 		if (scrollPages.getCurrent() > 0) {
-			scrollPages.toPage(0);
 			horizontalSlider.toPage(0);
+			// ;
 			// setTimeout(function () {
 			// 	preloader.preloader
 			// }, 300);
-			preloader.showPreloader( randomBackground.bind( preloader, preloader.hidePreloader ) );
+			scrollPages.blockScroll(false, true);
+			preloader.showPreloader( randomBackground.bind( preloader, preloader.hidePreloader.bind( this, scrollPages.toPage.bind(this, 0) ) ) );
+			// hideControls ();
 		}
 	});
 
@@ -398,7 +402,9 @@ $(document).on('ready', function () {
 
 		// console.log( e.originalEvent );
 		// console.log( Math.abs(e.originalEvent.clientX - $(this).data('down').x) );
-
+		if ( !$(this).data('down') ) {
+			return;
+		}
 		if (e.timeStamp - $(this).data('down').time < 250 && Math.abs(e.originalEvent.clientX - $(this).data('down').x) < 20 && Math.abs(e.originalEvent.clientY - $(this).data('down').y) < 20 ) {
 
 			var $self = $(this),
@@ -410,7 +416,7 @@ $(document).on('ready', function () {
 				modals.openModal($target);
 
 			}
-		
+
 		}
 
 	});

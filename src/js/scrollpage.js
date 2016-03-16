@@ -455,13 +455,13 @@ var scrollPages = (function () {
 	speed = 1000;
 	var plg = {
 		init: function () {
-			this.organizePages();
+			// this.organizePages();
 			this.definePages();
 			this.resize();
 		},
-		organizePages: function () {
+		// organizePages: function () {
 			//
-		},
+		// },
 		definePages: function () {
 			pagesState.pagesCount = 0;
 			for (var i = 0; i < cacheDom.$sections.length; i++) {
@@ -483,11 +483,11 @@ var scrollPages = (function () {
 
 			var before, after, top, left;
 
+			// console.log(pagesState.animatedBool)
+
 			if (!pagesState.pages.length || pagesState.animatedBool) {
 				return;
 			}
-
-			// console.log(id)
 
 			if (id === undefined) {
 				id = this.getIdFromHash();
@@ -530,14 +530,15 @@ var scrollPages = (function () {
 
 				if (!landingNav) {
 
-					pagesState.animatedBool = true;
+					this.blockScroll(true);
 
-					$(cacheDom.$verticalViewport).off(transitionPrefix).css({
+					cacheDom.$verticalViewport.off(transitionPrefix).css({
 						'-webkit-transform': 'translateY(' + -top + 'px)',
 						'transform': 'translateY(' + -top + 'px)'
-					}).one(transitionPrefix, this.animationDone.bind(this, id, after));
+					})
+					.one(transitionPrefix, this.animationDone.bind(this, id, after));
 
-					this.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), 1000);
+					// pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), speed);
 
 				}
 
@@ -594,16 +595,28 @@ var scrollPages = (function () {
 			return pagesState.currentPage;
 		},
 		animationDone: function (id, callback) {
-			pagesState.animatedBool = false;
+			this.blockScroll(false);
 			pagesState.currentPage = id;
 			pagesAnimation(id);
-			clearTimeout( this.animatedBoolTimeout );
+			clearTimeout( pagesState.animatedBoolTimeout );
 
 			// document.location.hash = '#' + pagesState.pages[id].id;
 			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 			if (typeof callback === 'function') {
 				callback();
 			}
+		},
+		blockScroll: function ( boolean, lock ) {
+			if ( pagesState.lockedScroll && !lock ) {
+				return;
+			}
+			if ( typeof lock === "boolean" ) {
+				pagesState.lockedScroll = boolean;
+			}
+			cacheDom.$verticalViewport.off(transitionPrefix);
+			clearTimeout( pagesState.animatedBoolTimeout );
+			pagesState.animatedBool = boolean;
+			console.log( boolean );
 		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {
@@ -667,7 +680,7 @@ var horizontalSlider = (function () {
 				pagesState.pagesCount++;
 			}
 			// TODO remove it
-			console.log(pagesState.pages);
+			// console.log(pagesState.pages);
 		},
 		toPage: function (id, resize) {
 
@@ -722,7 +735,7 @@ var horizontalSlider = (function () {
 
 					pagesState.animatedBool = true;
 
-					$(cacheDom.$horizontalViewport).off(transitionPrefix).css({
+					cacheDom.$horizontalViewport.off(transitionPrefix).css({
 						'-webkit-transform': 'translateX(' + -left + 'px)',
 						'transform': 'translateX(' + -left + 'px)'
 					}).one(transitionPrefix, this.animationDone.bind(this, id, after));
@@ -790,7 +803,7 @@ var horizontalSlider = (function () {
 			clearTimeout( this.animatedBoolTimeout );
 
 			// document.location.hash = '#' + pagesState.pages[id].id;
-			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+			// history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 			if (typeof callback === 'function') {
 				callback();
 			}

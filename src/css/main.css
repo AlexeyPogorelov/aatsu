@@ -504,9 +504,10 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 .modal-container {
 	color: #d1cdc0;
 	font-size: 18px;
-	font-weight: 400;
-	line-height: 1.5em;
-	text-transform: uppercase;
+	line-height: 1.3em;
+	letter-spacing: 8px;
+	font-weight: 100;
+	word-spacing: 5px;
 }
 .modal-holder .modal-content .container {
 	-webkit-column-count: 3;
