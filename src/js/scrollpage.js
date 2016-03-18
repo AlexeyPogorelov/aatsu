@@ -273,11 +273,16 @@ if (!isTouchDevice || !isTouch) {
 		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
 		if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
 			if (delta > 40) {
+
 				scrollPages.prevPage();
+
 			} else if (delta < -40) {
+
 				scrollPages.nextPage();
+
 			}
 		}
+
 		pagesState.lastScrollTime = new Date().getTime();
 
 	});
@@ -289,9 +294,13 @@ if (!isTouchDevice || !isTouch) {
 		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
 		if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
 			if (delta > 0) {
+
 				scrollPages.prevPage();
+
 			} else if (delta < 0) {
+
 				scrollPages.nextPage();
+
 			}
 		}
 		pagesState.lastScrollTime = new Date().getTime();
@@ -344,6 +353,7 @@ if (!isTouchDevice || !isTouch) {
 	});
 
 } else {
+
 	$('body').css('overflow', 'auto');
 	var landingNav = (function (i) {
 	
@@ -417,7 +427,8 @@ if (!isTouchDevice || !isTouch) {
 
 }
 
-$('.modal-container, .col-left, .col-right, .col-full').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
+// $('.modal-container, .col-left, .col-right, .col-full').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
+$('.modal-container').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
 	e.stopPropagation();
 });
 
@@ -479,7 +490,7 @@ var scrollPages = (function () {
 			// TODO remove it
 			// console.log(pagesState.pages);
 		},
-		toPage: function (id, resize) {
+		toPage: function (id, callback) {
 
 			var before, after, top, left;
 
@@ -526,7 +537,7 @@ var scrollPages = (function () {
 					before();
 				}
 
-				plg.makeActiveNav(pagesState.pages[id].id);
+				plg.makeActiveNav( pagesState.pages[id].id );
 
 				if (!landingNav) {
 
@@ -536,7 +547,7 @@ var scrollPages = (function () {
 						'-webkit-transform': 'translateY(' + -top + 'px)',
 						'transform': 'translateY(' + -top + 'px)'
 					})
-					.one(transitionPrefix, this.animationDone.bind(this, id, after));
+					.one(transitionPrefix, this.animationDone.bind(this, id, after, callback));
 
 					// pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), speed);
 
@@ -594,7 +605,7 @@ var scrollPages = (function () {
 		getCurrent: function () {
 			return pagesState.currentPage;
 		},
-		animationDone: function (id, callback) {
+		animationDone: function (id, after, callback) {
 			this.blockScroll(false);
 			pagesState.currentPage = id;
 			pagesAnimation(id);
@@ -602,6 +613,9 @@ var scrollPages = (function () {
 
 			// document.location.hash = '#' + pagesState.pages[id].id;
 			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+			if (typeof after === 'function') {
+				after();
+			}
 			if (typeof callback === 'function') {
 				callback();
 			}
@@ -616,7 +630,7 @@ var scrollPages = (function () {
 			cacheDom.$verticalViewport.off(transitionPrefix);
 			clearTimeout( pagesState.animatedBoolTimeout );
 			pagesState.animatedBool = boolean;
-			console.log( boolean );
+			// console.log( boolean );
 		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {
@@ -729,7 +743,7 @@ var horizontalSlider = (function () {
 					before();
 				}
 
-				plg.makeActiveNav(pagesState.pages[id].id);
+				plg.makeActiveNav( pagesState.pages[id].id );
 
 				if (!landingNav) {
 
@@ -738,9 +752,9 @@ var horizontalSlider = (function () {
 					cacheDom.$horizontalViewport.off(transitionPrefix).css({
 						'-webkit-transform': 'translateX(' + -left + 'px)',
 						'transform': 'translateX(' + -left + 'px)'
-					}).one(transitionPrefix, this.animationDone.bind(this, id, after));
+					}).one( transitionPrefix, this.animationDone.bind(this, id, after) );
 
-					this.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), 1000);
+					this.animatedBoolTimeout = setTimeout( this.animationDone.bind(this, id, after), 1000 );
 
 				}
 
@@ -748,33 +762,51 @@ var horizontalSlider = (function () {
 
 		},
 		nextPage: function () {
+
 			if (pagesState.currentPage + 1 < pagesState.pagesCount) {
+
 				this.toPage(++pagesState.currentPage);
+
 			}
+
 		},
 		prevPage: function () {
-			if (pagesState.currentPage > 0) {
+
+			if (pagesState.currentPage > 1) {
+
 				this.toPage(--pagesState.currentPage);
+
 			}
+
 		},
 		getIdFromHash: function (hash) {
+
 			var id = 0,
 				curHash = hash || window.location.hash.substr(1);
+
 			for (var i = 0; i < pagesState.pages.length; i++) {
+
 				if (pagesState.pages[i].id == curHash) {
+
 					pagesState.currentPage = i;
 					return i;
+
 				} else {
+
 					id = 0;
 					pagesState.currentPage = 0;
+
 				}
+
 			}
+
 			return id;
+
 		},
 		navigation: function ($self) {
 			if ( $self.attr('href') ) {
 				if ( document.location.hash != $self.attr('href') ) {
-					var id = plg.getIdFromHash($self.attr('href').substr(1));
+					var id = plg.getIdFromHash( $self.attr('href').substr(1) );
 					plg.toPage(id);
 				}
 			}
@@ -797,6 +829,7 @@ var horizontalSlider = (function () {
 			return pagesState.currentPage;
 		},
 		animationDone: function (id, callback) {
+
 			pagesState.animatedBool = false;
 			pagesState.currentPage = id;
 			pagesAnimation(id);
@@ -807,12 +840,13 @@ var horizontalSlider = (function () {
 			if (typeof callback === 'function') {
 				callback();
 			}
+
 		},
 		resize: function () {
 			for (var i = 0; i < pagesState.pages.length; i++) {
 				pagesState.pages[i].top = cacheDom.$sections[i].offsetTop;
 				if (pagesState.pages[i].full) {
-					cacheDom.$sections.eq(i).height(windowHeight);
+					cacheDom.$sections.eq(i).height( windowHeight );
 				}
 			}
 			this.toPage(pagesState.currentPage, true);
@@ -829,6 +863,8 @@ var horizontalSlider = (function () {
 		// 	alert();
 		// }
 		var $self = $(this);
+
+		modals.closeModal();
 
 		plg.toPage( $self.data('page') );
 		plg.navigation( $self );

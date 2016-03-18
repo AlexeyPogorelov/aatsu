@@ -655,7 +655,7 @@ button:focus,
 	-webkit-perspective: 1000px;
 	      perspective: 1000px;
 	-webkit-overflow-scrolling: touch;
-	overflow-y: scroll;
+	overflow-x: auto;
 	-webkit-transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, transform .2s, visibility .4s;
@@ -669,7 +669,7 @@ button:focus,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 
 	position: absolute;
-	/*top: 150px;*/
+	top: 50px;
 	/*bottom:150px;*/
 	left: 0px;
 	right: 0px;
