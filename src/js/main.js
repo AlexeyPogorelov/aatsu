@@ -18,6 +18,14 @@ function hideControls () {
 	$('#main-navigation').addClass('invisible');
 
 	scrollPages.blockScroll(false, true);
+	blurMinStatus();
+
+	setTimeout(function () {
+
+		scrollPages.blockScroll(false, true);
+		blurMinStatus();
+
+	}, 1000);
 
 	pagesState.horizontal = false;
 }
@@ -32,6 +40,7 @@ function showControls () {
 function state1 () {
 	$('#main-navigation').addClass('invisible');
 	$('#presentation').removeClass('blured');
+	hideControls();
 }
 function state2 () {
 	$('#presentation').addClass('blured');
@@ -260,12 +269,6 @@ $(document).on('ready', function () {
 			blurMax = 14,
 			max = 14;
 
-		// if ( !scrollStarted && !scrollPages.getCurrent() ) {
-		// 	blurStatus = max;
-		// 	scrollStarted = true;
-		// }
-		// console.log( scrollPages.getCurrent() );
-
 		function increaseBlur (e) {
 
 			if (blurStatus >= max) {
@@ -277,8 +280,6 @@ $(document).on('ready', function () {
 				e.preventDefault();
 				e.stopPropagation();
 				setBlur( ++blurStatus );
-				console.log( blurStatus );
-				// console.log( scrollPages.getCurrent() );
 
 			}
 
@@ -295,8 +296,6 @@ $(document).on('ready', function () {
 				e.preventDefault();
 				e.stopPropagation();
 				setBlur( --blurStatus );
-				console.log( blurStatus );
-				// console.log( scrollPages.getCurrent() );
 
 			}
 
@@ -328,7 +327,9 @@ $(document).on('ready', function () {
 		$('#start').on('mousewheel', function (e) {
 
 			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+
 			if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+
 				if (delta > 40) {
 
 					decreaseBlur(e);
@@ -338,6 +339,7 @@ $(document).on('ready', function () {
 					increaseBlur(e);
 
 				}
+
 			}
 
 			pagesState.lastScrollTime = new Date().getTime();
@@ -347,7 +349,9 @@ $(document).on('ready', function () {
 		$('#start').on('DOMMouseScroll wheel', function (e) {
 
 			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
+
 			if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+
 				if (delta > 0) {
 
 					decreaseBlur(e);
@@ -357,7 +361,9 @@ $(document).on('ready', function () {
 					increaseBlur(e);
 
 				}
+
 			}
+
 			pagesState.lastScrollTime = new Date().getTime();
 
 		});
@@ -547,8 +553,12 @@ $(document).on('ready', function () {
 			modals.closeModal();
 
 			preloader.showPreloader( randomBackground.bind( scrollPages, function () {
+
+				blurMinStatus();
+
 				scrollPages.blockScroll(false, true);
 				scrollPages.toPage(0, preloader.hidePreloader);
+
 			} ) );
 
 		}

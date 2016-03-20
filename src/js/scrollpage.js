@@ -289,10 +289,12 @@ if (!isTouchDevice || !isTouch) {
 
 	$(window).on('DOMMouseScroll wheel', function (e) {
 
+			console.log(pagesState.animatedBool)
 		e.preventDefault();
 		e.stopPropagation();
 		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
 		if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+
 			if (delta > 0) {
 
 				scrollPages.prevPage();
@@ -302,6 +304,7 @@ if (!isTouchDevice || !isTouch) {
 				scrollPages.nextPage();
 
 			}
+
 		}
 		pagesState.lastScrollTime = new Date().getTime();
 
@@ -466,13 +469,9 @@ var scrollPages = (function () {
 	speed = 1000;
 	var plg = {
 		init: function () {
-			// this.organizePages();
 			this.definePages();
 			this.resize();
 		},
-		// organizePages: function () {
-			//
-		// },
 		definePages: function () {
 			pagesState.pagesCount = 0;
 			for (var i = 0; i < cacheDom.$sections.length; i++) {
@@ -497,44 +496,65 @@ var scrollPages = (function () {
 			// console.log(pagesState.animatedBool)
 
 			if (!pagesState.pages.length || pagesState.animatedBool) {
+
 				return;
+
 			}
 
 			if (id === undefined) {
+
 				id = this.getIdFromHash();
+
 				if (pagesState.pages[id] && typeof pagesState.pages[id].before === 'function' ) {
+
 					window[ pagesState.pages[id].before ]();
+
 				}
+
 			}
 
 			if (pagesState.pages[id] === undefined) {
+
 				top = pagesState.pages[0].top + windowHeight;
 				pagesState.currentPage = 0;
+
 			} else {
+
 				top = pagesState.pages[id].top;
 				left = pagesState.pages[id].left;
+
 			}
 
 			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
+
 				pagesState.leave();
 				pagesState.leave = false;
+
 			}
 			if (pagesState.pages[id] && pagesState.pages[id].leave ) {
+
 				pagesState.leave = window[ pagesState.pages[id].leave ];
+
 			}
 
 			if (pagesState.pages[id] && pagesState.pages[id].before) {
+
 				before = window[ pagesState.pages[id].before ];
+
 			}
 
 			if (pagesState.pages[id] && pagesState.pages[id].after) {
+
 				after = window[ pagesState.pages[id].after ];
+
 			}
 
 			if (!pagesState.animatedBool) {
 
 				if (typeof before === 'function') {
+
 					before();
+
 				}
 
 				plg.makeActiveNav( pagesState.pages[id].id );
@@ -557,55 +577,89 @@ var scrollPages = (function () {
 
 		},
 		nextPage: function () {
+
 			if (pagesState.currentPage + 1 < pagesState.pagesCount) {
+
 				this.toPage(++pagesState.currentPage);
+
 			}
+
 		},
 		prevPage: function () {
+
 			if (pagesState.currentPage > 0) {
+
 				this.toPage(--pagesState.currentPage);
+
 			}
+
 		},
 		getIdFromHash: function (hash) {
 			var id = 0,
 				curHash = hash || window.location.hash.substr(1);
+
 			for (var i = 0; i < pagesState.pages.length; i++) {
+
 				if (pagesState.pages[i].id == curHash) {
+
 					pagesState.currentPage = i;
 					return i;
+
 				} else {
+
 					id = 0;
 					pagesState.currentPage = 0;
+
 				}
+
 			}
+
 			return id;
+
 		},
 		navigation: function ($self) {
+
 			if ( $self.attr('href') ) {
+
 				if ( document.location.hash != $self.attr('href') ) {
+
 					var id = plg.getIdFromHash($self.attr('href').substr(1));
 					plg.toPage(id);
+
 				}
+
 			}
+
 		},
 		makeActiveNav: function (hash) {
+
 			cacheDom.$menu.find('.active').removeClass('active');
 			cacheDom.$menu.find('a').each(function () {
+
 				var $self = $(this);
+
 				if ($self.attr('href') == "#" + hash) {
+
 					$self
 						.parent()
 						.addClass('active')
 						.siblings()
 						.removeClass('active');
+
 					return false;
+
 				}
+
 			});
+
 		},
 		getCurrent: function () {
+
 			return pagesState.currentPage;
+
 		},
 		animationDone: function (id, after, callback) {
+
 			this.blockScroll(false);
 			pagesState.currentPage = id;
 			pagesAnimation(id);
@@ -613,33 +667,55 @@ var scrollPages = (function () {
 
 			// document.location.hash = '#' + pagesState.pages[id].id;
 			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+
 			if (typeof after === 'function') {
+
 				after();
+
 			}
+
 			if (typeof callback === 'function') {
+
 				callback();
+
 			}
+
 		},
 		blockScroll: function ( boolean, lock ) {
+
 			if ( pagesState.lockedScroll && !lock ) {
+
 				return;
+
 			}
+
 			if ( typeof lock === "boolean" ) {
+
 				pagesState.lockedScroll = boolean;
+
 			}
+
 			cacheDom.$verticalViewport.off(transitionPrefix);
 			clearTimeout( pagesState.animatedBoolTimeout );
 			pagesState.animatedBool = boolean;
-			// console.log( boolean );
+			// console.log( this );
 		},
 		resize: function () {
+
 			for (var i = 0; i < pagesState.pages.length; i++) {
+
 				pagesState.pages[i].top = cacheDom.$sections[i].offsetTop;
+
 				if (pagesState.pages[i].full) {
+
 					cacheDom.$sections.eq(i).height(windowHeight);
+
 				}
+
 			}
+
 			this.toPage(pagesState.currentPage, true);
+
 		}
 	};
 
