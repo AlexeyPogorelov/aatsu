@@ -289,10 +289,11 @@ if (!isTouchDevice || !isTouch) {
 
 	$(window).on('DOMMouseScroll wheel', function (e) {
 
-			console.log(pagesState.animatedBool)
 		e.preventDefault();
 		e.stopPropagation();
+
 		var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
+
 		if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
 
 			if (delta > 0) {

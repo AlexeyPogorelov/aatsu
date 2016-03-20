@@ -18,12 +18,10 @@ function hideControls () {
 	$('#main-navigation').addClass('invisible');
 
 	scrollPages.blockScroll(false, true);
-	blurMinStatus();
 
 	setTimeout(function () {
 
 		scrollPages.blockScroll(false, true);
-		blurMinStatus();
 
 	}, 1000);
 
@@ -219,6 +217,7 @@ $('img').each(function () {
 });
 
 $(document).on('ready', function () {
+
 	var $window = $(window),
 		$presentation = $('#presentation'),
 		$foreground = $presentation.find('> .foreground-holder'),
@@ -227,8 +226,10 @@ $(document).on('ready', function () {
 		winWidth = $window.width(),
 		winHeight = $window.height(),
 		deviceInspector = (function () {
+
 			var newDevice;
 			function deviseChanged (device) {
+
 				switch (device) {
 					case 'mobile':
 						break;
@@ -239,35 +240,55 @@ $(document).on('ready', function () {
 					case 'large':
 						break;
 				}
+
 			}
+
 			return function () {
+
 				var currentWidth = winWidth;
+
 				if (currentWidth <= 780){
+
 					newDevice = 'mobile';
+
 				} else if (currentWidth <= 1000) {
+
 					newDevice = 'tablet';
+
 				} else if (currentWidth <= 1278) {
+
 					newDevice = 'pc';
+
 				} else {
+
 					newDevice = 'large';
+
 				}
+
 				if (!window._currentDevice){
+
 					window._currentDevice = newDevice;
 					deviseChanged(newDevice);
+
 				}
+
 				if (newDevice != window._currentDevice) {
+
 					window._currentDevice = newDevice;
 					deviseChanged(newDevice);
+
 				}
+
 			};
+
 		})();
 
 	(function () {
 
 		var scrollStarted = false,
 			blurStatus = 0,
-			blurMax = 14,
-			max = 14;
+			blurMax = 20,
+			max = 20;
 
 		function increaseBlur (e) {
 
@@ -367,6 +388,7 @@ $(document).on('ready', function () {
 			pagesState.lastScrollTime = new Date().getTime();
 
 		});
+
 	})();
 
 	// randomize background
@@ -376,7 +398,9 @@ $(document).on('ready', function () {
 			bgLoaded = 0;
 
 		function bgReady () {
+
 			preloader.loaded();
+
 			if ( ++bgLoaded >= 2 ) {
 
 				bgLoaded = 0;
@@ -418,7 +442,9 @@ $(document).on('ready', function () {
 				'width': 'auto',
 				'height': '100%'
 			});
+
 		} else {
+
 			$foreground.parent().height(winHeight);
 			$foreground.height(winWidth);
 			$background.height(winWidth);
@@ -430,31 +456,47 @@ $(document).on('ready', function () {
 				'height': 'auto',
 				'width': '100%'
 			});
+
 		}
 	}
 	fillPresentation ();
 
 	// placing image middle
 	function middlindImage ($child, $parent, offset) {
+
 		if (!$child.jquery) {
+
 			$child = $($child);
+
 		}
+
 		if (!$parent) {
+
 			$parent = $child.parent();
+
 		}
+
 		if (!offset) {
+
 			offset = 0;
+
 		}
+
 		$child.css({
 			'margin-top': -(($child.height() - $parent.height()) / 2),
 			'margin-left': 0
 		});
+
 		if (winHeight > winWidth) {
+
 			$child.css({
 				'margin-left': -(($child.width() - $parent.width()) / 2)
 			});
+
 		}
+
 	}
+
 	middlindImage ($foreground.find('img'), $window, -60);
 	middlindImage ($background.find('img'), $window, -60);
 
@@ -462,62 +504,80 @@ $(document).on('ready', function () {
 	$window.on('mousemove', function (e) {
 		// console.log(e);
 		if (winHeight > winWidth) {
+
 			$foreground.css({
 				'-webkit-mask-position-x': e.clientX - winWidth / 2,
 				'-webkit-mask-position-y': e.clientY - winHeight / 2,
 				'mask-position-x': e.clientX - winWidth / 2,
 				'mask-position-y': e.clientY - winHeight / 2
 			});
+
 		} else {
+
 			$foreground.css({
 				'-webkit-mask-position-x': e.clientX - winWidth / 2,
 				'-webkit-mask-position-y': e.clientY - winWidth / 2,
 				'mask-position-x': e.clientX - winWidth / 2,
 				'mask-position-y': e.clientY - winWidth / 2
 			});
+
 		}
+
 	});
 
 	// touch move
 	$window.on('touchmove', function (e) {
+
 		if (winHeight > winWidth) {
+
 			$foreground.css({
 				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
 				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
 				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
 				'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
 			});
+
 		} else {
+
 			$foreground.css({
 				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
 				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
 				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
 				'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
 			});
+
 		}
+
 	});
 
 	// touch end
 	$window.on('touchend', function (e) {
+
 		if (winHeight > winWidth) {
+
 			$foreground.css({
 				'-webkit-mask-position-x': -3000,
 				'-webkit-mask-position-y': -3000,
 				'mask-position-x': -3000,
 				'mask-position-y': -3000
 			});
+
 		} else {
+
 			$foreground.css({
 				'-webkit-mask-position-x': -3000,
 				'-webkit-mask-position-y': -3000,
 				'mask-position-x': -3000,
 				'mask-position-y': -3000
 			});
+
 		}
+
 	});
 
 	// resize
 	$window.on('resize', function () {
+
 		winWidth = $window.width();
 		winHeight = $window.height();
 		fillPresentation ();
@@ -525,27 +585,12 @@ $(document).on('ready', function () {
 		middlindImage ($background.find('img'), $window, -60);
 		deviceInspector();
 		bodyOverflow.unfixBody();
-	});
 
-	// scroll
-	// $(document).on('scroll', function (e) {
-	// 	var top = $(e.target).scrollTop();
-		// animation blur
-		// if (top < winHeight) {
-		// 	$presentation.css({
-		// 		'-webkit-filter': 'blur(' + ( top / winHeight * 20 ) + 'px)',
-		// 		'filter': 'blur(' + ( top / winHeight * 20 ) + 'px)'
-		// 	});
-		// } else {
-		// 	$presentation.css({
-		// 		'-webkit-filter': 'blur(20px)',
-		// 		'filter': 'blur(20px)'
-		// 	});
-		// }
-	// });
+	});
 
 	// logo click
 	$('#main-navigation').find('.logo').on('click', function () {
+
 		if (scrollPages.getCurrent() > 0) {
 
 			horizontalSlider.toPage(0);
@@ -562,6 +607,7 @@ $(document).on('ready', function () {
 			} ) );
 
 		}
+
 	});
 
 	// modals
@@ -583,7 +629,9 @@ $(document).on('ready', function () {
 		// console.log( e.originalEvent );
 		// console.log( Math.abs(e.originalEvent.clientX - $(this).data('down').x) );
 		if ( !$(this).data('down') ) {
+
 			return;
+
 		}
 		if (e.timeStamp - $(this).data('down').time < 250 && Math.abs(e.originalEvent.clientX - $(this).data('down').x) < 20 && Math.abs(e.originalEvent.clientY - $(this).data('down').y) < 20 ) {
 
