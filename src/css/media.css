@@ -49,6 +49,9 @@
 	a.main-mailto {
 		font-size: 14px;
 	}
+	section.screen-3 .container p, section.screen-3 .container p a {
+		font-size: 14px;
+	}
 	
 	#main-navigation .logo {
 		left: 0;
