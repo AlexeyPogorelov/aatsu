@@ -7,7 +7,6 @@ var backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
-$presentation = $('#presentation');
 
 function randomInteger(min, max) {
 	var rand = min + Math.random() * (max - min);
@@ -31,7 +30,6 @@ function showControls () {
 	pagesState.horizontal = true;
 }
 function state1 () {
-	// console.log('state1');
 	$('#main-navigation').addClass('invisible');
 	$('#presentation').removeClass('blured');
 }
@@ -39,6 +37,7 @@ function state2 () {
 	$('#presentation').addClass('blured');
 }
 function state3 () {
+	blurMaxStatus();
 }
 
 function visibleControls () {
@@ -181,7 +180,7 @@ var preloader = {
 
 					for (var m = 0; m < modals.opened.length; m++) {
 
-						console.log(modals.opened[m])
+						// console.log(modals.opened[m])
 						modals.closeModal( modals.opened[m] );
 
 					}
@@ -212,8 +211,9 @@ $('img').each(function () {
 
 $(document).on('ready', function () {
 	var $window = $(window),
-		$foreground = $('#presentation > .foreground-holder'),
-		$background = $('#presentation > .background-holder'),
+		$presentation = $('#presentation'),
+		$foreground = $presentation.find('> .foreground-holder'),
+		$background = $presentation.find('> .background-holder'),
 		$body = $('body'),
 		winWidth = $window.width(),
 		winHeight = $window.height(),
@@ -252,6 +252,116 @@ $(document).on('ready', function () {
 				}
 			};
 		})();
+
+	(function () {
+
+		var scrollStarted = false,
+			blurStatus = 0,
+			blurMax = 14,
+			max = 14;
+
+		// if ( !scrollStarted && !scrollPages.getCurrent() ) {
+		// 	blurStatus = max;
+		// 	scrollStarted = true;
+		// }
+		// console.log( scrollPages.getCurrent() );
+
+		function increaseBlur (e) {
+
+			if (blurStatus >= max) {
+
+				return false;
+
+			} else {
+
+				e.preventDefault();
+				e.stopPropagation();
+				setBlur( ++blurStatus );
+				console.log( blurStatus );
+				// console.log( scrollPages.getCurrent() );
+
+			}
+
+		}
+
+		function decreaseBlur (e) {
+
+			if (blurStatus < 1) {
+
+				return false;
+
+			} else {
+
+				e.preventDefault();
+				e.stopPropagation();
+				setBlur( --blurStatus );
+				console.log( blurStatus );
+				// console.log( scrollPages.getCurrent() );
+
+			}
+
+		}
+
+		function setBlur (blur) {
+
+			$presentation.css({
+				'-webkit-filter': 'blur(' + blur + 'px)',
+				'filter': 'blur(' + blur + 'px)'
+			});
+
+		}
+
+		window.blurMaxStatus = function () {
+
+			blurStatus = max;
+			setBlur( blurStatus );
+
+		};
+
+		window.blurMinStatus = function () {
+
+			blurStatus = 0;
+			setBlur( blurStatus );
+
+		};
+
+		$('#start').on('mousewheel', function (e) {
+
+			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
+			if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+				if (delta > 40) {
+
+					decreaseBlur(e);
+
+				} else if (delta < -40) {
+
+					increaseBlur(e);
+
+				}
+			}
+
+			pagesState.lastScrollTime = new Date().getTime();
+
+		});
+
+		$('#start').on('DOMMouseScroll wheel', function (e) {
+
+			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
+			if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+				if (delta > 0) {
+
+					decreaseBlur(e);
+
+				} else if (delta < 0) {
+
+					increaseBlur(e);
+
+				}
+			}
+			pagesState.lastScrollTime = new Date().getTime();
+
+		});
+	})();
 
 	// randomize background
 	function randomBackground (callback) {
