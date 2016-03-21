@@ -225,20 +225,28 @@ var preloader = {
 		};
 
 $('body').on('load', function () {
+
 	preloader.status(1);
 	setTimeout(preloader.ready, 500);
+
 });
 
 setTimeout(function () {
+
 	preloader.status(1);
 	setTimeout(preloader.ready, 500);
+
 }, 10000);
 
 $('img').each(function () {
+
 	if (!this.naturalWidth) {
+
 		preloader.trg++;
 		$(this).one('load', preloader.loaded);
+
 	}
+
 });
 
 $(document).on('ready', function () {
@@ -249,64 +257,7 @@ $(document).on('ready', function () {
 		$background = $presentation.find('> .background-holder'),
 		$body = $('body'),
 		winWidth = $window.width(),
-		winHeight = $window.height(),
-		deviceInspector = (function () {
-
-			var newDevice;
-			function deviseChanged (device) {
-
-				switch (device) {
-					case 'mobile':
-						break;
-					case 'tablet':
-						break;
-					case 'pc':
-						break;
-					case 'large':
-						break;
-				}
-
-			}
-
-			return function () {
-
-				var currentWidth = winWidth;
-
-				if (currentWidth <= 780){
-
-					newDevice = 'mobile';
-
-				} else if (currentWidth <= 1000) {
-
-					newDevice = 'tablet';
-
-				} else if (currentWidth <= 1278) {
-
-					newDevice = 'pc';
-
-				} else {
-
-					newDevice = 'large';
-
-				}
-
-				if (!window._currentDevice){
-
-					window._currentDevice = newDevice;
-					deviseChanged(newDevice);
-
-				}
-
-				if (newDevice != window._currentDevice) {
-
-					window._currentDevice = newDevice;
-					deviseChanged(newDevice);
-
-				}
-
-			};
-
-		})();
+		winHeight = $window.height();
 
 	(function () {
 
@@ -610,7 +561,6 @@ $(document).on('ready', function () {
 		fillPresentation ();
 		middlindImage ($foreground.find('img'), $window, -60);
 		middlindImage ($background.find('img'), $window, -60);
-		deviceInspector();
 		bodyOverflow.unfixBody();
 
 	});

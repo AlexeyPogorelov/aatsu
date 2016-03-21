@@ -16,9 +16,10 @@
 	/*width: 540px;*/
 }
 
+.modal-container .container img,
 .absolute-table img {
-	height: 100%;
-	/*width: 100%;*/
+	height: 100% !important;
+	width: auto !important;
 }
 
 .full-height {
@@ -569,7 +570,32 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	font-weight: 100;
 	word-spacing: 5px;
 }
+.modal-container .container img {
+	padding: 40px 0;
+	height: 400px;
+	width: 400px;
+}
+.modal-container .container h1,
+.modal-container .container h2,
+.modal-container .container h3,
+.modal-container .container h4,
+.modal-container .container h5,
+.modal-container .container h6 {
+	color: #fff;
+	padding-top: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.modal-container .container p {
+	padding-top: 0;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 40px;
+	text-align: left;
+}
 .modal-holder .modal-content .container {
+	width: 1060px;
+	width: 86%;
 	-webkit-column-count: 3;
 	-moz-column-count: 3;
 	column-count: 3;
