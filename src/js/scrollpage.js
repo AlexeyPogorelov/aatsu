@@ -241,19 +241,25 @@ var pagesState = {},
 	};
 
 pagesState.lastScrollTime = new Date().getTime() - 1000;
+
 var pagesAnimation = (function (id) {
 
-	// console.log(id)
+	var $presentation = $('#presentation'),
+		$foreground = $presentation.find('> .foreground-holder'),
+		$background = $presentation.find('> .background-holder'),
+		plg = function (id) {
 
-	var plg = function (id) {
+			if ( id > 3 ) {
 
-		if ( id > 1 && jQuery.browser.mobile ) {
-			$foreground.hide();
-		} else if ( jQuery.browser.mobile ) {
-			$foreground.show();
-		}
+				$foreground.hide();
 
-	};
+			} else {
+
+				$foreground.show();
+
+			}
+
+		};
 
 	return plg;
 
@@ -621,9 +627,9 @@ var scrollPages = (function () {
 		},
 		animationDone: function (id, after, callback) {
 
-			this.blockScroll(false);
+			this.blockScroll( false );
 			pagesState.currentPage = id;
-			pagesAnimation(id);
+			pagesAnimation( id );
 			clearTimeout( pagesState.animatedBoolTimeout );
 
 			// document.location.hash = '#' + pagesState.pages[id].id;
@@ -724,8 +730,6 @@ var horizontalSlider = (function () {
 				});
 				pagesState.pagesCount++;
 			}
-			// TODO remove it
-			console.log(pagesState.pages);
 		},
 		toPage: function (id, resize) {
 
@@ -781,12 +785,22 @@ var horizontalSlider = (function () {
 
 					pagesState.animatedBool = true;
 
-					cacheDom.$horizontalViewport.off(transitionPrefix).css({
-						'-webkit-transform': 'translateX(' + -left + 'px)',
-						'transform': 'translateX(' + -left + 'px)'
-					}).one( transitionPrefix, this.animationDone.bind(this, id, after) );
+					cacheDom.$horizontalViewport.addClass('translating');
 
-					this.animatedBoolTimeout = setTimeout( this.animationDone.bind(this, id, after), 1000 );
+					setTimeout( function () {
+
+						cacheDom.$horizontalViewport.off(transitionPrefix).css({
+							'-webkit-transform': 'translateX(' + -left + 'px)',
+							'transform': 'translateX(' + -left + 'px)'
+						});
+
+					}, 600 );
+
+					this.animatedBoolTimeout = setTimeout( function () {
+
+						plg.animationDone(id, after);
+
+					}, 1200 );
 
 			}
 
@@ -879,6 +893,7 @@ var horizontalSlider = (function () {
 			pagesAnimation(id);
 			clearTimeout( this.animatedBoolTimeout );
 
+			cacheDom.$horizontalViewport.removeClass('translating');
 			// document.location.hash = '#' + pagesState.pages[id].id;
 			// history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 			if (typeof callback === 'function') {
@@ -924,15 +939,17 @@ var horizontalSlider = (function () {
 	cacheDom.$menu.find('a').on('click', function (e) {
 
 		e.preventDefault();
-		// if (/[#][\s]+/.test( $(this).attr('href') ) ) {
-		// 	alert();
-		// }
 		var $self = $(this);
 
 		modals.closeModal();
 
-		plg.toPage( $self.data('page') );
-		plg.navigation( $self );
+		if (!$self.parent().hasClass('active')) {
+
+			plg.toPage( $self.data('page') );
+			plg.navigation( $self );
+
+		}
+
 
 	});
 

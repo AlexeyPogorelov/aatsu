@@ -263,8 +263,15 @@ $(document).on('ready', function () {
 
 		var scrollStarted = false,
 			blurStatus = 0,
-			blurMax = 20,
-			max = 20;
+			blurMax = 12,
+			max = 50;
+
+		function convertBlur (stat) {
+
+			stat = stat || 0;
+			return stat / max * blurMax;
+
+		}
 
 		function increaseBlur (e) {
 
@@ -276,7 +283,7 @@ $(document).on('ready', function () {
 
 				e.preventDefault();
 				e.stopPropagation();
-				setBlur( ++blurStatus );
+				setBlur( convertBlur( ++blurStatus ) );
 
 			}
 
@@ -292,7 +299,7 @@ $(document).on('ready', function () {
 
 				e.preventDefault();
 				e.stopPropagation();
-				setBlur( --blurStatus );
+				setBlur( convertBlur( --blurStatus ) );
 
 			}
 
@@ -310,14 +317,14 @@ $(document).on('ready', function () {
 		window.blurMaxStatus = function () {
 
 			blurStatus = max;
-			setBlur( blurStatus );
+			setBlur( convertBlur ( blurStatus ) );
 
 		};
 
 		window.blurMinStatus = function () {
 
 			blurStatus = 0;
-			setBlur( blurStatus );
+			setBlur( convertBlur ( blurStatus ) );
 
 		};
 
