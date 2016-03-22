@@ -250,6 +250,8 @@ var pagesAnimation = (function () {
 		$socials = $('.socials-holder'),
 		plg = function (id) {
 
+			console.log(id);
+
 			if ( id > 3 ) {
 
 				$foreground.hide();

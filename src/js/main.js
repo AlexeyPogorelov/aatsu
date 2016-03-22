@@ -747,19 +747,19 @@ $(document).on('ready', function () {
 
 			$clone
 				.on('click', function (e) {
+
 					e.stopPropagation();
+
 				})
+				.one('DOMMouseScroll wheel mousewheel', closeModal)
 				.addClass( 'modal-image' )
 				.css( stylesStack )
 				.appendTo( $body );
 
-			setTimeout(function () {
+				// $tint.one('mousedown DOMMouseScroll wheel mousewheel', closeModal);
+				$tint.one('mousedown', closeModal);
 
-				$clone.css( stylesTarget );
-
-				$tint.addClass('active');
-
-				$tint.one('mousedown', function () {
+			function closeModal () {
 
 					$tint.removeClass('active');
 					$clone.css( stylesStack ).one(transitionPrefix, function () {
@@ -769,7 +769,13 @@ $(document).on('ready', function () {
 
 					});
 
-				});
+				}
+
+			setTimeout(function () {
+
+				$clone.css( stylesTarget );
+
+				$tint.addClass('active');
 
 			}, 10);
 
