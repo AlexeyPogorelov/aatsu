@@ -250,16 +250,14 @@ var pagesAnimation = (function () {
 		$socials = $('.socials-holder'),
 		plg = function (id) {
 
-			console.log(id);
-
 			if ( id > 3 ) {
 
 				$foreground.hide();
+				$socials.removeClass('deactive');
 
 			} else {
 
 				$foreground.show();
-				$socials.removeClass('deactive');
 
 			}
 
@@ -303,7 +301,7 @@ $(window).on('mousewheel', function (e) {
 
 	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
 
-	if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+	if ( !pagesState.animatedBool && pagesState.lastScrollTime + 200 < new Date().getTime() ) {
 
 		if (delta > 40) {
 
@@ -328,7 +326,7 @@ $(window).on('DOMMouseScroll wheel', function (e) {
 
 	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
 
-	if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+	if ( !pagesState.animatedBool && pagesState.lastScrollTime + 200 < new Date().getTime() ) {
 
 		if (delta > 0) {
 
@@ -531,17 +529,19 @@ var scrollPages = (function () {
 
 				plg.makeActiveNav( pagesState.pages[id].id );
 
-					this.blockScroll(true);
+				this.blockScroll(true);
 
-					cacheDom.$verticalViewport.off(transitionPrefix).css({
+				cacheDom.$verticalViewport
+					.off(transitionPrefix)
+					.css({
 						'-webkit-transform': 'translateY(' + -top + 'px)',
 						'transform': 'translateY(' + -top + 'px)'
 					})
 					.one(transitionPrefix, this.animationDone.bind(this, id, after, callback));
 
-					// pagesAnimation( id );
+				// pagesAnimation( id );
 
-					// pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), speed);
+				// pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after), speed);
 
 			}
 
@@ -674,6 +674,7 @@ var scrollPages = (function () {
 			cacheDom.$verticalViewport.off(transitionPrefix);
 			clearTimeout( pagesState.animatedBoolTimeout );
 			pagesState.animatedBool = boolean;
+
 		},
 		resize: function () {
 
@@ -792,18 +793,18 @@ var horizontalSlider = (function () {
 
 				plg.makeActiveNav( pagesState.pages[id].id );
 
-					pagesState.animatedBool = true;
+				pagesState.animatedBool = true;
 
-					cacheDom.$horizontalViewport.addClass('translating').one(transitionPrefix, function () {
+				cacheDom.$horizontalViewport.off(transitionPrefix).addClass('translating').one(transitionPrefix, function () {
 
-						cacheDom.$horizontalViewport.off(transitionPrefix).css({
-							'-webkit-transform': 'translateX(' + -left + 'px)',
-							'transform': 'translateX(' + -left + 'px)'
-						});
-
-						plg.animationDone(id, after);
-
+					cacheDom.$horizontalViewport.off(transitionPrefix).css({
+						'-webkit-transform': 'translateX(' + -left + 'px)',
+						'transform': 'translateX(' + -left + 'px)'
 					});
+
+					plg.animationDone(id, after);
+
+				});
 
 			}
 
@@ -893,12 +894,13 @@ var horizontalSlider = (function () {
 
 			pagesState.animatedBool = false;
 			pagesState.currentPage = id;
-			pagesAnimation(id);
 			clearTimeout( this.animatedBoolTimeout );
 
+			cacheDom.$horizontalViewport.off(transitionPrefix);
 			cacheDom.$horizontalViewport.removeClass('translating');
 			// document.location.hash = '#' + pagesState.pages[id].id;
 			// history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+
 			if (typeof callback === 'function') {
 
 				callback();

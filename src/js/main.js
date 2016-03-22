@@ -190,6 +190,15 @@ var preloader = {
 
 				$('section').addClass('invisible');
 
+				// var $modalContent = $modal.find('.modal-container > .container');
+				// if ($modalContent.length) {
+
+				// 	$('#application-holder').css({
+				// 		'height': $modalContent.height() + 200
+				// 	}).height( $modalContent.height() + 200 );
+
+				// }
+
 				// scrollPages.blockScroll(true);
 
 				this.opened.push($modal);
@@ -263,6 +272,7 @@ $(document).on('ready', function () {
 		winHeight = $window.height();
 
 	// scroll wheel horizontal
+	// TODO
 	(function () {
 
 		var $scrollElements = $('.modal-container');
@@ -344,21 +354,15 @@ $(document).on('ready', function () {
 
 			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
 
-			if ( !pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime() ) {
+			if (delta > 40) {
 
-				if (delta > 40) {
+				decreaseBlur(e);
 
-					decreaseBlur(e);
+			} else if (delta < -40) {
 
-				} else if (delta < -40) {
-
-					increaseBlur(e);
-
-				}
+				increaseBlur(e);
 
 			}
-
-			pagesState.lastScrollTime = new Date().getTime();
 
 		});
 
@@ -366,21 +370,15 @@ $(document).on('ready', function () {
 
 			var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
 
-			if (!pagesState.animatedBool && pagesState.lastScrollTime - 50 < new Date().getTime()) {
+			if (delta > 0) {
 
-				if (delta > 0) {
+				decreaseBlur(e);
 
-					decreaseBlur(e);
+			} else if (delta < 0) {
 
-				} else if (delta < 0) {
-
-					increaseBlur(e);
-
-				}
+				increaseBlur(e);
 
 			}
-
-			pagesState.lastScrollTime = new Date().getTime();
 
 		});
 
@@ -655,15 +653,15 @@ $(document).on('ready', function () {
 
 		}
 
-		if (e.timeStamp - $(this).data('down').time < 250 && Math.abs(e.originalEvent.clientX - $(this).data('down').x) < 20 && Math.abs(e.originalEvent.clientY - $(this).data('down').y) < 20 ) {
+		if ( e.timeStamp - $(this).data('down').time < 300 && Math.abs(e.originalEvent.clientX - $(this).data('down').x) < 20 && Math.abs(e.originalEvent.clientY - $(this).data('down').y) < 20 ) {
 
-			var $self = $(this),
-				target = $self.attr('data-modal'),
-				$target = $(target);
+			var $self = $( this ),
+				target = $self.attr( 'data-modal' ),
+				$target = $( target );
 
-			if ($target.length) {
+			if ( $target.length ) {
 
-				modals.openModal($target);
+				modals.openModal( $target );
 
 			}
 

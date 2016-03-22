@@ -104,17 +104,28 @@
 	display: none;
 }
 
+.socials-holder.deactive {
+	pointer-events: none;
+	opacity: 0;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+}
 .socials-holder {
+	opacity: 1;
 	position: fixed;
-	bottom: 0;
-	right: 0;
+	bottom: 20px;
+	right: 20px;
 	z-index: 3;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
 }
 .socials-holder li {
 	display: inline-block;
+	margin-right: 20px;
 }
 .socials-holder a {
 	color: #fff;
+	font-size: 20px;
 }
 
 .portrait-orientation {
@@ -144,7 +155,7 @@
 	cursor: default;
 	color: #fff;
 	opacity: 1;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	height: 140px;
@@ -550,6 +561,14 @@ section.screen-3 .container {
 	}
 
 }
+#contact .container > .data-block {
+	height: 240px;
+}
+#contact .container {
+	-webkit-columns: 2;
+	-moz-columns: 2;
+	columns: 2;
+}
 section.screen-3 .container {
 	/*position: relative;*/
 	cursor: auto;
@@ -557,9 +576,6 @@ section.screen-3 .container {
 	opacity: .8;
 	z-index: 1;
 	/*max-height: calc(100vh - 400px);*/
-	-webkit-columns: 2;
-	-moz-columns: 2;
-	columns: 2;
 }
 section.screen-3 .container .content-holder {
 	top: 200px;
@@ -593,7 +609,7 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	-webkit-columns: 1;
 }
 .modal-holder {
-	overflow: auto;
+	/*overflow: auto;*/
 }
 .modal-container {
 	color: #d1cdc0;
@@ -605,9 +621,10 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	min-height: 540px;
 }
 .modal-holder .modal-content .container {
-	min-height: 540px;
+	height: 540px;
 }
 .modal-container .container img {
+	cursor: pointer;
 	padding: 40px 0;
 	/*height: 400px;*/
 	width: auto;
