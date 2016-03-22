@@ -707,6 +707,78 @@ $(document).on('ready', function () {
 
 	// });
 
+	// modal image
+	$('.modal-container').on('click', function (e) {
+
+		if ( e.target.nodeName.toLowerCase() === 'img' ) {
+
+			var $body = $('body'),
+				$modal = $(this),
+				$target = $(e.target),
+				$clone = $target.clone(),
+				origTop = $target.offset().top,
+				origLeft = $target.offset().left,
+				origWidth = $target.width(),
+				origHeight = $target.height();
+
+			var stylesStack = {
+					'position': 'fixed',
+					'z-index': '20',
+					'transform': 'scale(1)',
+					'opacity': 0,
+					'left': origLeft,
+					'top': origTop,
+					'height': origHeight,
+					'width': origWidth
+				},
+				$tint = $('<div>')
+					.addClass('tint')
+					.appendTo( $body );
+
+			var stylesTarget = {
+				'transform': 'scale(1) translate(-50%, -50%)',
+				'-webkit-transform': 'scale(1) translate(-50%, -50%)',
+				'opacity': 1,
+				'left': '50%',
+				'top': '50%',
+				'height': e.target.naturalHeight,
+				'width': e.target.naturalWidth
+			};
+
+			$clone
+				.on('click', function (e) {
+					e.stopPropagation();
+				})
+				.addClass( 'modal-image' )
+				.css( stylesStack )
+				.appendTo( $body );
+
+			setTimeout(function () {
+
+				$clone.css( stylesTarget );
+
+				$tint.addClass('active');
+
+				$tint.one('mousedown', function () {
+
+					$tint.removeClass('active');
+					$clone.css( stylesStack ).one(transitionPrefix, function () {
+
+						$clone.remove();
+						$tint.remove();
+
+					});
+
+				});
+
+			}, 10);
+
+		}
+
+		//
+
+	});
+
 	// init plugins
 	$('.gallery-slider').simpleSlider();
 });

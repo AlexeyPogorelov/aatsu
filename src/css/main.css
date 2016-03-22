@@ -80,15 +80,10 @@
 #application-holder {
 	overflow: hidden;
 	height: 100%;
+	/*min-height: 1000px;*/
 	width: 100%;
 }
 #horizontal-viewport {
-	/*overflow: hidden;*/
-/*	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;*/
 	opacity: 1;
 	-webkit-transform: translate(0, 0);
 	transform: translate(0, 0);
@@ -107,6 +102,19 @@
 #animatedLogo {
 	position: absolute;
 	display: none;
+}
+
+.socials-holder {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	z-index: 3;
+}
+.socials-holder li {
+	display: inline-block;
+}
+.socials-holder a {
+	color: #fff;
 }
 
 .portrait-orientation {
@@ -593,8 +601,9 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 }
 .modal-container .container img {
 	padding: 40px 0;
-	height: 400px;
-	width: 400px;
+	/*height: 400px;*/
+	width: auto;
+	/*max-height: 200px;*/
 }
 .modal-container .container h1,
 .modal-container .container h2,
@@ -617,14 +626,17 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	padding-bottom: 40px;
 	text-align: left;
 	line-height: 1.6em;
-	min-height: 100%;
+	/*min-height: 100%;*/
+}
+.modal-holder .modal-content {
+	position: relative;
 }
 .modal-holder .modal-content .container {
 	width: 1060px;
 	width: 86%;
-	-webkit-column-count: 3;
+/*	-webkit-column-count: 3;
 	-moz-column-count: 3;
-	column-count: 3;
+	column-count: 3;*/
 }
 .modal-holder .modal-content .container * {
 	-webkit-touch-callout: initial;
@@ -633,6 +645,30 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	-moz-user-select: initial;
 	-ms-user-select: initial;
 	user-select: initial;
+}
+.modal-image {
+	transform-origin: 50% 50%;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	/*opacity: 0;*/
+	-webkit-transition: all .6s;
+	transition: all .6s;
+}
+.tint {
+	background: rgba(0,0,0,0);
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 19;
+	-webkit-transition: background .6s;
+	transition: background .6s;
+}
+.tint.active {
+	background: rgba(0,0,0,.6);
+	-webkit-transition: background .6s;
+	transition: background .6s;
 }
 .mobile {}
 .mobile #presentation {

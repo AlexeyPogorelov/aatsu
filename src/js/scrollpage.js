@@ -179,14 +179,35 @@
 
 // crossbrowser
 var animationPrefix = (function () {
-			var t,
-				el = document.createElement("fakeelement"),
-				transitions = {
-					"transition": "animationend",
-					"OTransition": "oAnimationEnd",
-					"MozTransition": "animationend",
-					"WebkitTransition": "webkitAnimationEnd"
-				};
+		var t,
+			el = document.createElement("fakeelement"),
+			transitions = {
+				"transition": "animationend",
+				"OTransition": "oAnimationEnd",
+				"MozTransition": "animationend",
+				"WebkitTransition": "webkitAnimationEnd"
+			};
+
+		for (t in transitions){
+
+			if (el.style[t] !== undefined){
+
+				return transitions[t];
+
+			}
+
+		}
+
+	})(),
+	transitionPrefix = (function () {
+		var t,
+			el = document.createElement("fakeelement"),
+			transitions = {
+				"transition": "transitionend",
+				"OTransition": "oTransitionEnd",
+				"MozTransition": "transitionend",
+				"WebkitTransition": "webkitTransitionEnd"
+			};
 
 			for (t in transitions){
 
@@ -198,28 +219,7 @@ var animationPrefix = (function () {
 
 			}
 
-		})(),
-		transitionPrefix = (function () {
-			var t,
-				el = document.createElement("fakeelement"),
-				transitions = {
-					"transition": "transitionend",
-					"OTransition": "oTransitionEnd",
-					"MozTransition": "transitionend",
-					"WebkitTransition": "webkitTransitionEnd"
-				};
-
-				for (t in transitions){
-
-					if (el.style[t] !== undefined){
-
-						return transitions[t];
-
-					}
-
-				}
-
-		})();
+	})();
 
 	// htmlBody = 'body';
 if ( jQuery.browser.mobile ) {
@@ -242,11 +242,12 @@ var pagesState = {},
 
 pagesState.lastScrollTime = new Date().getTime() - 1000;
 
-var pagesAnimation = (function (id) {
+var pagesAnimation = (function () {
 
 	var $presentation = $('#presentation'),
 		$foreground = $presentation.find('> .foreground-holder'),
 		$background = $presentation.find('> .background-holder'),
+		$socials = $('.socials-holder'),
 		plg = function (id) {
 
 			if ( id > 3 ) {
@@ -256,6 +257,7 @@ var pagesAnimation = (function (id) {
 			} else {
 
 				$foreground.show();
+				$socials.removeClass('deactive');
 
 			}
 
@@ -627,25 +629,29 @@ var scrollPages = (function () {
 		},
 		animationDone: function (id, after, callback) {
 
-			this.blockScroll( false );
-			pagesState.currentPage = id;
-			pagesAnimation( id );
-			clearTimeout( pagesState.animatedBoolTimeout );
+			setTimeout(function () {
 
-			// document.location.hash = '#' + pagesState.pages[id].id;
-			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+				plg.blockScroll( false );
+				pagesState.currentPage = id;
+				pagesAnimation( id );
+				clearTimeout( pagesState.animatedBoolTimeout );
 
-			if (typeof after === 'function') {
+				// document.location.hash = '#' + pagesState.pages[id].id;
+				history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 
-				after();
+				if (typeof after === 'function') {
 
-			}
+					after();
 
-			if (typeof callback === 'function') {
+				}
 
-				callback();
+				if (typeof callback === 'function') {
 
-			}
+					callback();
+
+				}
+
+			}, 400);
 
 		},
 		blockScroll: function ( boolean, lock ) {
@@ -665,7 +671,6 @@ var scrollPages = (function () {
 			cacheDom.$verticalViewport.off(transitionPrefix);
 			clearTimeout( pagesState.animatedBoolTimeout );
 			pagesState.animatedBool = boolean;
-			// console.log( this );
 		},
 		resize: function () {
 
@@ -785,22 +790,16 @@ var horizontalSlider = (function () {
 
 					pagesState.animatedBool = true;
 
-					cacheDom.$horizontalViewport.addClass('translating');
-
-					setTimeout( function () {
+					cacheDom.$horizontalViewport.addClass('translating').one(transitionPrefix, function () {
 
 						cacheDom.$horizontalViewport.off(transitionPrefix).css({
 							'-webkit-transform': 'translateX(' + -left + 'px)',
 							'transform': 'translateX(' + -left + 'px)'
 						});
 
-					}, 600 );
-
-					this.animatedBoolTimeout = setTimeout( function () {
-
 						plg.animationDone(id, after);
 
-					}, 1200 );
+					});
 
 			}
 
