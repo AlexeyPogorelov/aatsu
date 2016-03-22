@@ -15,11 +15,13 @@ body::-webkit-scrollbar {
 	width: 0;
 }
 .wrapper {}
+/*.modal-holder::-webkit-scrollbar-corner,*/
 .lightbox-cell::-webkit-scrollbar-corner,
 .dropdown::-webkit-scrollbar-corner,
 .mobile-navbar-holder::-webkit-scrollbar-corner {
 	background-color: #e5e5e5;
 }
+/*.modal-holder::-webkit-scrollbar,*/
 .lightbox-cell::-webkit-scrollbar,
 .dropdown::-webkit-scrollbar,
 .mobile-navbar-holder::-webkit-scrollbar {
@@ -28,6 +30,7 @@ body::-webkit-scrollbar {
 	background-color: #fff;
 	border: none;
 }
+/*.modal-holder::-webkit-scrollbar-thumb,*/
 .lightbox-cell::-webkit-scrollbar-thumb,
 .dropdown::-webkit-scrollbar-thumb,
 .mobile-navbar-holder::-webkit-scrollbar-thumb {
@@ -433,8 +436,8 @@ input[type='number'] {
 	transform-origin: 50%;
 	top: 50%;
 	left: 50%;
-	height: 80px;
-	width: 80px;
+	height: 60px;
+	width: 60px;
 }
 .preloader .after {
 	background: #fff;
@@ -602,21 +605,24 @@ button:focus,
 .col-right,
 .col-full {}
 
+.modal-holder::-webkit-scrollbar-corner,
 .col-left::-webkit-scrollbar-corner,
 .col-right::-webkit-scrollbar-corner,
 .col-full::-webkit-scrollbar-corner {
 	background-color: rgba(255,255,255,.2);
 }
 
+.modal-holder::-webkit-scrollbar,
 .col-left::-webkit-scrollbar,
 .col-right::-webkit-scrollbar,
 .col-full::-webkit-scrollbar {
 	background-color: rgba(255,255,255,.3);
 	border: none;
-	height: 0;
-	width: 6px;
+	height: 10px;
+	width: 10px;
 }
 
+.modal-holder::-webkit-scrollbar-thumb,
 .col-left::-webkit-scrollbar-thumb,
 .col-right::-webkit-scrollbar-thumb,
 .col-full::-webkit-scrollbar-thumb {

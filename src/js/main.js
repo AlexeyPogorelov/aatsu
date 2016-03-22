@@ -148,6 +148,9 @@ var preloader = {
 
 				}
 
+				// init custum scroller
+				// $('.modal-container').mCustomScrollbar();
+
 				$(window).trigger('resize').trigger('scroll');
 
 				// hide preloader
@@ -259,6 +262,15 @@ $(document).on('ready', function () {
 		winWidth = $window.width(),
 		winHeight = $window.height();
 
+	// scroll wheel horizontal
+	(function () {
+
+		var $scrollElements = $('.modal-container');
+
+		// $scrollElements.on('')
+
+	})();
+
 	(function () {
 
 		var scrollStarted = false,
@@ -368,16 +380,29 @@ $(document).on('ready', function () {
 	})();
 
 	// randomize background
-	function randomBackground (callback) {
+	function randomBackground ( callback ) {
 
 		var randomBgIndex = randomInteger(0, backgrounds.length - 1),
 			bgLoaded = 0;
 
-		function bgReady () {
+		if ( pagesState.randomBgIndex === randomBgIndex ) {
 
-			preloader.loaded();
+			randomBackground( callback );
+			return;
 
-			if ( ++bgLoaded >= 2 ) {
+		}
+
+		pagesState.randomBgIndex = randomBgIndex;
+
+		function bgReady ( force ) {
+
+			preloader.status(0);
+
+			// console.log('loaded');
+
+			if ( ++bgLoaded >= 2 || force === true ) {
+
+				preloader.loaded();
 
 				bgLoaded = 0;
 
@@ -387,7 +412,7 @@ $(document).on('ready', function () {
 
 						$window.trigger('resize');
 
-					}, 1000);
+					}, 10000);
 
 					callback();
 
@@ -399,6 +424,13 @@ $(document).on('ready', function () {
 		$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', bgReady);
 
 		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
+
+		// if ( $background.find('img') )
+		setTimeout( function () {
+
+			bgReady(true);
+
+		}, 4000 );
 
 	}
 	randomBackground();
@@ -579,7 +611,12 @@ $(document).on('ready', function () {
 				blurMinStatus();
 
 				scrollPages.blockScroll(false, true);
-				scrollPages.toPage(0, preloader.hidePreloader);
+				scrollPages.toPage(0, function () {
+
+					// alert();
+					preloader.hidePreloader();
+
+				});
 
 			} ) );
 

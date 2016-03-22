@@ -13,11 +13,12 @@
 	top: -106px;
 	right: 20px;
 	height: 86px;
-	/*width: 540px;*/
+	width: auto;
 }
 
 .modal-container .container img,
 .absolute-table img {
+	padding: 0 !important;
 	height: 100% !important;
 	width: auto !important;
 }
@@ -128,7 +129,7 @@
 	left: 0;
 	height: 140px;
 	width: 100%;
-	z-index: 2;
+	z-index: 11;
 	-webkit-transition: opacity 2s;
 	-webkit-transition-delay: .6s;
 	transition: opacity 2s;
@@ -561,7 +562,9 @@ section.screen-3 .container p a {
 section.screen-3 .container .col-right p:nth-of-type(even) {
 	margin-bottom: 10px;
 }
-
+.modal-holder {
+	overflow: auto;
+}
 .modal-container {
 	color: #d1cdc0;
 	font-size: 18px;
@@ -569,6 +572,10 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	letter-spacing: 8px;
 	font-weight: 100;
 	word-spacing: 5px;
+	min-height: 540px;
+}
+.modal-holder .modal-content .container {
+	min-height: 540px;
 }
 .modal-container .container img {
 	padding: 40px 0;
@@ -582,16 +589,21 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 .modal-container .container h5,
 .modal-container .container h6 {
 	color: #fff;
+	margin-bottom: 30px;
 	padding-top: 0;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 40px;
+	padding-right: 40px;
+	font-weight: bold;
 }
 .modal-container .container p {
+	display: block;
 	padding-top: 0;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 40px;
+	padding-right: 40px;
 	padding-bottom: 40px;
 	text-align: left;
+	line-height: 1.6em;
+	min-height: 100%;
 }
 .modal-holder .modal-content .container {
 	width: 1060px;

@@ -150,3 +150,25 @@
 		display: table;
 	}
 }
+
+
+@media screen and (max-height: 770px) {
+
+	.modal-content {
+		margin-top: 0 !important;
+	}
+	.modal-holder {
+		bottom: 10px;
+	}
+	.absolute-table {
+		position: static;
+		margin-bottom: 40px;
+		width: 100%;
+	}
+	.modal-container .container img,
+	.absolute-table img {
+		height: auto !important;
+		width: 100% !important;
+	}
+
+}

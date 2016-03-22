@@ -35,7 +35,7 @@
 		transform: translateX(-50%) translateY(-50%) rotate(-360deg);
 	}
 }
-.preloader img {
-	-webkit-animation: rotateAround 2s linear 0s infinite;
-	animation: rotateAround 2s linear 0s infinite;
-}
+/*.preloader img {
+	-webkit-animation: rotateAround 2s linear 0s infinite reverse;
+	animation: rotateAround 2s linear 0s infinite reverse;
+}*/

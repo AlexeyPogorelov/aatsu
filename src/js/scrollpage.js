@@ -725,7 +725,7 @@ var horizontalSlider = (function () {
 				pagesState.pagesCount++;
 			}
 			// TODO remove it
-			console.log(pagesState.pages);
+			// console.log(pagesState.pages);
 		},
 		toPage: function (id, resize) {
 
