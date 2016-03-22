@@ -631,15 +631,16 @@ var scrollPages = (function () {
 		},
 		animationDone: function (id, after, callback) {
 
+			pagesAnimation( id );
+			pagesState.currentPage = id;
+			clearTimeout( pagesState.animatedBoolTimeout );
+			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+
 			setTimeout(function () {
 
 				plg.blockScroll( false );
-				pagesState.currentPage = id;
-				pagesAnimation( id );
-				clearTimeout( pagesState.animatedBoolTimeout );
 
 				// document.location.hash = '#' + pagesState.pages[id].id;
-				history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 
 				if (typeof after === 'function') {
 
@@ -653,7 +654,7 @@ var scrollPages = (function () {
 
 				}
 
-			}, 400);
+			}, 500);
 
 		},
 		blockScroll: function ( boolean, lock ) {
@@ -768,6 +769,7 @@ var horizontalSlider = (function () {
 				pagesState.leave();
 				pagesState.leave = false;
 			}
+
 			if (pagesState.pages[id] && pagesState.pages[id].leave ) {
 				pagesState.leave = window[ pagesState.pages[id].leave ];
 			}

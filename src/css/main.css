@@ -557,6 +557,9 @@ section.screen-3 .container {
 	opacity: .8;
 	z-index: 1;
 	/*max-height: calc(100vh - 400px);*/
+	-webkit-columns: 2;
+	-moz-columns: 2;
+	columns: 2;
 }
 section.screen-3 .container .content-holder {
 	top: 200px;
@@ -583,6 +586,11 @@ section.screen-3 .container p a {
 }
 section.screen-3 .container .col-right p:nth-of-type(even) {
 	margin-bottom: 10px;
+}
+#about .container {
+	columns: 1;
+	-moz-columns: 1;
+	-webkit-columns: 1;
 }
 .modal-holder {
 	overflow: auto;
@@ -633,7 +641,7 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 }
 .modal-holder .modal-content .container {
 	width: 1060px;
-	width: 86%;
+	width: 98%;
 	-webkit-column-count: 2;
 	-moz-column-count: 2;
 	column-count: 2;
