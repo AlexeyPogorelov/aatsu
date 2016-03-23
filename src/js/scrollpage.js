@@ -257,6 +257,7 @@ var pagesAnimation = (function () {
 
 			} else {
 
+				$socials.addClass('deactive');
 				$foreground.show();
 
 			}
@@ -795,16 +796,27 @@ var horizontalSlider = (function () {
 
 				pagesState.animatedBool = true;
 
-				cacheDom.$horizontalViewport.off(transitionPrefix).addClass('translating').one(transitionPrefix, function () {
+				if (!resize) {
 
-					cacheDom.$horizontalViewport.off(transitionPrefix).css({
-						'-webkit-transform': 'translateX(' + -left + 'px)',
-						'transform': 'translateX(' + -left + 'px)'
+					cacheDom.$horizontalViewport
+						.addClass('translating');
+
+				}
+
+				cacheDom.$horizontalViewport
+					.off(transitionPrefix)
+					.one(transitionPrefix, function () {
+
+						cacheDom.$horizontalViewport
+							.off(transitionPrefix)
+							.css({
+								'-webkit-transform': 'translateX(' + -left + 'px)',
+								'transform': 'translateX(' + -left + 'px)'
+							});
+
+						plg.animationDone(id, after);
+
 					});
-
-					plg.animationDone(id, after);
-
-				});
 
 			}
 
