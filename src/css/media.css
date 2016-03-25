@@ -170,5 +170,9 @@
 		height: auto !important;
 		width: 100% !important;
 	}
+	section.screen-3 .container .content-holder {
+		top: 120px;
+		bottom: 80px;
+	}
 
 }
