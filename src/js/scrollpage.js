@@ -291,7 +291,8 @@ $(window).resize(function () {
 
 	windowWidth = $(window).width();
 	windowHeight = $(window).height();
-	scrollPages.resize(pagesState.currentPage, true);
+	// TODO test without it
+	// scrollPages.resize(pagesState.currentPage, true);
 
 });
 

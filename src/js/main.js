@@ -422,7 +422,8 @@ $(document).on('ready', function () {
 
 					setTimeout(function () {
 
-						$window.trigger('resize');
+						// TODO test without it
+						// $window.trigger('resize');
 
 					}, 10000);
 
