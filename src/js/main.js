@@ -151,6 +151,10 @@ var preloader = {
 				// init custum scroller
 				// $('.modal-container').mCustomScrollbar();
 
+				$('#contact').on('touchmove', function (e) {
+					e.stopPropagation();
+				});
+
 				$(window).trigger('resize').trigger('scroll');
 
 				// hide preloader
@@ -767,6 +771,14 @@ $(document).on('ready', function () {
 				'height': e.target.naturalHeight,
 				'width': e.target.naturalWidth
 			};
+
+			if (e.target.naturalWidth > winWidth - 20) {
+
+				var ratio = e.target.naturalWidth / e.target.naturalHeight;
+				stylesTarget.width = winWidth - 20;
+				stylesTarget.height = winWidth / ratio;
+
+			}
 
 			$clone
 				.on('click', function (e) {

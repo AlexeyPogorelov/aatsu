@@ -8,6 +8,9 @@
 	MEDIUM
 ------------------------------------------------------------------------------*/
 @media screen and (max-width: 1439px) {
+/*	#main-navigation li {
+		margin: 76px 90px 0;
+	}*/
 }
 /*--------------------------------------------------------------------------
 	TABLET
@@ -33,7 +36,7 @@
 		font-size: 12px;
 	}
 	.modal-holder .modal-content .container {
-		padding: 40px;
+		/*padding: 40px;*/
 	}
 	p.type-1 {
 		font-size: 12px;
@@ -133,11 +136,13 @@
 		-webkit-column: initial;
 		-moz-column: initial;
 		column: initial;
-		overflow: scroll;
-		height: 100vh;
+		overflow: auto;
+		/*height: 100vh;*/
+		height: calc(100vh - 100px);
 		max-height: 100vh;
 		display: block;
 		padding-top: 60px;
+		margin-top: 40px;
 	}
 	#contact .container > .data-block {
 		height: auto;
@@ -177,6 +182,29 @@
 		height: 16px;
 		width: 2px;
 	}
+	.gallery-slider {
+		top: 46%;
+	}
+	.modal-container .container h1,
+	.modal-container .container h2,
+	.modal-container .container h3,
+	.modal-container .container h4,
+	.modal-container .container h5,
+	.modal-container .container h6,
+	.modal-container .container p {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.modal-container .container p {
+		font-size: 14px;
+	}
+	#main-navigation .logo {
+		height: 40px;
+	}
+	#main-navigation .logo .lines-holder {
+		display: none;
+	}
+
 }
 /*
 	xSMALL
@@ -208,6 +236,10 @@
 		margin-bottom: 40px;
 		width: 100%;
 	}
+	section.screen-3 .container {
+		overflow: auto;
+		height: 100%;
+	}
 	.modal-container .container img,
 	.absolute-table img {
 		height: auto !important;
@@ -217,5 +249,4 @@
 		top: 80px;
 		bottom: 80px;
 	}
-
 }
