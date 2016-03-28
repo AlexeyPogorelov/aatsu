@@ -395,7 +395,8 @@ $(document).on('ready', function () {
 	function randomBackground ( callback ) {
 
 		var randomBgIndex = randomInteger(0, backgrounds.length - 1),
-			bgLoaded = 0;
+			bgLoaded = 0,
+			localTimeout;
 
 		if ( pagesState.randomBgIndex === randomBgIndex ) {
 
@@ -414,18 +415,20 @@ $(document).on('ready', function () {
 
 			if ( ++bgLoaded >= 2 || force === true ) {
 
+				clearTimeout( localTimeout );
+
 				preloader.loaded();
 
 				bgLoaded = 0;
 
 				if ( typeof callback === 'function' ) {
 
-					setTimeout(function () {
+					// setTimeout(function () {
 
 						// TODO test without it
 						// $window.trigger('resize');
 
-					}, 10000);
+					// }, 10000);
 
 					callback();
 
@@ -440,7 +443,7 @@ $(document).on('ready', function () {
 		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
 
 		// if ( $background.find('img') )
-		setTimeout( function () {
+		localTimeout = setTimeout( function () {
 
 			bgReady(true);
 
@@ -608,6 +611,7 @@ $(document).on('ready', function () {
 		middlindImage ($foreground.find('img'), $window, -60);
 		middlindImage ($background.find('img'), $window, -60);
 		bodyOverflow.unfixBody();
+		modals.closeModal();
 
 	});
 
