@@ -409,7 +409,7 @@
 	#main-navigation li:last-child {
 		margin-right: -20px;
 	}
-	
+
 	#main-navigation .logo {
 		height: 60px;
 		width: 60px;
@@ -421,6 +421,7 @@
 		display: none;
 	}
 
+/* TODO test it */
 	#main-navigation li {
 		margin: 22px 6px 0;
 	}

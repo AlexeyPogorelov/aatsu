@@ -202,29 +202,6 @@
 	.modal-container .container p {
 		font-size: 14px;
 	}
-	#main-navigation .logo {
-		height: 60px;
-		width: 60px;
-	}
-	#main-navigation .logo svg, #main-navigation .logo img {
-		padding: 16px 14px 13px;
-	}
-	#main-navigation .logo .lines-holder {
-		display: none;
-	}
-
-	#main-navigation li {
-		margin: 22px 6px 0;
-	}
-	#main-navigation li:nth-child(2) {
-		margin-right: 70px;
-	}
-	#main-navigation li:last-child {
-		margin-right: -20px;
-	}
-	#main-navigation li a {
-		font-size: 11px;
-	}
 
 }
 /*
