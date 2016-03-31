@@ -1,4 +1,5 @@
-var backgrounds = [
+var domain = 'http://pogorelov.cc.ua/aatsu/src/',
+backgrounds = [
 	[2, 1],
 	[4, 3],
 	[6, 5],
@@ -442,9 +443,9 @@ $(document).on('ready', function () {
 
 		}
 
-		$foreground.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', bgReady);
+		$foreground.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', bgReady);
 
-		$background.find('img').attr('src', 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
+		$background.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
 
 		// if ( $background.find('img') )
 		localTimeout = setTimeout( function () {
@@ -1026,7 +1027,8 @@ $(document).on('ready', function () {
 				e.stopPropagation();
 
 				var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
-				if (true || pagesState.lastScrollTime - 50 < new Date().getTime()) {
+
+				if ( pagesState.lastScrollTime + 150 < e.timeStamp ) {
 					if (delta > 0) {
 
 						plg.prevSlide();
@@ -1037,6 +1039,8 @@ $(document).on('ready', function () {
 
 					}
 				}
+
+				pagesState.lastScrollTime = e.timeStamp;
 
 			}).on('mousewheel', function (e) {
 
@@ -1044,7 +1048,8 @@ $(document).on('ready', function () {
 				e.stopPropagation();
 
 				var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
-				if (true || pagesState.lastScrollTime - 50 < new Date().getTime()) {
+
+				if ( pagesState.lastScrollTime + 150 < e.timeStamp ) {
 					if (delta > 0) {
 
 						plg.prevSlide();
@@ -1055,6 +1060,8 @@ $(document).on('ready', function () {
 
 					}
 				}
+
+				pagesState.lastScrollTime = e.timeStamp;
 
 			});
 
@@ -1080,7 +1087,6 @@ $(document).on('ready', function () {
 					state.touchStart.yPos = e.originalEvent.touches[0].clientY;
 
 				}
-
 
 				// console.log('-----');
 			});
