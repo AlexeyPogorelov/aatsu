@@ -385,6 +385,7 @@
 	}
 }
 @media screen and (max-width: 980px) {
+
 	#main-navigation li a {
 		font-size: 12px;
 	}
@@ -397,8 +398,10 @@
 	#main-navigation li:last-child {
 		margin-right: -20px;
 	}
+
 }
 @media screen and (max-width: 700px) {
+
 	#main-navigation .logo {
 		height: 60px;
 	}
@@ -425,7 +428,7 @@
 
 /* TODO test it */
 	#main-navigation li {
-		margin: 22px 6px 0;
+		margin: 22px 36px 0;
 	}
 	#main-navigation li:nth-child(2) {
 		margin-right: 70px;
@@ -436,6 +439,21 @@
 	#main-navigation li a {
 		font-size: 11px;
 	}
+
+}
+@media screen and (max-width: 550px) {
+
+	#main-navigation li {
+		margin: 22px 20px 0;
+	}
+
+}
+@media screen and (max-width: 440px) {
+
+	#main-navigation li {
+		margin: 22px 6px 0;
+	}
+
 }
 
 #presentation {

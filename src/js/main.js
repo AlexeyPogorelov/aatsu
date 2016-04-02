@@ -421,6 +421,7 @@ $(document).on('ready', function () {
 
 					clearTimeout( localTimeout );
 					console.log('clear')
+					// console.log(bgReady.caller)
 
 					if ( typeof callback === 'function' ) {
 
@@ -549,80 +550,84 @@ $(document).on('ready', function () {
 	middlindImage ($foreground.find('img'), $window, -60);
 	middlindImage ($background.find('img'), $window, -60);
 
-	// mouse move
-	$window.on('mousemove', function (e) {
-		// console.log(e);
-		if (winHeight > winWidth) {
+	if (winWidth > 800) {
 
-			$foreground.css({
-				'-webkit-mask-position-x': e.clientX - winWidth / 2,
-				'-webkit-mask-position-y': e.clientY - winHeight / 2,
-				'mask-position-x': e.clientX - winWidth / 2,
-				'mask-position-y': e.clientY - winHeight / 2
-			});
+		// mouse move
+		$window.on('mousemove', function (e) {
+			// console.log(e);
+			if (winHeight > winWidth) {
 
-		} else {
+				$foreground.css({
+					'-webkit-mask-position-x': e.clientX - winWidth / 2,
+					'-webkit-mask-position-y': e.clientY - winHeight / 2,
+					'mask-position-x': e.clientX - winWidth / 2,
+					'mask-position-y': e.clientY - winHeight / 2
+				});
 
-			$foreground.css({
-				'-webkit-mask-position-x': e.clientX - winWidth / 2,
-				'-webkit-mask-position-y': e.clientY - winWidth / 2,
-				'mask-position-x': e.clientX - winWidth / 2,
-				'mask-position-y': e.clientY - winWidth / 2
-			});
+			} else {
 
-		}
+				$foreground.css({
+					'-webkit-mask-position-x': e.clientX - winWidth / 2,
+					'-webkit-mask-position-y': e.clientY - winWidth / 2,
+					'mask-position-x': e.clientX - winWidth / 2,
+					'mask-position-y': e.clientY - winWidth / 2
+				});
 
-	});
+			}
 
-	// touch move
-	$window.on('trg', function (e) {
+		});
 
-		if (winHeight > winWidth) {
+		// touch move
+		$window.on('trg', function (e) {
 
-			$foreground.css({
-				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
-				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-				'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
-			});
+			if (winHeight > winWidth) {
 
-		} else {
+				$foreground.css({
+					'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+					'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
+					'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+					'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
+				});
 
-			$foreground.css({
-				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
-				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-				'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
-			});
+			} else {
 
-		}
+				$foreground.css({
+					'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+					'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
+					'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+					'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
+				});
 
-	});
+			}
 
-	// touch end
-	$window.on('trg', function (e) {
+		});
 
-		if (winHeight > winWidth) {
+		// touch end
+		$window.on('trg', function (e) {
 
-			$foreground.css({
-				'-webkit-mask-position-x': -3000,
-				'-webkit-mask-position-y': -3000,
-				'mask-position-x': -3000,
-				'mask-position-y': -3000
-			});
+			if (winHeight > winWidth) {
 
-		} else {
+				$foreground.css({
+					'-webkit-mask-position-x': -3000,
+					'-webkit-mask-position-y': -3000,
+					'mask-position-x': -3000,
+					'mask-position-y': -3000
+				});
 
-			$foreground.css({
-				'-webkit-mask-position-x': -3000,
-				'-webkit-mask-position-y': -3000,
-				'mask-position-x': -3000,
-				'mask-position-y': -3000
-			});
+			} else {
 
-		}
+				$foreground.css({
+					'-webkit-mask-position-x': -3000,
+					'-webkit-mask-position-y': -3000,
+					'mask-position-x': -3000,
+					'mask-position-y': -3000
+				});
 
-	});
+			}
+
+		});
+
+	}
 
 	// resize
 	$window.on('resize', function () {
