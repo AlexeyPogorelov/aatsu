@@ -693,7 +693,7 @@ var scrollPages = (function () {
 			}
 
 			this.toPage(pagesState.currentPage, true);
-			this.blockScroll(false);
+			// this.blockScroll(false);
 
 		}
 	};
@@ -942,7 +942,7 @@ var horizontalSlider = (function () {
 
 			}
 
-			this.toPage(pagesState.currentPage, true);
+			// this.toPage(pagesState.currentPage, true);
 
 		}
 	};

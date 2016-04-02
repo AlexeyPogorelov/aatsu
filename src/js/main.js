@@ -182,9 +182,9 @@ var preloader = {
 			},
 			resize: function () {
 
-				this.unfixBody();
+				bodyOverflow.unfixBody();
 
-			}.bind(this)
+			}
 		},
 		modals = {
 			opened: [],
@@ -267,7 +267,7 @@ $('img').each(function () {
 	if (!this.naturalWidth) {
 
 		preloader.trg++;
-		$(this).one('load', preloader.loaded);
+		$(this).one('load error', preloader.loaded);
 
 	}
 
@@ -299,6 +299,12 @@ $(document).on('ready', function () {
 			blurStatus = 0,
 			blurMax = 12,
 			max = 50;
+
+			if ($.browser.platform === "win") {
+
+				max = 10;
+
+			}
 
 		function convertBlur (stat) {
 
@@ -397,64 +403,75 @@ $(document).on('ready', function () {
 	})();
 
 	// randomize background
-	function randomBackground ( callback ) {
+	var randomBackground = (function () {
 
-		var randomBgIndex = randomInteger(0, backgrounds.length - 1),
-			bgLoaded = 0,
-			localTimeout;
+			var randomBgIndex,
+				bgLoaded = 0,
+				localTimeout;
 
-		if ( pagesState.randomBgIndex === randomBgIndex ) {
+			function bgReady ( callback, force ) {
 
-			randomBackground( callback );
-			return;
+				preloader.status(0);
 
-		}
+				if ( ++bgLoaded >= 2 || force === 1 ) {
 
-		pagesState.randomBgIndex = randomBgIndex;
+					preloader.loaded();
 
-		function bgReady ( force ) {
+					bgLoaded = 0;
 
-			preloader.status(0);
+					clearTimeout( localTimeout );
+					console.log('clear')
 
-			// console.log('loaded');
+					if ( typeof callback === 'function' ) {
 
-			if ( ++bgLoaded >= 2 || force === true ) {
+						callback();
 
-				clearTimeout( localTimeout );
-
-				preloader.loaded();
-
-				bgLoaded = 0;
-
-				if ( typeof callback === 'function' ) {
-
-					// setTimeout(function () {
-
-						// TODO test without it
-						// $window.trigger('resize');
-
-					// }, 10000);
-
-					callback();
+					}
 
 				}
 
 			}
 
-		}
+			return function ( callback ) {
 
-		$foreground.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load', bgReady);
+				randomBgIndex = randomInteger(0, backgrounds.length - 1);
+				bgLoaded = 0;
 
-		$background.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load', bgReady);
+				if ( pagesState.randomBgIndex === randomBgIndex ) {
 
-		// if ( $background.find('img') )
-		localTimeout = setTimeout( function () {
+					randomBackground( callback );
+					return;
 
-			bgReady(true);
+				}
 
-		}, 4000 );
+				pagesState.randomBgIndex = randomBgIndex;
 
-	}
+				$foreground.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load error', function () {
+
+					bgReady( callback );
+
+				});
+
+				$background.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load error', function () {
+
+					bgReady( callback );
+
+				});
+
+				localTimeout = setTimeout(function () {
+
+					// console.log(typeof callback)
+					if ( typeof callback === 'function' ) {
+
+						callback();
+
+					}
+
+				}, 4000);
+
+			};
+
+		})();
 	randomBackground();
 
 	function fillPresentation () {
@@ -558,7 +575,7 @@ $(document).on('ready', function () {
 	});
 
 	// touch move
-	$window.on('touchmove', function (e) {
+	$window.on('trg', function (e) {
 
 		if (winHeight > winWidth) {
 
@@ -583,7 +600,7 @@ $(document).on('ready', function () {
 	});
 
 	// touch end
-	$window.on('touchend', function (e) {
+	$window.on('trg', function (e) {
 
 		if (winHeight > winWidth) {
 
@@ -615,8 +632,8 @@ $(document).on('ready', function () {
 		fillPresentation ();
 		middlindImage ($foreground.find('img'), $window, -60);
 		middlindImage ($background.find('img'), $window, -60);
-		bodyOverflow.unfixBody();
-		modals.closeModal();
+		bodyOverflow.resize();
+		// modals.closeModal();
 
 	});
 
@@ -629,19 +646,22 @@ $(document).on('ready', function () {
 
 			modals.closeModal();
 
-			preloader.showPreloader( randomBackground.bind( scrollPages, function () {
+			preloader.showPreloader( function () {
 
-				blurMinStatus();
+					randomBackground( function () {
 
-				scrollPages.blockScroll(false, true);
-				scrollPages.toPage(0, function () {
+						blurMinStatus();
 
-					// alert();
-					preloader.hidePreloader();
+						scrollPages.blockScroll(false, true);
+						scrollPages.toPage(0, function () {
 
-				});
+							preloader.hidePreloader();
 
-			} ) );
+						});
+
+					} );
+				}
+			);
 
 		}
 
