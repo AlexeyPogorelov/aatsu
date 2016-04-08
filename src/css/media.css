@@ -137,6 +137,9 @@
 	.modal-holder .modal-content .container {
 		padding-top: 0;
 	}
+	#main-navigation {
+		height: 50px;
+	}
 
 }
 @media screen and (max-width: 570px) {

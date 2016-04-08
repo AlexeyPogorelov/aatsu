@@ -8,7 +8,22 @@ backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
+if (!true) {
 
+	backgrounds = [
+		[2, 1],
+		[4, 3],
+		[6, 5],
+		[7, 8],
+		[9, 10],
+		[12, 11],
+		[14, 13]
+	];
+
+}
+// $(window).on('touchend', function (e) {
+// 	alert( e.target.className )
+// });
 function randomInteger(min, max) {
 
 	var rand = min + Math.random() * (max - min);
@@ -151,6 +166,10 @@ var preloader = {
 
 				// init custum scroller
 				// $('.modal-container').mCustomScrollbar();
+
+				picturefill({
+					elements: [ document.getElementsByTagName( "img" ) ]
+				});
 
 				$('#contact').on('touchmove', function (e) {
 					e.stopPropagation();
