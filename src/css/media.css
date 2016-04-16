@@ -35,6 +35,9 @@
 	.portrait-orientation span img {
 		width: 180px;
 	}
+	#main-navigation {
+		height: 95px;
+	}
 	.modal-holder .modal-content .container,
 	.container {
 		padding: 0 40px;

@@ -101,7 +101,7 @@
 }
 #horizontal-viewport > .full-height {
 	float: left;
-	width: 100%;
+	/*width: 100%;*/
 }
 #animatedLogo {
 	position: absolute;

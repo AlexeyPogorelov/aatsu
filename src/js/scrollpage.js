@@ -113,8 +113,6 @@ $(window).resize(function () {
 
 	windowWidth = $(window).width();
 	windowHeight = $(window).height();
-	// TODO test without it
-	// scrollPages.resize(pagesState.currentPage, true);
 
 });
 
@@ -223,30 +221,24 @@ $('.modal-container').on('DOMMouseScroll wheel mousewheel touchmove', function (
 
 $(document).on('keydown', function (e) {
 
+	if (pagesState.animatedBool) return;
+
 	switch (e.which) {
 		case 38:
 			e.preventDefault();
-			if (!pagesState.animatedBool) {
-				scrollPages.prevPage();
-			}
+			scrollPages.prevPage();
 			break;
 		case 40:
 			e.preventDefault();
-			if (!pagesState.animatedBool) {
-				scrollPages.nextPage();
-			}
+			scrollPages.nextPage();
 			break;
 		case 33:
 			e.preventDefault();
-			if (!pagesState.animatedBool) {
-				scrollPages.prevPage();
-			}
+			scrollPages.prevPage();
 			break;
 		case 34:
 			e.preventDefault();
-			if (!pagesState.animatedBool) {
-				scrollPages.nextPage();
-			}
+			scrollPages.nextPage();
 			break;
 	}
 
@@ -287,6 +279,7 @@ var scrollPages = (function () {
 			var before, after, top, left;
 
 			// console.log(pagesState.animatedBool)
+			// console.log(id)
 
 			if (!pagesState.pages.length || pagesState.animatedBool) {
 
@@ -343,31 +336,28 @@ var scrollPages = (function () {
 
 			}
 
-			if (!pagesState.animatedBool) {
+			if (typeof before === 'function') {
 
-				if (typeof before === 'function') {
-
-					before();
-
-				}
-
-				plg.makeActiveNav( pagesState.pages[id].id );
-
-				this.blockScroll(true);
-
-				cacheDom.$verticalViewport
-					.off(transitionPrefix)
-					.css({
-						'-webkit-transform': 'translateY(' + -top + 'px)',
-						'transform': 'translateY(' + -top + 'px)'
-					})
-					.one(transitionPrefix, this.animationDone.bind(this, id, after, callback));
-
-				// pagesAnimation( id );
-
-				pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after, callback), speed);
+				before();
 
 			}
+
+			plg.makeActiveNav( pagesState.pages[id].id );
+
+			this.blockScroll(true);
+
+console.log(top)
+			cacheDom.$verticalViewport
+				.off(transitionPrefix)
+				.css({
+					'-webkit-transform': 'translateY(' + -top + 'px)',
+					'transform': 'translateY(' + -top + 'px)'
+				})
+				.one(transitionPrefix, this.animationDone.bind(this, id, after, callback));
+
+			// pagesAnimation( id );
+
+			pagesState.animatedBoolTimeout = setTimeout(this.animationDone.bind(this, id, after, callback), speed);
 
 		},
 		nextPage: function () {
@@ -514,14 +504,15 @@ var scrollPages = (function () {
 
 			}
 
-			this.toPage(pagesState.currentPage, true);
+			plg.toPage(pagesState.currentPage, true);
 			// this.blockScroll(false);
 
 		}
 	};
 
 	$(window).on('resize', function () {
-		plg.resize();
+		clearTimeout(pagesState.resizeTimeout);
+		pagesState.resizeTimeout = setTimeout(plg.resize, 300);
 	});
 
 	// $(window).on('popstate', function (e) {
@@ -572,7 +563,7 @@ var horizontalSlider = (function () {
 				return;
 			}
 
-			// console.log(id)
+			// console.log(id);
 			// console.log(pagesState.pages[id])
 
 			if (id === undefined) {
@@ -586,28 +577,39 @@ var horizontalSlider = (function () {
 				left = pagesState.pages[0].left + windowHeight;
 				pagesState.currentPage = 0;
 			} else {
-				left = pagesState.pages[id].left;
-				left = pagesState.pages[id].left;
+				left = windowWidth * id;
 			}
 
-			if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
-				pagesState.leave();
-				pagesState.leave = false;
-			}
+			if (resize) {
 
-			if (pagesState.pages[id] && pagesState.pages[id].leave ) {
-				pagesState.leave = window[ pagesState.pages[id].leave ];
-			}
+				cacheDom.$horizontalViewport
+					.off(transitionPrefix)
+					.css({
+						'-webkit-transform': 'translateX(' + -left + 'px)',
+						'transform': 'translateX(' + -left + 'px)'
+					});
 
-			if (pagesState.pages[id] && pagesState.pages[id].before) {
-				before = window[ pagesState.pages[id].before ];
-			}
+			} else {
 
-			if (pagesState.pages[id] && pagesState.pages[id].after) {
-				after = window[ pagesState.pages[id].after ];
-			}
+				if (pagesState.pages[id] && typeof pagesState.leave === 'function' ) {
+					pagesState.leave();
+					pagesState.leave = false;
+				}
 
-			if (!pagesState.animatedBool) {
+				if (pagesState.pages[id] && pagesState.pages[id].leave ) {
+					pagesState.leave = window[ pagesState.pages[id].leave ];
+				}
+
+				if (pagesState.pages[id] && pagesState.pages[id].before) {
+					before = window[ pagesState.pages[id].before ];
+				}
+
+				if (pagesState.pages[id] && pagesState.pages[id].after) {
+					after = window[ pagesState.pages[id].after ];
+				}
+
+
+				pagesState.animatedBool = true;
 
 				if (typeof before === 'function') {
 
@@ -617,14 +619,9 @@ var horizontalSlider = (function () {
 
 				plg.makeActiveNav( pagesState.pages[id].id );
 
-				pagesState.animatedBool = true;
+				cacheDom.$horizontalViewport
+					.addClass('translating');
 
-				if (!resize) {
-
-					cacheDom.$horizontalViewport
-						.addClass('translating');
-
-				}
 
 				cacheDom.$horizontalViewport
 					.off(transitionPrefix)
@@ -745,26 +742,28 @@ var horizontalSlider = (function () {
 		},
 		resize: function () {
 
+			windowWidth = $(window).width();
+
 			if ( cacheDom.$horizontal.length ) {
 
-				cacheDom.$horizontalViewport.width( cacheDom.$horizontal.length * windowWidth );
-				cacheDom.$horizontal.width( windowWidth );
+				cacheDom.$horizontalViewport.width( cacheDom.$horizontal.length * windowWidth + 20000 );
+				// cacheDom.$horizontal.width( windowWidth );
 
 			}
 
-			for (var i = 0; i < pagesState.pages.length; i++) {
+			// for (var i = 0; i < pagesState.pages.length; i++) {
 
-				pagesState.pages[i].left = cacheDom.$horizontal[i].offsetLeft;
+				// pagesState.pages[i].left = cacheDom.$horizontal[i].offsetLeft;
 
-				if (pagesState.pages[i].full) {
+				// if (pagesState.pages[i].full) {
 
-					cacheDom.$sections.eq(i).height( windowHeight );
+				// 	cacheDom.$sections.eq(i).height( windowHeight );
 
-				}
+				// }
 
-			}
+			// }
 
-			this.toPage(pagesState.currentPage, true);
+			plg.toPage(pagesState.currentPage, true);
 
 		}
 	};
@@ -772,7 +771,8 @@ var horizontalSlider = (function () {
 	plg.init();
 
 	$(window).on('resize', function () {
-		plg.resize();
+		clearTimeout(pagesState.resizeTimeout);
+		pagesState.resizeTimeout = setTimeout(plg.resize, 300);
 	});
 
 	// main menu click

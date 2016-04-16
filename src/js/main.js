@@ -168,6 +168,7 @@ var preloader = {
 				preloader.hidePreloader(function () {
 
 					$('#main-navigation').removeClass('stop-animation');
+					$(window).trigger('resize').trigger('scroll');
 
 				});
 
@@ -207,7 +208,7 @@ var preloader = {
 
 					var $self = $(this);
 
-					if ($(window).width() > 800) {
+					if ($(window).width() > 960) {
 
 						$self.attr( 'src', $self.attr('data-src') );
 
@@ -441,8 +442,9 @@ $(document).on('ready', function () {
 
 					bgLoaded = 0;
 
+					// TODO review it
 					clearTimeout( localTimeout );
-					console.log('clear')
+					// console.log('clear')
 					// console.log(bgReady.caller)
 
 					if ( typeof callback === 'function' ) {
