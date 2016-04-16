@@ -8,19 +8,6 @@ backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
-if (!true) {
-
-	backgrounds = [
-		[2, 1],
-		[4, 3],
-		[6, 5],
-		[7, 8],
-		[9, 10],
-		[12, 11],
-		[14, 13]
-	];
-
-}
 // $(window).on('touchend', function (e) {
 // 	alert( e.target.className )
 // });
@@ -167,9 +154,9 @@ var preloader = {
 				// init custum scroller
 				// $('.modal-container').mCustomScrollbar();
 
-				picturefill({
-					elements: [ document.getElementsByTagName( "img" ) ]
-				});
+				// picturefill({
+				// 	elements: [ document.getElementsByTagName( "img" ) ]
+				// });
 
 				$('#contact').on('touchmove', function (e) {
 					e.stopPropagation();
@@ -215,6 +202,22 @@ var preloader = {
 				$('#main-navigation').addClass('disabled');
 
 				$('#horizontal-viewport').addClass('translating');
+
+				$modal.find('[data-src]').each(function () {
+
+					var $self = $(this);
+
+					if ($(window).width() > 800) {
+
+						$self.attr( 'src', $self.attr('data-src') );
+
+					} else {
+
+						$self.attr( 'src', $self.attr('data-src-small') );
+
+					}
+
+				});
 
 				// var $modalContent = $modal.find('.modal-container > .container');
 				// if ($modalContent.length) {
@@ -283,7 +286,7 @@ setTimeout(function () {
 
 $('img').each(function () {
 
-	if (!this.naturalWidth) {
+	if (!this.naturalWidth && $(this).attr('src')) {
 
 		preloader.trg++;
 		$(this).one('load error', preloader.loaded);

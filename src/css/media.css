@@ -32,7 +32,9 @@
 	MOBILE
 */
 @media screen and (max-width: 840px) {
-
+	.portrait-orientation span img {
+		width: 180px;
+	}
 	.modal-holder .modal-content .container,
 	.container {
 		padding: 0 40px;
@@ -138,7 +140,7 @@
 		padding-top: 0;
 	}
 	#main-navigation {
-		height: 50px;
+		height: 55px;
 	}
 
 }
