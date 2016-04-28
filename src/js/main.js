@@ -321,7 +321,7 @@ $(document).on('ready', function () {
 		var scrollStarted = false,
 			blurStatus = 0,
 			blurMax = 12,
-			max = 50;
+			max = 20;
 
 			if ($.browser.platform === "win") {
 
@@ -777,18 +777,6 @@ $(document).on('ready', function () {
 
 		if ( e.target.nodeName.toLowerCase() === 'img' ) {
 
-			function closeModal () {
-
-					$tint.removeClass('active');
-					$clone.css( stylesStack ).one(transitionPrefix, function () {
-
-						$clone.remove();
-						$tint.remove();
-
-					});
-
-				}
-
 			var $body = $('body'),
 				$modal = $(this),
 				$target = $(e.target),
@@ -797,6 +785,18 @@ $(document).on('ready', function () {
 				origLeft = $target.offset().left,
 				origWidth = $target.width(),
 				origHeight = $target.height();
+
+			var closeModal = function () {
+
+					$tint.removeClass('active');
+					$clone.css( stylesStack ).one(transitionPrefix, function () {
+
+						$clone.off().remove();
+						$tint.off().remove();
+
+					});
+
+				};
 
 			var stylesStack = {
 					'position': 'fixed',
@@ -810,6 +810,7 @@ $(document).on('ready', function () {
 				},
 				$tint = $('<div>')
 					.addClass('tint')
+					.one('DOMMouseScroll wheel mousewheel touchstart click', closeModal)
 					.appendTo( $body );
 
 			var stylesTarget = {
@@ -822,27 +823,19 @@ $(document).on('ready', function () {
 				'width': e.target.naturalWidth
 			};
 
-			if (e.target.naturalWidth > winWidth - 20) {
+			if (e.target.naturalWidth > winWidth / 1.5) {
 
 				var ratio = e.target.naturalWidth / e.target.naturalHeight;
-				stylesTarget.width = winWidth - 20;
-				stylesTarget.height = winWidth / ratio;
+				stylesTarget.width = winWidth / 1.5;
+				stylesTarget.height = stylesTarget.width / ratio;
 
 			}
 
 			$clone
-				.on('click', function (e) {
-
-					e.stopPropagation();
-
-				})
-				.one('DOMMouseScroll wheel mousewheel touchstart', closeModal)
 				.addClass( 'modal-image' )
 				.css( stylesStack )
+				.one('DOMMouseScroll wheel mousewheel touchstart click', closeModal)
 				.appendTo( $body );
-
-				// $tint.one('mousedown DOMMouseScroll wheel mousewheel', closeModal);
-				$tint.one('mousedown', closeModal);
 
 			setTimeout(function () {
 

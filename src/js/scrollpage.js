@@ -1,5 +1,5 @@
 
-// crossbrowser
+/* GLOBAL */
 var animationPrefix = (function () {
 		var t,
 			el = document.createElement("fakeelement"),
@@ -41,26 +41,20 @@ var animationPrefix = (function () {
 
 			}
 
-	})();
+	})(),
+	pagesState = {},
+	touchState = {
+		touchStart: {},
+		touchEnd: {}
+	},
+	windowWidth = $(window).width(),
+	windowHeight = $(window).height(),
+	cacheDom = {};
 
-	// htmlBody = 'body';
 if ( jQuery.browser.mobile ) {
 	$('body').addClass('mobile');
 }
 
-	/* GLOBAL */
-// var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
-// var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
-// if (isTouchDevice || isTouch) {
-// 	// $('body').css('overflow', 'auto');
-// }
-// isTouch = false;
-
-var pagesState = {},
-	touchState = {
-		touchStart: {},
-		touchEnd: {}
-	};
 
 pagesState.lastScrollTime = new Date().getTime() - 1000;
 
@@ -72,15 +66,23 @@ var pagesAnimation = (function () {
 		$socials = $('.socials-holder'),
 		plg = function (id) {
 
-			if ( id > 3 ) {
+			if ( id > 0 ) {
 
 				$foreground.hide();
+
+			} else {
+
+				$foreground.show();
+
+			}
+
+			if ( id > 3 ) {
+
 				$socials.removeClass('deactive');
 
 			} else {
 
 				$socials.addClass('deactive');
-				$foreground.show();
 
 			}
 
@@ -89,10 +91,6 @@ var pagesAnimation = (function () {
 	return plg;
 
 })();
-
-var windowWidth = $(window).width();
-var windowHeight = $(window).height();
-var cacheDom = {};
 
 $(window).load(function(){
 
@@ -109,14 +107,12 @@ cacheDom.$horizontal = cacheDom.$horizontalViewport.find(' > .full-height');
 cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
-$(window).resize(function () {
+$(window).on('resize', function () {
 
 	windowWidth = $(window).width();
 	windowHeight = $(window).height();
 
-});
-
-$(window).on('mousewheel', function (e) {
+}).on('mousewheel', function (e) {
 
 	e.preventDefault();
 	e.stopPropagation();
@@ -139,9 +135,7 @@ $(window).on('mousewheel', function (e) {
 
 	pagesState.lastScrollTime = new Date().getTime();
 
-});
-
-$(window).on('DOMMouseScroll wheel', function (e) {
+}).on('DOMMouseScroll wheel', function (e) {
 
 	e.preventDefault();
 	e.stopPropagation();
@@ -169,9 +163,7 @@ $('body').on('touchstart', function (e) {
 
 	touchState.touchStart.timeStamp = e.timeStamp;
 
-});
-
-$('body').on('touchmove', function (e) {
+}).on('touchmove', function (e) {
 
 	e.preventDefault();
 	touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
@@ -184,9 +176,7 @@ $('body').on('touchmove', function (e) {
 		touchState.touchStart.yPos = touchState.touchEnd.yPos;
 	}
 
-});
-
-$('body').on('touchend', function (e) {
+}).on('touchend', function (e) {
 	if (pagesState.animatedBool) {
 		return;
 	}
@@ -346,7 +336,7 @@ var scrollPages = (function () {
 
 			this.blockScroll(true);
 
-console.log(top)
+// console.log(top)
 			cacheDom.$verticalViewport
 				.off(transitionPrefix)
 				.css({
@@ -468,7 +458,7 @@ console.log(top)
 
 				}
 
-			}, 500);
+			}, 300);
 
 		},
 		blockScroll: function ( boolean, lock ) {

@@ -4,19 +4,19 @@ layout = "default"
 ==
 function onStart()
 {
-    $this['settings'] = \Intertech\Aatsu\Models\MainSettings::instance();
-    $this['socials'] = \Intertech\Aatsu\Models\SocialSettings::instance();
-    $this['intro'] = \Intertech\Aatsu\Models\IntroSettings::instance();
-    $this['about'] = \Intertech\Aatsu\Models\AboutSettings::instance();
-    $this['contacts'] = \Intertech\Aatsu\Models\ContactSettings::instance();
+	$this['settings'] = \Intertech\Aatsu\Models\MainSettings::instance();
+	$this['socials'] = \Intertech\Aatsu\Models\SocialSettings::instance();
+	$this['intro'] = \Intertech\Aatsu\Models\IntroSettings::instance();
+	$this['about'] = \Intertech\Aatsu\Models\AboutSettings::instance();
+	$this['contacts'] = \Intertech\Aatsu\Models\ContactSettings::instance();
 
-    $this['products'] = \FeegleWeb\Octoshop\Models\Product::enabled()->orderBy('sort_order', 'asc')->get();
-    $this['posts'] = \Intertech\Aatsu\Models\Post::orderBy('sort_order', 'asc')->get();
+	$this['products'] = \FeegleWeb\Octoshop\Models\Product::enabled()->orderBy('sort_order', 'asc')->get();
+	$this['posts'] = \Intertech\Aatsu\Models\Post::orderBy('sort_order', 'asc')->get();
 }
 ==
 <div class="preloader">
-    <div class="after"></div>
-    <img src="{{ 'assets/img/icons/preloader.svg'|theme }}" alt="preloader">
+	<div class="after"></div>
+	<img src="{{ 'assets/img/icons/preloader.svg'|theme }}" alt="preloader">
 </div>
 
 <div class="portrait-orientation">
@@ -27,10 +27,10 @@ function onStart()
 </div>
 
 <div id="main-navigation" class="stop-animation closed invisible">
-    <div class="logo">
-        <!-- <img src="img/icons/main-logo.svg"> -->
-        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-        <svg
+	<div class="logo">
+		<!-- <img src="img/icons/main-logo.svg"> -->
+		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+		<svg
 				xmlns:dc="http://purl.org/dc/elements/1.1/"
 				xmlns:cc="http://creativecommons.org/ns#"
 				xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -69,121 +69,119 @@ function onStart()
 					d="m 70.522224,100.63164 20.02415,-53.696005 -9.453626,-26.3192 -30.85486,80.015205 c -0.02768,0.052 20.284336,0 20.284336,0 m 39.471866,0 -10.090514,-27.4002 -10.089814,27.4002 z m 19.29965,0 c 0,0 20.2921,0.052 20.27958,0 l -30.86244,-80.015205 -9.46121,26.3192 z M 62.769508,2.35e-4 l 29.34204,0 7.792028,20.9716 7.768584,-20.9716 29.55833,0 L 200,159.66004 l -27.24045,0 -16.46209,-42.5698 -20.88422,0 15.96147,42.5698 -19.99595,0 c -4.59081,-12.3436 -15.46136,-42.5258 -15.46136,-42.5258 l -32.039278,0 -15.469122,42.5258 -19.98008,0 15.961466,-42.5698 -20.772628,0 -16.581788,42.5698 -27.03597,0 z"
 					inkscape:connector-curvature="0" />
 			</svg>
-        <div class="lines-holder">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-        </div>
-    </div>
-    <ul>
-        <li>
-            <a href="#series" data-page="1">{{ settings.menu1 }}</a>
-        </li>
-        <li>
-            <a href="#blog" data-page="2">{{ settings.menu2 }}</a>
-        </li>
-        <li>
-            <a href="#about" data-page="3">{{ settings.menu3 }}</a>
-        </li>
-        <li>
-            <a href="#contact" data-page="4">{{ settings.menu4 }}</a>
-        </li>
-    </ul>
+		<div class="lines-holder">
+			<span class="line"></span>
+			<span class="line"></span>
+			<span class="line"></span>
+		</div>
+	</div>
+	<ul>
+		<li>
+			<a href="#series" data-page="1">{{ settings.menu1 }}</a>
+		</li>
+		<li>
+			<a href="#blog" data-page="2">{{ settings.menu2 }}</a>
+		</li>
+		<li>
+			<a href="#about" data-page="3">{{ settings.menu3 }}</a>
+		</li>
+		<li>
+			<a href="#contact" data-page="4">{{ settings.menu4 }}</a>
+		</li>
+	</ul>
 </div>
 
 <div id="presentation" class="blured">
-    <!-- backgrounds -->
-    <div class="background-holder">
-        <img src="" alt="stone">
-    </div>
-    <div class="foreground-holder">
-        <img src="" alt="stone">
-    </div>
+	<!-- backgrounds -->
+	<div class="background-holder">
+		<img src="" alt="stone">
+	</div>
+	<div class="foreground-holder">
+		<img src="" alt="stone">
+	</div>
 </div>
 
 <div id="application-holder">
 
-    <div class="socials-holder deactive">
+	<div class="socials-holder deactive">
 
-        <ul>
+		<ul>
 
-            {% if socials.facebook %}
-                <li>
-                    <a href="{{ socials.facebook }}" target="_blank">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </li>
-            {% endif %}
+			{% if socials.facebook %}
+				<li>
+					<a href="{{ socials.facebook }}" target="_blank">
+						<i class="fa fa-facebook"></i>
+					</a>
+				</li>
+			{% endif %}
 
-            {% if socials.instagram %}
-                <li>
-                    <a href="{{ socials.instagram }}" target="_blank">
-                        <i class="fa fa-instagram"></i>
-                    </a>
-                </li>
-            {% endif %}
+			{% if socials.instagram %}
+				<li>
+					<a href="{{ socials.instagram }}" target="_blank">
+						<i class="fa fa-instagram"></i>
+					</a>
+				</li>
+			{% endif %}
 
-            {% if socials.vkontakte %}
-                <li>
-                    <a href="{{ socials.vkontakte }}" target="_blank">
-                        <i class="fa fa-vk"></i>
-                    </a>
-                </li>
-            {% endif %}
+			{% if socials.vkontakte %}
+				<li>
+					<a href="{{ socials.vkontakte }}" target="_blank">
+						<i class="fa fa-vk"></i>
+					</a>
+				</li>
+			{% endif %}
 
-            {% if socials.pinterest %}
-                <li>
-                    <a href="{{ socials.pinterest }}" target="_blank">
-                        <i class="fa fa-pinterest"></i>
-                    </a>
-                </li>
-            {% endif %}
+			{% if socials.pinterest %}
+				<li>
+					<a href="{{ socials.pinterest }}" target="_blank">
+						<i class="fa fa-pinterest"></i>
+					</a>
+				</li>
+			{% endif %}
 
-        </ul>
+		</ul>
 
-    </div>
+	</div>
 
-    <div id="horizontal-viewport">
+	<div id="horizontal-viewport">
 
-        <div id="animatedLogo">
+		<div id="animatedLogo">
 
-            <img src="{{ 'assets/img/icons/main-logo.svg'|theme }}">
+			<img src="{{ 'assets/img/icons/main-logo.svg'|theme }}">
 
-        </div>
+		</div>
 
-        <section id="vertical-viewport" class="full-height">
+		<section id="vertical-viewport" class="full-height">
 
-            <section id="start" class="empty full-height" data-before="state1" data-leave="state2" data-after="hideControls" ></section>
+			<section id="start" class="empty full-height" data-before="state1" data-leave="state2" data-after="hideControls" ></section>
 
-            <section id="screen-1" class="screen-3 full-height" data-before="state3">
+			<section id="screen-1" class="screen-3 full-height" data-before="state3">
 
-                <div class="container">
+				<div class="container">
 
-                    <div class="content-holder">
-                    </div>
+					<div class="content-holder">
+					</div>
 
-                    {{ intro.description1|raw }}
+					{{ intro.description1|raw }}
 
-                </div>
+				</div>
 
-            </section>
+			</section>
 
-            <section id="screen-2" class="screen-3 full-height" data-before="state5">
-                <div class="container">
+			<section id="screen-2" class="screen-3 full-height" data-before="state5">
+				<div class="container">
 
-                    <div class="content-holder">
-                    </div>
+					<div class="content-holder">
+					</div>
 
-                    {{ intro.description2|raw }}
+					{{ intro.description2|raw }}
 
-                </div>
-            </section>
+				</div>
+			</section>
 
-            <section id="logo" class="empty full-height" data-before="state3" >
-                <div class="logo">
-                    <!-- <img src="img/icons/main-logo.svg"> -->
-                    <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
-                    <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 200 159.66" xml:space="preserve" id="svg2" version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="main-logo.svg">
+			<!--section id="logo" class="empty full-height" data-before="state3" >
+				<div class="logo">
+					<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 200 159.66" xml:space="preserve" id="svg2" version="1.1" inkscape:version="0.91 r13725" sodipodi:docname="main-logo.svg">
 
 							<sodipodi:namedview borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" id="namedview12" showgrid="false"></sodipodi:namedview>
 
@@ -194,221 +192,221 @@ function onStart()
 							</defs>
 							<path id="path22" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" d="m 70.522224,100.63164 20.02415,-53.696005 -9.453626,-26.3192 -30.85486,80.015205 c -0.02768,0.052 20.284336,0 20.284336,0 m 39.471866,0 -10.090514,-27.4002 -10.089814,27.4002 z m 19.29965,0 c 0,0 20.2921,0.052 20.27958,0 l -30.86244,-80.015205 -9.46121,26.3192 z M 62.769508,2.35e-4 l 29.34204,0 7.792028,20.9716 7.768584,-20.9716 29.55833,0 L 200,159.66004 l -27.24045,0 -16.46209,-42.5698 -20.88422,0 15.96147,42.5698 -19.99595,0 c -4.59081,-12.3436 -15.46136,-42.5258 -15.46136,-42.5258 l -32.039278,0 -15.469122,42.5258 -19.98008,0 15.961466,-42.5698 -20.772628,0 -16.581788,42.5698 -27.03597,0 z" inkscape:connector-curvature="0"></path>
 						</svg>
-                    <div class="lines-holder">
-                        <span class="line"></span>
-                        <span class="line"></span>
-                        <span class="line"></span>
-                    </div>
-                </div>
-            </section>
+					<div class="lines-holder">
+						<span class="line"></span>
+						<span class="line"></span>
+						<span class="line"></span>
+					</div>
+				</div>
+			</section-->
 
-            <section id="clean" class="empty full-height" data-before="showControls" data-leave="hideControls">
-            </section>
+			<section id="clean" class="empty full-height" data-before="showControls" data-leave="hideControls">
+			</section>
 
-        </section>
+		</section>
 
-        <section id="series" class="presentation full-height">
-            <div class="gallery-slider" id="gallery-slider">
-                <div class="slider-viewport">
+		<section id="series" class="presentation full-height">
+			<div class="gallery-slider" id="gallery-slider">
+				<div class="slider-viewport">
 
-                    <div class="slider-holder">
+					<div class="slider-holder">
 
-                        {% for product in products %}
-                            <div class="slide">
-                                <div class="image-holder" data-modal="#product-{{ product.id }}">
-                                    <!--<picture>-->
-                                        <!--<source srcset="{{ product.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-                                        <!--<source srcset="{{ product.image.path }}">-->
-                                        <!--<img srcset="{{ product.image.path }}" alt="My default image">-->
-                                    <!--</picture>-->
-                                    <img
-                                        srcset="{{ product.image.thumb(480, auto) }} 675w,
-                                                {{ product.image.path }}"
-                                    alt="…">
-                                </div>
-                            </div>
-                        {% endfor %}
+						{% for product in products %}
+							<div class="slide">
+								<div class="image-holder" data-modal="#product-{{ product.id }}">
+									<!--<picture>-->
+										<!--<source srcset="{{ product.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
+										<!--<source srcset="{{ product.image.path }}">-->
+										<!--<img srcset="{{ product.image.path }}" alt="My default image">-->
+									<!--</picture>-->
+									<img
+										srcset="{{ product.image.thumb(480, auto) }} 675w,
+												{{ product.image.path }}"
+									alt="…">
+								</div>
+							</div>
+						{% endfor %}
 
-                    </div>
+					</div>
 
-                </div>
-            </div>
-        </section>
+				</div>
+			</div>
+		</section>
 
-        <section id="blog" class="presentation full-height">
-            <div class="gallery-slider" id="blog-slider">
-                <div class="slider-viewport">
+		<section id="blog" class="presentation full-height">
+			<div class="gallery-slider" id="blog-slider">
+				<div class="slider-viewport">
 
-                    <div class="slider-holder">
+					<div class="slider-holder">
 
-                        {% for post in posts %}
-                            <div class="slide">
-                                <div class="image-holder" data-modal="#post-{{ post.id }}">
-                                    <!--<picture>-->
-                                        <!--<source srcset="{{ post.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-                                        <!--<source srcset="{{ post.image.path }}">-->
-                                        <!--<img srcset="{{ post.image.path }}" alt="My default image">-->
-                                    <!--</picture>-->
-                                    <img
-                                        srcset="{{ post.image.thumb(480, auto) }} 675w,
-                                                {{ post.image.path }}"
-                                    alt="…">
-                                </div>
-                            </div>
-                        {% endfor %}
+						{% for post in posts %}
+							<div class="slide">
+								<div class="image-holder" data-modal="#post-{{ post.id }}">
+									<!--<picture>-->
+										<!--<source srcset="{{ post.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
+										<!--<source srcset="{{ post.image.path }}">-->
+										<!--<img srcset="{{ post.image.path }}" alt="My default image">-->
+									<!--</picture>-->
+									<img
+										srcset="{{ post.image.thumb(480, auto) }} 675w,
+												{{ post.image.path }}"
+									alt="…">
+								</div>
+							</div>
+						{% endfor %}
 
-                    </div>
+					</div>
 
-                </div>
-            </div>
-        </section>
+				</div>
+			</div>
+		</section>
 
-        <section id="about" class="screen-3 full-height">
-            <div class="container">
-                <div class="content-holder">
-                </div>
+		<section id="about" class="screen-3 full-height">
+			<div class="container">
+				<div class="content-holder">
+				</div>
 
-                {{ about.description|raw }}
+				{{ about.description|raw }}
 
-            </div>
-        </section>
+			</div>
+		</section>
 
-        <section id="contact" class="screen-3 full-height">
-            <div class="container">
-                <div class="content-holder">
-                </div>
-                <div class="data-block">
-                    {{ contacts.left_description|raw }}
-                </div>
-                <div class="data-block">
-                    <h3>{{ contacts.title }}</h3>
+		<section id="contact" class="screen-3 full-height">
+			<div class="container">
+				<div class="content-holder">
+				</div>
+				<div class="data-block">
+					{{ contacts.left_description|raw }}
+				</div>
+				<div class="data-block">
+					<h3>{{ contacts.title }}</h3>
 
-                    {% if contacts.title_email1 %}
-                        <p>{{ contacts.title_email1 }}:</p>
-                    {% endif %}
-                    {% if contacts.email1 %}
-                        <p><a href="mailto:{{ contacts.email1 }}">{{ contacts.email1 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email1 %}
+						<p>{{ contacts.title_email1 }}:</p>
+					{% endif %}
+					{% if contacts.email1 %}
+						<p><a href="mailto:{{ contacts.email1 }}">{{ contacts.email1 }}</a></p>
+					{% endif %}
 
-                    {% if contacts.title_email2 %}
-                        <p>{{ contacts.title_email2 }}:</p>
-                    {% endif %}
-                    {% if contacts.email2 %}
-                        <p><a href="mailto:{{ contacts.email2 }}">{{ contacts.email2 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email2 %}
+						<p>{{ contacts.title_email2 }}:</p>
+					{% endif %}
+					{% if contacts.email2 %}
+						<p><a href="mailto:{{ contacts.email2 }}">{{ contacts.email2 }}</a></p>
+					{% endif %}
 
-                    {% if contacts.title_email3 %}
-                        <p>{{ contacts.title_email3 }}:</p>
-                    {% endif %}
-                    {% if contacts.email3 %}
-                        <p><a href="mailto:{{ contacts.email3 }}">{{ contacts.email3 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email3 %}
+						<p>{{ contacts.title_email3 }}:</p>
+					{% endif %}
+					{% if contacts.email3 %}
+						<p><a href="mailto:{{ contacts.email3 }}">{{ contacts.email3 }}</a></p>
+					{% endif %}
 
-                    {% if contacts.title_email4 %}
-                        <p>{{ contacts.title_email4 }}:</p>
-                    {% endif %}
-                    {% if contacts.email4 %}
-                        <p><a href="mailto:{{ contacts.email4 }}">{{ contacts.email4 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email4 %}
+						<p>{{ contacts.title_email4 }}:</p>
+					{% endif %}
+					{% if contacts.email4 %}
+						<p><a href="mailto:{{ contacts.email4 }}">{{ contacts.email4 }}</a></p>
+					{% endif %}
 
-                    {% if contacts.title_email5 %}
-                        <p>{{ contacts.title_email5 }}:</p>
-                    {% endif %}
-                    {% if contacts.email5 %}
-                        <p><a href="mailto:{{ contacts.email5 }}">{{ contacts.email5 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email5 %}
+						<p>{{ contacts.title_email5 }}:</p>
+					{% endif %}
+					{% if contacts.email5 %}
+						<p><a href="mailto:{{ contacts.email5 }}">{{ contacts.email5 }}</a></p>
+					{% endif %}
 
-                    {% if contacts.title_email6 %}
-                        <p>{{ contacts.title_email6 }}:</p>
-                    {% endif %}
-                    {% if contacts.email6 %}
-                        <p><a href="mailto:{{ contacts.email6 }}">{{ contacts.email6 }}</a></p>
-                    {% endif %}
+					{% if contacts.title_email6 %}
+						<p>{{ contacts.title_email6 }}:</p>
+					{% endif %}
+					{% if contacts.email6 %}
+						<p><a href="mailto:{{ contacts.email6 }}">{{ contacts.email6 }}</a></p>
+					{% endif %}
 
-                </div>
-            </div>
-        </section>
+				</div>
+			</div>
+		</section>
 
-    </div>
+	</div>
 </div>
 <div class="modal-holder">
-    <!-- <div class="close-modal" data-close></div> -->
+	<!-- <div class="close-modal" data-close></div> -->
 
-    {% for product in products %}
-        <div class="modal-content" id="product-{{ product.id }}">
-            <div class="modal-container">
-                <div class="container">
+	{% for product in products %}
+		<div class="modal-content" id="product-{{ product.id }}">
+			<div class="modal-container">
+				<div class="container">
 
-                    {% if product.table_image.path %}
-                        <div class="absolute-table">
-                            <img src="{{ product.table_image.path }}">
-                        </div>
-                    {% endif %}
+					{% if product.table_image.path %}
+						<div class="absolute-table">
+							<img src="{{ product.table_image.path }}">
+						</div>
+					{% endif %}
 
-                    {% for block in product.blocks %}
-                        {% if block.description %}
-                            <p>{{ block.description }}</p>
-                        {% endif %}
-                        {% if block.image %}
-                            <!--<picture>-->
-                                <!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-                                <!--<source srcset="{{ block.image.path }}">-->
-                                <!--<img srcset="{{ block.image.path }}" alt="My default image">-->
-                            <!--</picture>-->
+					{% for block in product.blocks %}
+						{% if block.description %}
+							<p>{{ block.description }}</p>
+						{% endif %}
+						{% if block.image %}
+							<!--<picture>-->
+								<!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
+								<!--<source srcset="{{ block.image.path }}">-->
+								<!--<img srcset="{{ block.image.path }}" alt="My default image">-->
+							<!--</picture>-->
 <!--                             <img
-                                srcset="{{ block.image.thumb(480, auto) }} 675w,
-                                        {{ block.image.path }}"
-                            alt="…"> -->
+								srcset="{{ block.image.thumb(480, auto) }} 675w,
+										{{ block.image.path }}"
+							alt="…"> -->
 
-                             <img
-                                data-src="{{ block.image.path }}"
-                                data-src-small="{{ block.image.thumb(480, auto) }}"
-                            alt="…">
-                        {% endif %}
-                    {% endfor %}
+							 <img
+								data-src="{{ block.image.path }}"
+								data-src-small="{{ block.image.thumb(480, auto) }}"
+							alt="…">
+						{% endif %}
+					{% endfor %}
 
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
 
-    {% for post in posts %}
-        <div class="modal-content" id="post-{{ post.id }}">
-            <div class="modal-container">
-                <div class="container">
+	{% for post in posts %}
+		<div class="modal-content" id="post-{{ post.id }}">
+			<div class="modal-container">
+				<div class="container">
 
-                    {% if post.table_image.path %}
-                        <div class="absolute-table">
-                            <img src="{{ post.table_image.path }}">
-                        </div>
-                    {% endif %}
+					{% if post.table_image.path %}
+						<div class="absolute-table">
+							<img src="{{ post.table_image.path }}">
+						</div>
+					{% endif %}
 
-                    {% for block in post.blocks %}
-                        {% if block.description %}
-                            <p>{{ block.description }}</p>
-                        {% endif %}
-                        {% if block.image %}
-                            <!--<picture>-->
-                                <!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-                                <!--<source srcset="{{ block.image.path }}">-->
-                                <!--<img srcset="{{ block.image.path }}" alt="My default image">-->
-                            <!--</picture>-->
+					{% for block in post.blocks %}
+						{% if block.description %}
+							<p>{{ block.description }}</p>
+						{% endif %}
+						{% if block.image %}
+							<!--<picture>-->
+								<!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
+								<!--<source srcset="{{ block.image.path }}">-->
+								<!--<img srcset="{{ block.image.path }}" alt="My default image">-->
+							<!--</picture>-->
 
 <!--                              <img
-                                srcset="{{ block.image.thumb(480, auto) }} 675w,
-                                        {{ block.image.path }}"
-                            alt="…"> -->
+								srcset="{{ block.image.thumb(480, auto) }} 675w,
+										{{ block.image.path }}"
+							alt="…"> -->
 
-                             <img
-                                data-src="{{ block.image.path }}"
-                                data-src-small="{{ block.image.thumb(480, auto) }}"
-                            alt="…">
-                        {% endif %}
-                    {% endfor %}
+							 <img
+								data-src="{{ block.image.path }}"
+								data-src-small="{{ block.image.thumb(480, auto) }}"
+							alt="…">
+						{% endif %}
+					{% endfor %}
 
-                </div>
-            </div>
-        </div>
-    {% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
 
 </div>
