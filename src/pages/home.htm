@@ -139,6 +139,14 @@ function onStart()
 				</li>
 			{% endif %}
 
+			{% if socials.tumblr %}
+				<li>
+					<a href="{{ socials.tumblr }}" target="_blank">
+						<i class="fa fa-tumblr"></i>
+					</a>
+				</li>
+			{% endif %}
+
 		</ul>
 
 	</div>
@@ -214,14 +222,9 @@ function onStart()
 						{% for product in products %}
 							<div class="slide">
 								<div class="image-holder" data-modal="#product-{{ product.id }}">
-									<!--<picture>-->
-										<!--<source srcset="{{ product.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-										<!--<source srcset="{{ product.image.path }}">-->
-										<!--<img srcset="{{ product.image.path }}" alt="My default image">-->
-									<!--</picture>-->
 									<img
-										srcset="{{ product.image.thumb(480, auto) }} 675w,
-												{{ product.image.path }}"
+										data-src="{{ product.image.path }}"
+										data-src-small="{{ product.image.thumb(480, auto) }}"
 									alt="…">
 								</div>
 							</div>
@@ -242,14 +245,10 @@ function onStart()
 						{% for post in posts %}
 							<div class="slide">
 								<div class="image-holder" data-modal="#post-{{ post.id }}">
-									<!--<picture>-->
-										<!--<source srcset="{{ post.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-										<!--<source srcset="{{ post.image.path }}">-->
-										<!--<img srcset="{{ post.image.path }}" alt="My default image">-->
-									<!--</picture>-->
 									<img
-										srcset="{{ post.image.thumb(480, auto) }} 675w,
-												{{ post.image.path }}"
+										data-src="{{ post.image.path }}"
+										data-src-small="{{ post.image.thumb(480, auto) }}"
+
 									alt="…">
 								</div>
 							</div>
@@ -330,7 +329,6 @@ function onStart()
 	</div>
 </div>
 <div class="modal-holder">
-	<!-- <div class="close-modal" data-close></div> -->
 
 	{% for product in products %}
 		<div class="modal-content" id="product-{{ product.id }}">
@@ -348,15 +346,6 @@ function onStart()
 							<p>{{ block.description }}</p>
 						{% endif %}
 						{% if block.image %}
-							<!--<picture>-->
-								<!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-								<!--<source srcset="{{ block.image.path }}">-->
-								<!--<img srcset="{{ block.image.path }}" alt="My default image">-->
-							<!--</picture>-->
-<!--                             <img
-								srcset="{{ block.image.thumb(480, auto) }} 675w,
-										{{ block.image.path }}"
-							alt="…"> -->
 
 							 <img
 								data-src="{{ block.image.path }}"
@@ -386,16 +375,6 @@ function onStart()
 							<p>{{ block.description }}</p>
 						{% endif %}
 						{% if block.image %}
-							<!--<picture>-->
-								<!--<source srcset="{{ block.image.thumb(480, auto) }}" media="(max-width: 620px)">-->
-								<!--<source srcset="{{ block.image.path }}">-->
-								<!--<img srcset="{{ block.image.path }}" alt="My default image">-->
-							<!--</picture>-->
-
-<!--                              <img
-								srcset="{{ block.image.thumb(480, auto) }} 675w,
-										{{ block.image.path }}"
-							alt="…"> -->
 
 							 <img
 								data-src="{{ block.image.path }}"

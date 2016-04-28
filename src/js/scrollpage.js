@@ -536,7 +536,7 @@ var horizontalSlider = (function () {
 				pagesState.pages.push({
 					'id': cacheDom.$horizontal[i].id,
 					'classes': cacheDom.$horizontal[i].classList,
-					// 'top': cacheDom.$horizontal[i].offsetTop,
+					'$el': $(cacheDom.$horizontal[i]),
 					'left': cacheDom.$horizontal[i].offsetLeft,
 					'leave': cacheDom.$horizontal.eq(i).attr('data-leave'),
 					'before': cacheDom.$horizontal.eq(i).attr('data-before'),
@@ -611,11 +611,24 @@ var horizontalSlider = (function () {
 
 				cacheDom.$horizontalViewport
 					.addClass('translating');
-
+				cacheDom.$horizontal.removeClass('active');
 
 				cacheDom.$horizontalViewport
 					.off(transitionPrefix)
 					.one(transitionPrefix, function () {
+
+						if ( !pagesState.pages[id].$el.data('visited') ) {
+
+							pagesState.pages[id].$el.data('visited', true);
+							// console.log( pagesState.pages[id].$el.find('[data-src]') )
+							pagesState.pages[id].$el.find('[data-src]').each(function () {
+								var $self = $(this);
+									$self.attr('src', $self.data('src'));
+							});
+
+						}
+
+						pagesState.pages[id].$el.addClass('active');
 
 						cacheDom.$horizontalViewport
 							.off(transitionPrefix)
