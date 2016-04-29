@@ -336,7 +336,6 @@ var scrollPages = (function () {
 
 			this.blockScroll(true);
 
-// console.log(top)
 			cacheDom.$verticalViewport
 				.off(transitionPrefix)
 				.css({
@@ -621,10 +620,22 @@ var horizontalSlider = (function () {
 
 							pagesState.pages[id].$el.data('visited', true);
 							// console.log( pagesState.pages[id].$el.find('[data-src]') )
-							pagesState.pages[id].$el.find('[data-src]').each(function () {
-								var $self = $(this);
-									$self.attr('src', $self.data('src'));
-							});
+
+							if ($(window).width() > 960) {
+
+								pagesState.pages[id].$el.find('[data-src]').each(function () {
+									var $self = $(this);
+										$self.attr('src', $self.data('src'));
+								});
+
+							} else {
+
+								pagesState.pages[id].$el.find('[data-src-small]').each(function () {
+									var $self = $(this);
+										$self.attr('src', $self.data('src'));
+								});
+
+							}
 
 						}
 

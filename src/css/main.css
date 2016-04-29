@@ -161,8 +161,10 @@
 .portrait-orientation span img {
 	width: 320px;
 }
-/**/
-/* #main-navigation {
+
+
+/* MAIN-NAVIGATION */
+#main-navigation {
 	cursor: default;
 	color: #fff;
 	opacity: 1;
@@ -182,9 +184,7 @@
 }
 #main-navigation li {
 	display: inline-block;
-	margin: 76px 120px 0;
-	-webkit-transition: transform 1s;
-	transition: transform 1s;
+	margin: 3.5vw 4.7vw 0;
 }
 #main-navigation li:first-child {
 	margin-left: 0;
@@ -197,12 +197,55 @@
 }
 #main-navigation li a {
 	color: #fff;
-	font-size: 17px;
-	letter-spacing: 6px;
+	font-size: 0.88vw;
+	letter-spacing: 0.4em;
+	text-decoration: none;
 	position: relative;
-	-webkit-transition: all .3s;
-	transition: all .3s;
+	padding: 0.20vw 0.6vw;
+	right: -1.1vw;
+	-webkit-transition: color 0s;
+	transition: color 0s;
 }
+
+/*			#main-navigation ul li a span {
+				position: relative;
+				left: 0.1vw;
+				line-height: 1em;
+				z-index: 1;
+			}
+			#main-navigation ul li a:before, #main-navigation ul li a:after {
+				background-color: rgba(255, 255, 255, 0);
+				content: '';
+				position: absolute;
+				z-index: 0;
+			}
+			#main-navigation ul li a:before {
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 100%;
+			}
+			#main-navigation ul li a:after {
+				left: -0.3vw;
+				top: 45%;
+				height: 55%;
+				width: 0.5vw;
+			}
+			#main-navigation ul li a:hover {
+				color: #000;
+				-webkit-transition: color 0.3s;
+				transition: color 0.3s;
+			}
+				#main-navigation ul li a:hover:before, #main-navigation ul li a:hover:after {
+					background-color: white;
+				}
+			#main-navigation ul li:nth-child(2) {
+				margin-right: 12.8vw;
+			}
+			#main-navigation ul li:nth-child(3) {
+				margin-left: 12.8vw;
+			}*/
+
 #main-navigation li a:before {
 	content: '';
 	position: absolute;
@@ -446,11 +489,11 @@
 		margin: 22px 6px 0;
 	}
 
-} */
+}
 
 
 /* main alt */
-#main-navigation {
+/* #main-navigation {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -531,7 +574,7 @@
 		#main-navigation ul li:nth-child(2) {
 			margin-right: 12.8vw; }
 		#main-navigation ul li:nth-child(3) {
-			margin-left: 12.8vw; }
+			margin-left: 12.8vw; } */
 
 #presentation {
 	overflow: hidden;
