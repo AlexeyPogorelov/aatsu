@@ -25,10 +25,10 @@ var animationPrefix = (function () {
 		var t,
 			el = document.createElement("fakeelement"),
 			transitions = {
+				"WebkitTransition": "webkitTransitionEnd",
 				"transition": "transitionend",
 				"OTransition": "oTransitionEnd",
-				"MozTransition": "transitionend",
-				"WebkitTransition": "webkitTransitionEnd"
+				"MozTransition": "transitionend"
 			};
 
 			for (t in transitions){

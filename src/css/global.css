@@ -7,8 +7,12 @@
 body {
 	background: #111;
 	color: white;
-	font: 14px/1.5em 'Bender', Arial, sans-serif;
+	font: 1.4vh/1.4em 'Bender', Arial, sans-serif;
 	overflow: hidden;
+	letter-spacing: 9px;
+	font-weight: 100;
+	/*font-size: 1.4vh;*/
+	/*line-height: 1.3em;*/
 }
 body::-webkit-scrollbar {
 	height: 0;
@@ -112,7 +116,7 @@ hr {
 }
 
 p {
-	font-size: 18px;
+	/*font-size: 18px;*/
 	letter-spacing: 9px;
 	font-weight: 100;
 }
@@ -466,7 +470,7 @@ input[type='number'] {
 /*	GRID	*/
 .container {
 	margin: 0 auto;
-	width: 960px;
+	/*width: 960px;*/
 }
 .text-center {
 	text-align: center;
@@ -650,14 +654,10 @@ button:focus,
 	overflow: auto;
 	opacity: 0;
 	position: absolute;
-	left: 0;
-	right: 0;
-	top: 120px;
-	bottom: 0;
 	/*bottom: 120px;*/
 	/*height: 100%;*/
 	visibility: hidden;
-	width: 100%;
+	/*width: 100%;*/
 	z-index: 10;
 	-webkit-transform-style: preserve-3d;
 	      transform-style: preserve-3d;
@@ -668,21 +668,25 @@ button:focus,
 	-webkit-transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, transform .2s, visibility .4s;
-	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s; }
-	.modal-holder .modal-content {
+	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s;
+	left: 0;
+	right: 0;
+	top: 29.2vh;
+	bottom: 20.6vh;
+}
+.modal-holder .modal-content {
 	background: rgba(255,255,255,.2);
-
 	background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 10%, rgba(255,255,255,0.2) 90%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 10%,rgba(255,255,255,0.2) 90%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.2) 10%,rgba(255,255,255,0.2) 90%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
 
+	background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, rgba(255, 255, 255, 0) 100%);
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, rgba(255, 255, 255, 0) 100%);
+
 	position: absolute;
-	/*top: 50px;*/
-	/*bottom:150px;*/
-	left: 0px;
-	right: 0px;
-	margin-top: 140px;
+
+	/*margin-top: 140px;*/
 	opacity: 0;
 	/*overflow: auto;*/
 	-webkit-transform: translateZ(400px);
@@ -690,39 +694,43 @@ button:focus,
 	-webkit-transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, visibility .4s, -webkit-transform .2s;
 	transition: opacity .3s ease-out, transform .2s, visibility .4s;
-	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s; }
-	.modal-holder.opened {
+	transition: opacity .3s ease-out, transform .2s, visibility .4s, -webkit-transform .2s;
+}
+.modal-holder.opened {
 	opacity: 1;
-	visibility: visible; }
-	.modal-holder.opened .modal-content {
-		-webkit-transform: scale(1, 1);
-		        transform: scale(1, 1);
-		-webkit-transition: -webkit-transform 0.6s;
-		opacity: 0;
-		transition: -webkit-transform 0.6s;
-		transition: transform 0.6s;
-		display: none;
-		transition: transform 0.6s, -webkit-transform 0.6s; }
-	.modal-holder.opened .modal-content.opened {
-		display: block;
-		opacity: 1;
-	}
-	.modal-holder .modal-content .container::-webkit-scrollbar {
-		background-color: rgba(255,255,255,.3);
-		border: none;
-		height: 10px;
-		width: 10px;
-	}
-	.modal-holder .modal-content .container::-webkit-scrollbar-thumb {
-		background-color: #EE2151;
-		background-color: rgba(255,255,255,.5);
-		border: 1px solid #e5e5e5;
-	}
-	.modal-holder .modal-content .container::-webkit-scrollbar-corner {
-		background-color: rgba(255,255,255,.2);
-	}
-	.modal-holder .modal-content .container {
-		overflow: auto;
-		padding: 40px 0;
-		height: calc(100vh - 380px);
-	}
+	visibility: visible;
+}
+.modal-holder.opened .modal-content {
+	-webkit-transform: scale(1, 1);
+	        transform: scale(1, 1);
+	-webkit-transition: -webkit-transform 0.6s;
+	opacity: 0;
+	transition: -webkit-transform 0.6s;
+	transition: transform 0.6s;
+	display: none;
+	transition: transform 0.6s, -webkit-transform 0.6s;
+}
+.modal-holder.opened .modal-content.opened {
+	display: block;
+	opacity: 1;
+}
+.modal-holder .modal-content .container::-webkit-scrollbar {
+	background-color: rgba(255,255,255,.3);
+	border: none;
+	height: 10px;
+	width: 10px;
+}
+.modal-holder .modal-content .container::-webkit-scrollbar-thumb {
+	background-color: #EE2151;
+	background-color: rgba(255,255,255,.5);
+	border: 1px solid #e5e5e5;
+}
+.modal-holder .modal-content .container::-webkit-scrollbar-corner {
+	background-color: rgba(255,255,255,.2);
+}
+.modal-holder .modal-content .container {
+	overflow: auto;
+	padding: 40px 0;
+	height: calc(100vh - 380px);
+	padding: 2.9vh 15vw;
+}
