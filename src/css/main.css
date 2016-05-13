@@ -788,6 +788,10 @@ section.screen-3 .container {
 	/*max-height: calc(100vh - 400px);*/
 }
 section.screen-3 .container .content-holder {
+	top: 26vh;
+	bottom: 26vh;
+}
+section#screen-3 .container .content-holder {
 	/*top: 200px;*/
 	/*bottom: 200px;*/
 	top: 29.2vh;
@@ -960,6 +964,10 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 /*------------------------------------------------------*/
 @media screen and (max-width: 900px) {
 
+	body {
+		font: 3.6vh/1.4em 'Bender', Arial, sans-serif;
+	}
+
 	#about,
 	#contact {
 		overflow: auto;
@@ -973,8 +981,31 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 		padding: 4vh 10vw;
 	}
 	section.screen-1 .container, section.screen-2 .container, section.screen-3 .container {
-		padding: 0;
+		/*padding: 0;*/
+	}
+	.modal-holder .modal-content .container * {
+		width: 88%;
+		width: 100%;
 	}
 
+	.modal-container .container p {
+		font-size: 2.2vh;
+	}
+	#main-navigation ul li {
+		margin: 3.5vw 2.7vw 0;
+	}
+	#main-navigation ul li a {
+		font-size: 1.5vw;
+	}
+	#main-navigation ul li:nth-child(2) {
+		margin-right: 4.8vw;
+	}
 
 }
+
+@media only screen and (orientation:portrait) {
+	.portrait-orientation {
+		display: table;
+	}
+}
+
