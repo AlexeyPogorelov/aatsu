@@ -10,7 +10,7 @@ body {
 	font: 1.4vh/1.4em 'Bender', Arial, sans-serif;
 	overflow: hidden;
 	letter-spacing: 9px;
-	font-weight: 100;
+	font-weight: 400;
 	/*font-size: 1.4vh;*/
 	/*line-height: 1.3em;*/
 }
@@ -88,7 +88,7 @@ h2 {
 	font-size: 28px;
 	/*font-family: "BebasNeue", sans-serif;*/
 	color: #fff;
-	font-weight: 100;
+	font-weight: 400;
 	margin-bottom: 15px;
 }
 h3 {
@@ -96,9 +96,9 @@ h3 {
 	line-height: 1.5em;
 	letter-spacing: 10px;
 	font-family: Bender, sans-serif;
-	font-size: 18px;
+	/*font-size: 18px;*/
 	font-weight: 900;
-	margin-bottom: 20px;
+	margin-bottom: 1em;
 	text-transform: uppercase;
 }
 h4 {
@@ -118,17 +118,16 @@ hr {
 p {
 	/*font-size: 18px;*/
 	letter-spacing: 9px;
-	font-weight: 100;
+	font-weight: 400;
 }
 
-p.type-1 {
-	/*background: rgba(0, 0, 0, 0.1);*/
+/*p.type-1 {
 	font-size: 18px;
 	letter-spacing: 9px;
 	padding: 100px 50px;
 	text-align: center;
-	font-weight: 100;
-}
+	font-weight: 400;
+}*/
 
 /*	SELECT	*/
 select {

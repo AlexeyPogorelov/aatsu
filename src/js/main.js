@@ -71,7 +71,7 @@ function visibleControls () {
 
 var preloader = {
 			avgTime: 3000,
-			trg: 1,
+			trg: 0,
 			state: 0,
 			preloader: $('body > .preloader'),
 			loaded: function () {
@@ -288,6 +288,14 @@ setTimeout(function () {
 $('img').each(function () {
 
 	if (!this.naturalWidth && $(this).attr('src')) {
+		
+		try {
+			$(this).attr('src').length > 5
+		} catch (e) {
+			console.log(e);
+			console.log(this);
+			return;
+		}
 
 		preloader.trg++;
 		$(this).one('load error', preloader.loaded);

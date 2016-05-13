@@ -2,23 +2,20 @@
 /*
 	LARGE
 */
-@media screen and (min-width: 1440px) {
-}
+/*@media screen and (min-width: 1440px) {
+}*/
 /*------------------------------------------------------------------------------
 	MEDIUM
 ------------------------------------------------------------------------------*/
-@media screen and (max-width: 1439px) {
-/*	#main-navigation li {
-		margin: 76px 90px 0;
-	}*/
-}
+/*@media screen and (max-width: 1439px) {
+}*/
 /*--------------------------------------------------------------------------
 	TABLET
 --------------------------------------------------------------------------*/
-@media screen and (max-width: 1199px) {
+/*@media screen and (max-width: 1199px) {
 	.modal-holder .modal-content .container,
 	.container {
-		/*padding: 0 40px;*/
+		padding: 0 40px;
 		width: 760px;
 	}
 
@@ -27,11 +24,11 @@
 	section.screen-3 .container p a {
 		font-size: 14px;
 	}
-}
+}*/
 /*
 	MOBILE
 */
-@media screen and (max-width: 840px) {
+/*@media screen and (max-width: 840px) {
 	.portrait-orientation span img {
 		width: 180px;
 	}
@@ -73,7 +70,6 @@
 		bottom: 20px;
 	}
 	.modal-holder .modal-content .container {
-		/*height: 100%;*/
 		padding-top: 30px;
 
 		background: rgba(255,255,255,.2);
@@ -133,11 +129,11 @@
 	#contact .container > .data-block h3 {
 		margin-bottom: 20px;
 	}
-}
+}*/
 /*
 	SMALL
 */
-@media screen and (max-width: 700px) {
+/*@media screen and (max-width: 700px) {
 
 	.modal-holder .modal-content .container {
 		padding-top: 0;
@@ -169,11 +165,11 @@
 		font-size: 14px;
 	}
 
-}
+}*/
 /*
 	xSMALL
 */
-@media screen and (max-width: 400px) {
+/*@media screen and (max-width: 400px) {
 	.background-holder img,
 	.foreground-holder img {
 		max-width: 136%;
@@ -214,4 +210,4 @@
 		bottom: 80px;
 	}
 
-}
+}*/
