@@ -500,8 +500,9 @@ var scrollPages = (function () {
 	};
 
 	$(window).on('resize', function () {
-		clearTimeout(pagesState.resizeTimeout);
-		pagesState.resizeTimeout = setTimeout(plg.resize, 300);
+		// clearTimeout(pagesState.resizeTimeout);
+		// pagesState.resizeTimeout = setTimeout(plg.resize, 300);
+		plg.resize();
 	});
 
 	// $(window).on('popstate', function (e) {
@@ -773,8 +774,9 @@ var horizontalSlider = (function () {
 	plg.init();
 
 	$(window).on('resize', function () {
-		clearTimeout(pagesState.resizeTimeout);
-		pagesState.resizeTimeout = setTimeout(plg.resize, 300);
+		// clearTimeout(pagesState.resizeTimeout);
+		// pagesState.resizeTimeout = setTimeout(plg.resize, 300);
+		plg.resize();
 	});
 
 	// main menu click

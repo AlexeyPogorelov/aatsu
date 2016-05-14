@@ -8,6 +8,13 @@ backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
+if ($.browser.safari) {
+
+	// $('html').css({
+	// 	'position': 'fixed'
+	// });
+
+}
 // $(window).on('touchend', function (e) {
 // 	alert( e.target.className )
 // });
