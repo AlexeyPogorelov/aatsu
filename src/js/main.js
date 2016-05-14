@@ -1128,46 +1128,40 @@ $(document).on('ready', function () {
 
 			// drag events
 			DOM.$slider.on('touchstart', function (e) {
-				state.touchStart.timeStamp = e.timeStamp;
+
+				DOM.$sliderHolder.addClass('touched');
+				state.touchStart.xPos = e.originalEvent.touches[0].clientX;
+				state.touchStart.yPos = e.originalEvent.touches[0].clientY;
+				state.touchStart.trfX = -parseInt( DOM.$sliderHolder.css('transform').split(',')[4] );
+
 			});
 			DOM.$slider.on('touchmove', function (e) {
-				state.touchEnd.xPos = e.originalEvent.touches[0].clientX;
-				state.touchEnd.yPos = e.originalEvent.touches[0].clientY;
 
-				if (!state.touchStart.xPos) {
+				if (state.touchStart.xPos) {
 
-					state.touchStart.xPos = e.originalEvent.touches[0].clientX;
+					state.shiftD = state.touchStart.xPos - e.originalEvent.touches[0].clientX;
+					state.shiftX = state.touchStart.trfX + state.shiftD;
 
-				}
-
-				if (!state.touchStart.yPos) {
-
-					state.touchStart.yPos = e.originalEvent.touches[0].clientY;
+					DOM.$sliderHolder.css({
+						'-webkit-transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)',
+						'transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)'
+					});
 
 				}
 
 			});
 
-			DOM.$slider.on('touchend', function (e) {
-				var distance = 70,
-					speed = 200,
-					deltaX = state.touchEnd.xPos - state.touchStart.xPos,
-					deltaY = Math.abs(state.touchEnd.yPos - state.touchStart.yPos);
-				state.touchEnd.xPos = 0;
-				state.touchEnd.yPos = 0;
-				if (deltaX > distance || -deltaX > distance) {
-					if (deltaX < 0) {
+			DOM.$slider.on('touchend touchcancel', function (e) {
+				if ( Math.abs(state.shiftD) > 40 ) {
+					if (state.shiftD > 0) {
 						plg.nextSlide();
 					} else {
 						plg.prevSlide();
 					}
+				} else {
+					plg.toSlide(state.cur);
 				}
-				deltaX = null;
-				deltaY = null;
-				state.touchEnd.xPos = null;
-				state.touchEnd.yPos = null;
-				state.touchStart.xPos = null;
-				state.touchStart.yPos = null;
+				touchendCleaner ();
 			});
 
 			DOM.$slider.find('img').each(function () {
