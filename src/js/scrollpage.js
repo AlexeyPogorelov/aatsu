@@ -765,18 +765,6 @@ var horizontalSlider = (function () {
 
 			}
 
-			// for (var i = 0; i < pagesState.pages.length; i++) {
-
-				// pagesState.pages[i].left = cacheDom.$horizontal[i].offsetLeft;
-
-				// if (pagesState.pages[i].full) {
-
-				// 	cacheDom.$sections.eq(i).height( windowHeight );
-
-				// }
-
-			// }
-
 			plg.toPage(pagesState.currentPage, true);
 
 		}
@@ -803,7 +791,6 @@ var horizontalSlider = (function () {
 			plg.navigation( $self );
 
 		}
-
 
 	});
 

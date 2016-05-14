@@ -431,6 +431,17 @@ $(document).on('ready', function () {
 
 		});
 
+		if ($.browser.mobile) {
+
+			$('#screen-1, #screen-2').on('click', function (e) {
+
+				scrollPages.toPage(3);
+
+			});
+
+		}
+
+
 	})();
 
 	// randomize background
@@ -1117,10 +1128,7 @@ $(document).on('ready', function () {
 
 			// drag events
 			DOM.$slider.on('touchstart', function (e) {
-				// state.touchStart.xPos = e.originalEvent.touches[0].clientX;
-				// state.touchStart.yPos = e.originalEvent.touches[0].clientY;
 				state.touchStart.timeStamp = e.timeStamp;
-				// console.log('-----');
 			});
 			DOM.$slider.on('touchmove', function (e) {
 				state.touchEnd.xPos = e.originalEvent.touches[0].clientX;
@@ -1138,8 +1146,8 @@ $(document).on('ready', function () {
 
 				}
 
-				// console.log('-----');
 			});
+
 			DOM.$slider.on('touchend', function (e) {
 				var distance = 70,
 					speed = 200,
@@ -1147,13 +1155,6 @@ $(document).on('ready', function () {
 					deltaY = Math.abs(state.touchEnd.yPos - state.touchStart.yPos);
 				state.touchEnd.xPos = 0;
 				state.touchEnd.yPos = 0;
-					// time = e.timeStamp - state.touchStart.timeStamp;
-				// console.log('-----');
-				// console.log(time);
-				// console.log(deltaX);
-				// console.log((deltaY));
-				// console.log(state.touchEnd.originalEvent.touches[0].clientX);
-				// console.log(state.touchStart.originalEvent.touches[0].clientX);
 				if (deltaX > distance || -deltaX > distance) {
 					if (deltaX < 0) {
 						plg.nextSlide();
@@ -1168,24 +1169,17 @@ $(document).on('ready', function () {
 				state.touchStart.xPos = null;
 				state.touchStart.yPos = null;
 			});
-			// DOM.$slider.on('ondragstart', function (e) {
-			// 	e.preventDefault();
-			// 	return false;
-			// });
+
 			DOM.$slider.find('img').each(function () {
 				this.ondragstart = function() {
 					return false;
 				};
 			});
-			// DOM.$slides.on('ondragstart', function (e) {
-			// });
 			DOM.$section.on('mousedown', function (e) {
 				DOM.$sliderHolder.addClass('touched');
 				state.touchStart.xPos = e.pageX;
 				state.touchStart.yPos = e.pageY;
 				state.touchStart.trfX = -parseInt( DOM.$sliderHolder.css('transform').split(',')[4] );
-					// console.log( state.touchStart.trfX );
-
 			});
 
 			DOM.$section.on('mousemove', function (e) {
@@ -1196,10 +1190,6 @@ $(document).on('ready', function () {
 					state.shiftD = state.touchStart.xPos - e.pageX;
 					state.shiftX = state.touchStart.trfX + state.shiftD;
 
-					// console.log( state.shiftX );
-					// console.log( state.touchStart.trfX );
-					// console.log( state.touchStart.xPos - e.pageX );
-
 					DOM.$sliderHolder.css({
 						'-webkit-transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)',
 						'transform': 'translateX( ' + -state.shiftX + 'px) translateZ(0)'
@@ -1209,7 +1199,6 @@ $(document).on('ready', function () {
 			});
 
 			DOM.$section.on('mouseup mouseleave', function (e) {
-				// console.log(state.shiftD);
 				if ( Math.abs(state.shiftD) > 40 ) {
 					if (state.shiftD > 0) {
 						plg.nextSlide();
