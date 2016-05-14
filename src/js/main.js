@@ -433,7 +433,7 @@ $(document).on('ready', function () {
 
 		if ($.browser.mobile) {
 
-			$('#screen-1, #screen-2').on('click', function (e) {
+			$('#screen-1, #screen-2, #start').on('click', function (e) {
 
 				scrollPages.toPage(3);
 
@@ -593,84 +593,84 @@ $(document).on('ready', function () {
 	middlindImage ($foreground.find('img'), $window, -60);
 	middlindImage ($background.find('img'), $window, -60);
 
-	if (winWidth > 800) {
+	// if (winWidth > 800) {
 
-		// mouse move
-		$window.on('mousemove', function (e) {
-			// console.log(e);
-			if (winHeight > winWidth) {
+	// mouse move
+	$window.on('mousemove', function (e) {
+		// console.log(e);
+		if (winHeight > winWidth) {
 
-				$foreground.css({
-					'-webkit-mask-position-x': e.clientX - winWidth / 2,
-					'-webkit-mask-position-y': e.clientY - winHeight / 2,
-					'mask-position-x': e.clientX - winWidth / 2,
-					'mask-position-y': e.clientY - winHeight / 2
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': e.clientX - winWidth / 2,
+				'-webkit-mask-position-y': e.clientY - winHeight / 2,
+				'mask-position-x': e.clientX - winWidth / 2,
+				'mask-position-y': e.clientY - winHeight / 2
+			});
 
-			} else {
+		} else {
 
-				$foreground.css({
-					'-webkit-mask-position-x': e.clientX - winWidth / 2,
-					'-webkit-mask-position-y': e.clientY - winWidth / 2,
-					'mask-position-x': e.clientX - winWidth / 2,
-					'mask-position-y': e.clientY - winWidth / 2
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': e.clientX - winWidth / 2,
+				'-webkit-mask-position-y': e.clientY - winWidth / 2,
+				'mask-position-x': e.clientX - winWidth / 2,
+				'mask-position-y': e.clientY - winWidth / 2
+			});
 
-			}
+		}
 
-		});
+	});
 
-		// touch move
-		$window.on('trg', function (e) {
+	// touch move
+	$window.on('touchmove', function (e) {
 
-			if (winHeight > winWidth) {
+		if (winHeight > winWidth) {
 
-				$foreground.css({
-					'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-					'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
-					'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-					'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2,
+				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'mask-position-y': e.originalEvent.touches[0].pageY - winHeight / 2
+			});
 
-			} else {
+		} else {
 
-				$foreground.css({
-					'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-					'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
-					'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
-					'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'-webkit-mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2,
+				'mask-position-x': e.originalEvent.touches[0].pageX - winWidth / 2,
+				'mask-position-y': e.originalEvent.touches[0].pageY - winWidth / 2
+			});
 
-			}
+		}
 
-		});
+	});
 
-		// touch end
-		$window.on('trg', function (e) {
+	// touch end
+	$window.on('touchend touchcancel', function (e) {
 
-			if (winHeight > winWidth) {
+		if (winHeight > winWidth) {
 
-				$foreground.css({
-					'-webkit-mask-position-x': -3000,
-					'-webkit-mask-position-y': -3000,
-					'mask-position-x': -3000,
-					'mask-position-y': -3000
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': -3000,
+				'-webkit-mask-position-y': -3000,
+				'mask-position-x': -3000,
+				'mask-position-y': -3000
+			});
 
-			} else {
+		} else {
 
-				$foreground.css({
-					'-webkit-mask-position-x': -3000,
-					'-webkit-mask-position-y': -3000,
-					'mask-position-x': -3000,
-					'mask-position-y': -3000
-				});
+			$foreground.css({
+				'-webkit-mask-position-x': -3000,
+				'-webkit-mask-position-y': -3000,
+				'mask-position-x': -3000,
+				'mask-position-y': -3000
+			});
 
-			}
+		}
 
-		});
+	});
 
-	}
+	// }
 
 	// resize
 	$window.on('resize', function () {

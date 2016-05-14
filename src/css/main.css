@@ -161,6 +161,7 @@
 }
 .portrait-orientation span img {
 	width: 320px;
+	width: 60%;
 }
 
 
@@ -533,6 +534,7 @@
 			#main-navigation .logo:hover .lines-holder span.line {
 				background: #000; }
 	#main-navigation ul {
+		white-space: nowrap;
 		text-align: center; }
 		#main-navigation ul li {
 			display: inline-block;
@@ -983,20 +985,22 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	section.screen-1 .container, section.screen-2 .container, section.screen-3 .container {
 		/*padding: 0;*/
 	}
+
+	.modal-holder {
+		top: 20vh;
+		bottom: 10vh;
+	}
+	.modal-holder .modal-content .container {
+		height: 68vh;
+	}
 	.modal-holder .modal-content .container * {
 		width: 88%;
 		width: 100%;
 	}
 
 	.modal-container .container p {
-		font-size: 2.2vh;
+		font-size: 3vh;
 	}
-/*	#main-navigation ul li {
-		margin: 3.5vw 2.7vw 0;
-	}
-	#main-navigation ul li:nth-child(2) {
-		margin-right: 4.8vw;
-	}*/
 	#main-navigation ul li a {
 		font-size: 1.5vw;
 	}
