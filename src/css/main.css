@@ -62,6 +62,10 @@
 	-webkit-transform: translate(0, 0);
 	transform: translate(0, 0);
 }
+#vertical-viewport.touched {
+	-webkit-transition: none !important;
+	transition: none !important;
+}
 #vertical-viewport * {
 	cursor: none;
 }
@@ -111,15 +115,18 @@
 .socials-holder {
 	opacity: 1;
 	position: fixed;
-	bottom: 20px;
-	right: 20px;
+	bottom: 1vw;
+	right: 1vw;
 	z-index: 11;
 	-webkit-transition: opacity .3s;
 	transition: opacity .3s;
 }
 .socials-holder li {
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 1vw;
+}
+.socials-holder li:last-child {
+	margin-right: 0;
 }
 .socials-holder a {
 	color: #fff;
@@ -669,19 +676,26 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 		display: block;
 		margin-top: 13vh;
 	}*/
+/*	#vertical-viewport {
+		overflow: auto !important;
+		overflow-x: hidden !important;
+		overflow-y: auto !important;
+	}*/
 	/*#about .container,*/
 	#contact .container {
 		display: block;
 		padding: 4vh 10vw;
-		white-space: initial;
+		/*white-space: initial;*/
 		overflow: auto;
 		position: absolute;
 		top: 11vh;
 		bottom: 11vh;
+		left: 0;
+		right: 0;
 	}
 	#contact .container > .data-block {
 		margin: 3em 0;
-		display: block;
+		/*display: block;*/
 	}
 	section.screen-1 .container, section.screen-2 .container, section.screen-3 .container {
 		/*padding: 0;*/

@@ -1168,7 +1168,7 @@ $(document).on('ready', function () {
 				} else {
 					plg.toSlide(state.cur);
 				}
-				touchendCleaner ();
+				state.touchendCleaner ();
 			});
 
 			DOM.$slider.find('img').each(function () {
@@ -1176,6 +1176,15 @@ $(document).on('ready', function () {
 					return false;
 				};
 			});
+
+			state.touchendCleaner = function () {
+				DOM.$sliderHolder.removeClass('touched');
+				state.touchStart.yPos = 0;
+				state.touchStart.xPos = 0;
+				state.shiftX = 0;
+				state.shiftD = 0;
+			};
+
 			DOM.$section.on('mousedown', function (e) {
 				DOM.$sliderHolder.addClass('touched');
 				state.touchStart.xPos = e.pageX;
@@ -1185,7 +1194,7 @@ $(document).on('ready', function () {
 
 			DOM.$section.on('mousemove', function (e) {
 				if (e.buttons < 1) {
-					touchendCleaner ();
+					state.touchendCleaner ();
 				} else if (state.touchStart.xPos) {
 
 					state.shiftD = state.touchStart.xPos - e.pageX;
@@ -1209,16 +1218,8 @@ $(document).on('ready', function () {
 				} else {
 					plg.toSlide(state.cur);
 				}
-				touchendCleaner ();
+				state.touchendCleaner ();
 			});
-
-			function touchendCleaner () {
-				DOM.$sliderHolder.removeClass('touched');
-				state.touchStart.yPos = 0;
-				state.touchStart.xPos = 0;
-				state.shiftX = 0;
-				state.shiftD = 0;
-			}
 
 			$window.on( 'resize', plg.resize.bind(plg) );
 			plg.init();

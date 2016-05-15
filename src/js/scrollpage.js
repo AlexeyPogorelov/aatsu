@@ -10,7 +10,7 @@ var animationPrefix = (function () {
 				"MozTransition": "animationend"
 			};
 
-		for (t in transitions){
+		for (t in transitions) {
 
 			if (el.style[t] !== undefined){
 
@@ -49,12 +49,19 @@ var animationPrefix = (function () {
 	},
 	windowWidth = $(window).width(),
 	windowHeight = $(window).height(),
-	cacheDom = {};
+	cacheDom = {
+		'$verticalViewport': $('#vertical-viewport'),
+		'$horizontalViewport': $('#horizontal-viewport'),
+		'$menu': $('#main-navigation')
+	};
+
+/* CACHE DOM */
+cacheDom.$sections = cacheDom.$verticalViewport.find(' > .full-height');
+cacheDom.$horizontal = cacheDom.$horizontalViewport.find(' > .full-height');
 
 if ( jQuery.browser.mobile ) {
 	$('body').addClass('mobile');
 }
-
 
 pagesState.lastScrollTime = new Date().getTime() - 1000;
 
@@ -76,7 +83,7 @@ var pagesAnimation = (function () {
 
 			}
 
-			if ( id > 3 ) {
+			if ( id > 2 ) {
 
 				$socials.removeClass('deactive');
 
@@ -98,13 +105,6 @@ $(window).load(function(){
 	scrollPages.resize(true);
 
 });
-
-/* CACHE DOM */
-cacheDom.$verticalViewport = $('#vertical-viewport');
-cacheDom.$horizontalViewport = $('#horizontal-viewport');
-cacheDom.$sections = cacheDom.$verticalViewport.find(' > .full-height');
-cacheDom.$horizontal = cacheDom.$horizontalViewport.find(' > .full-height');
-cacheDom.$menu = $('#main-navigation');
 
 /* IF RESIZE */
 $(window).on('resize', function () {
@@ -159,48 +159,68 @@ $(window).on('resize', function () {
 
 });
 
-$('body').on('touchstart', function (e) {
+// scrollPages touch events
+(function () {
 
-	touchState.touchStart.timeStamp = e.timeStamp;
+	var touchState = {
+			touchStart: {},
+			touchEnd: {}
+		};
 
-}).on('touchmove', function (e) {
+	$('body').on('touchstart', function (e) {
 
-	e.preventDefault();
-	touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
-	touchState.touchEnd.yPos = e.originalEvent.touches[0].clientY;
+		touchState.touchStart.timeStamp = e.timeStamp;
 
-	if (!touchState.touchStart.xPos) {
-		touchState.touchStart.xPos = touchState.touchEnd.xPos;
-	}
-	if (!touchState.touchStart.yPos) {
-		touchState.touchStart.yPos = touchState.touchEnd.yPos;
-	}
+		// if (!pagesState.lockedScroll) cacheDom.$verticalViewport.addClass('touched');
+		touchState.touchStart.trfX = -parseInt( cacheDom.$verticalViewport.css('transform').split(',')[5] );
 
-}).on('touchend', function (e) {
-	if (pagesState.animatedBool) {
-		return;
-	}
-	var distance = 70,
-		speed = 200,
-		deltaX = touchState.touchEnd.xPos - touchState.touchStart.xPos,
-		deltaY = touchState.touchEnd.yPos - touchState.touchStart.yPos;
+	}).on('touchmove', function (e) {
 
-	if (deltaY > distance || deltaY < -distance) {
-		if (deltaY < 0) {
-			scrollPages.nextPage();
-		} else {
-			scrollPages.prevPage();
+		e.preventDefault();
+		touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
+		touchState.touchEnd.yPos = e.originalEvent.touches[0].clientY;
+
+		touchState.shiftD = touchState.touchStart.yPos - touchState.touchEnd.yPos;
+		touchState.posYtrf = touchState.touchStart.trfX + touchState.shiftD;
+
+		if (!touchState.touchStart.xPos) {
+			touchState.touchStart.xPos = touchState.touchEnd.xPos;
 		}
-	}
+		if (!touchState.touchStart.yPos) {
+			touchState.touchStart.yPos = touchState.touchEnd.yPos;
+		}
 
-	touchState.touchEnd.xPos = null;
-	touchState.touchEnd.yPos = null;
-	touchState.touchStart.xPos = null;
-	touchState.touchStart.yPos = null;
-	deltaX = null;
-	deltaY = null;
+		// cacheDom.$verticalViewport.css({
+		// 		'-webkit-transform': 'translateY(' + -touchState.posYtrf + 'px)',
+		// 		'transform': 'translateY(' + -touchState.posYtrf + 'px)'
+		// 	});
 
-});
+	}).on('touchend touchcancel', function (e) {
+		if (pagesState.lockedScroll) return;
+
+		cacheDom.$verticalViewport.removeClass('touched');
+
+		pagesState.animatedBool = false;
+
+		if (touchState.shiftD > windowHeight / 3) {
+			scrollPages.nextPage();
+		} else if (touchState.shiftD < -windowHeight / 3) {
+			scrollPages.prevPage();
+		} else {
+			scrollPages.toPage( pagesState.currentPage );
+		}
+
+		touchState.touchEnd.xPos = null;
+		touchState.touchEnd.yPos = null;
+		touchState.touchStart.xPos = null;
+		touchState.touchStart.yPos = null;
+		touchState.shiftD = null;
+		touchState.posYtrf = null;
+		deltaX = null;
+		deltaY = null;
+
+	});
+})();
 
 // $('.modal-container, .col-left, .col-right, .col-full').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
 $('.modal-container').on('DOMMouseScroll wheel mousewheel touchmove', function (e) {
