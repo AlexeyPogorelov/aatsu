@@ -290,7 +290,7 @@ setTimeout(function () {
 	preloader.status(1);
 	setTimeout(preloader.ready, 500);
 
-}, 10000);
+}, 90000);
 
 $('img').each(function () {
 
@@ -325,9 +325,17 @@ $(document).on('ready', function () {
 	// TODO
 	(function () {
 
-		var $scrollElements = $('.modal-container');
+		var $scrollElements = $('.slider-holder'),
+			mult = 1;
 
-		// $scrollElements.on('')
+		if ($.browser.mozilla === true ) mult = 20;
+
+		$scrollElements.on('wheel', function (e, delta) {
+			// console.log(e.originalEvent.deltaX = e.originalEvent.deltaY);
+			this.scrollLeft += e.originalEvent.deltaY * mult;
+			// console.log(this)
+			// e.preventDefault();
+		});
 
 	})();
 
@@ -442,7 +450,8 @@ $(document).on('ready', function () {
 
 			$('#screen-1, #screen-2, #start').on('click', function (e) {
 
-				scrollPages.toPage(3);
+				scrollPages.blockScroll( false );
+				scrollPages.nextPage(3);
 
 			});
 
@@ -485,6 +494,7 @@ $(document).on('ready', function () {
 
 			return function ( callback ) {
 
+				var folder = 'img/bg/';
 				randomBgIndex = randomInteger(0, backgrounds.length - 1);
 				bgLoaded = 0;
 
@@ -495,15 +505,19 @@ $(document).on('ready', function () {
 
 				}
 
+				if ($.browser.safari) {
+					folder = 'img/bg/mob/';
+				}
+
 				pagesState.randomBgIndex = randomBgIndex;
 
-				$foreground.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][0] + '.jpg').on('load error', function () {
+				$foreground.find('img').attr('src', domain + folder + backgrounds[randomBgIndex][0] + '.jpg').on('load error', function () {
 
 					bgReady( callback );
 
 				});
 
-				$background.find('img').attr('src', domain + 'img/bg/' + backgrounds[randomBgIndex][1] + '.jpg').on('load error', function () {
+				$background.find('img').attr('src', domain + folder + backgrounds[randomBgIndex][1] + '.jpg').on('load error', function () {
 
 					bgReady( callback );
 
@@ -878,7 +892,7 @@ $(document).on('ready', function () {
 	});
 
 	// init plugins
-	$('.gallery-slider').simpleSlider();
+	// $('.gallery-slider').simpleSlider();
 
 });
 

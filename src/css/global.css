@@ -9,8 +9,9 @@ body {
 	color: white;
 	font: 1.4vh/1.4em 'Bender', Arial, sans-serif;
 	overflow: hidden;
-	letter-spacing: 9px;
-	font-weight: 400;
+	/*letter-spacing: 9px;*/
+	letter-spacing: 0.5em;
+	font-weight: 300;
 	/*font-size: 1.4vh;*/
 	/*line-height: 1.3em;*/
 }
@@ -74,7 +75,7 @@ h1 {
 	color: #ee2151;
 	/*font-family: 'BebasNeue', sans-serif;*/
 	font-size: 40px;
-	letter-spacing: 1px;
+	/*letter-spacing: 1px;*/
 	word-spacing: 1px;
 	margin: 33px 0;
 	text-transform: uppercase;
@@ -94,7 +95,7 @@ h2 {
 h3 {
 	color: #fff;
 	line-height: 1.5em;
-	letter-spacing: 10px;
+	/*letter-spacing: 10px;*/
 	font-family: Bender, sans-serif;
 	/*font-size: 18px;*/
 	font-weight: 900;
@@ -117,7 +118,6 @@ hr {
 
 p {
 	/*font-size: 18px;*/
-	letter-spacing: 9px;
 	font-weight: 400;
 }
 
@@ -585,11 +585,11 @@ button:focus,
 	outline: none;
 }
 
-.slider-viewport {
-	overflow: hidden;
-}
 .slider-viewport .slider-holder {
 	transition: transform .3s ease-out;
+}
+.slider-viewport {
+	overflow: hidden;
 }
 .slider-viewport .slide {
 	float: left;
@@ -716,8 +716,8 @@ button:focus,
 .modal-holder .modal-content .container::-webkit-scrollbar {
 	background-color: rgba(255,255,255,.3);
 	border: none;
-	height: 10px;
-	width: 10px;
+	height: 1vw;
+	width: 1vw;
 }
 .modal-holder .modal-content .container::-webkit-scrollbar-thumb {
 	background-color: #EE2151;
@@ -732,4 +732,19 @@ button:focus,
 	padding: 40px 0;
 	height: calc(100vh - 380px);
 	padding: 2.9vh 15vw;
+}
+
+#contact .container::-webkit-scrollbar {
+	background-color: rgba(255,255,255,.3);
+	border: none;
+	height: 1vw;
+	width: 1vw;
+}
+#contact .container::-webkit-scrollbar-thumb {
+	background-color: #EE2151;
+	background-color: rgba(255,255,255,.5);
+	border: 1px solid #e5e5e5;
+}
+#contact .container::-webkit-scrollbar-corner {
+	background-color: rgba(255,255,255,.2);
 }

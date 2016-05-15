@@ -114,8 +114,8 @@ $(window).on('resize', function () {
 
 }).on('mousewheel', function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+	// e.preventDefault();
+	// e.stopPropagation();
 
 	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail;
 
@@ -131,14 +131,14 @@ $(window).on('resize', function () {
 
 		}
 
-	}
+		pagesState.lastScrollTime = new Date().getTime();
 
-	pagesState.lastScrollTime = new Date().getTime();
+	}
 
 }).on('DOMMouseScroll wheel', function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+	// e.preventDefault();
+	// e.stopPropagation();
 
 	var delta = e.originalEvent.wheelDelta || -e.originalEvent.detail || -e.originalEvent.deltaY;
 
@@ -154,8 +154,9 @@ $(window).on('resize', function () {
 
 		}
 
+		pagesState.lastScrollTime = new Date().getTime();
+
 	}
-	pagesState.lastScrollTime = new Date().getTime();
 
 });
 
@@ -176,7 +177,7 @@ $(window).on('resize', function () {
 
 	}).on('touchmove', function (e) {
 
-		e.preventDefault();
+		// e.preventDefault();
 		touchState.touchEnd.xPos = e.originalEvent.touches[0].clientX;
 		touchState.touchEnd.yPos = e.originalEvent.touches[0].clientY;
 

@@ -306,14 +306,36 @@
 	overflow: hidden;
 	position: relative;
 	-webkit-mask-image: -webkit-gradient( linear, left 50%, right 50%, color-stop(0.00, rgba(0,0,0,0)), color-stop(0.15, rgba(0,0,0,1)), color-stop(0.85, rgba(0,0,0,1)), color-stop(1.00, rgba(0,0,0,0)));
+	overflow: auto;
 }
-.presentation .slider-viewport {
+.presentation .gallery-slider .slider-viewport {
 	overflow: visible;
+	/*overflow: auto;*/
+	white-space: nowrap;
+	width: 100%;
+}
+.presentation .slider-holder {
+	overflow: auto;
+}
+.presentation .slider-holder::-webkit-scrollbar {
+	height: 0;
+	width: 0;
 }
 .presentation .slider-viewport .slide {
 	/*padding: 0 50px;*/
 	height: 60vh;
 	overflow: hidden;
+	float: none;
+	display: inline-block;
+	letter-spacing: 0;
+	font-size: 0;
+	width: 50%;
+}
+.presentation .slider-viewport .slide:first-child {
+	margin-left: 25%;
+}
+.presentation .slider-viewport .slide:last-child {
+	margin-right: 25%;
 }
 .presentation .slider-viewport .slide > * {
 	/*padding: 0 160px;*/
@@ -419,7 +441,7 @@ a.main-mailto {
 	font-family: 'Bender', sans-serif;
 	/*font-size: 14px;*/
 	font-weight: 400;
-	letter-spacing: 9px;
+	/*letter-spacing: 9px;*/
 	padding: 0;
 	text-align: center;
 	/*width: 100%;*/
@@ -509,7 +531,6 @@ section.screen-3 .container p,
 section.screen-3 .container p a {
 	color: #fff;
 	/*font-size: 18px;*/
-	font-weight: 400;
 	line-height: 1.5em;
 	margin-bottom: 0;
 }
@@ -536,8 +557,7 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	color: #d1cdc0;
 	/*font-size: 18px;*/
 	line-height: 1.3em;
-	letter-spacing: 8px;
-	font-weight: 400;
+	/*letter-spacing: 8px;*/
 	word-spacing: 5px;
 	/*min-height: 540px;*/
 }
@@ -710,6 +730,8 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	}
 	.modal-holder .modal-content .container {
 		height: 68vh;
+		padding-left: 5vw;
+		padding-right: 5vw;
 	}
 	.modal-holder .modal-content .container * {
 		width: 88%;
@@ -717,19 +739,24 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	}
 	.modal-holder .modal-content .container .absolute-table {
 		position: static;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
 		height: auto !important;
-		width: 80% !important;
+		width: 90% !important;
 	}
 	.modal-holder .modal-content .modal-container {
 		overflow: hidden;
 	}
-	
 
 	.modal-container .container p {
 		font-size: 3vh;
 	}
 	#main-navigation ul li a {
 		font-size: 1.5vw;
+	}
+
+	.socials-holder a {
+		font-size: 3.2vw;
 	}
 
 }
