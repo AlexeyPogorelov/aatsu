@@ -10,9 +10,24 @@
 
 .absolute-table {
 	position: absolute;
-	top: -106px;
+	top: -13vh;
 	right: 20px;
 	height: 86px;
+	width: auto;
+	text-align: right;
+	/*width: auto !important;*/
+	/*opacity: 0;*/
+	-webkit-transition: opacity .3s;
+	-o-transition: opacity .3s;
+	transition: opacity .3s;
+	height: 11vh;
+}
+.absolute-table.opened {
+	/*opacity: 1;*/
+}
+.absolute-table img {
+	display: inline-block !important;
+	height: 100%;
 	width: auto;
 }
 
@@ -548,7 +563,8 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	width: auto;
 }
 .modal-holder {
-	overflow: auto;
+	/*overflow: auto;*/
+	overflow: visible;
 	/*background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, rgba(255, 255, 255, 0) 100%);*/
 	/*background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 10%, rgba(255, 255, 255, 0.2) 90%, rgba(255, 255, 255, 0) 100%);*/
 	position: absolute;
@@ -634,9 +650,6 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	margin-bottom: 30px;
 	padding-top: 0;
 	font-weight: bold;
-}
-.modal-holder .modal-content .container .absolute-table {
-	width: auto !important;
 }
 .modal-image {
 	transform-origin: 50% 50%;
@@ -737,12 +750,16 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 		width: 88%;
 		width: 100%;
 	}
+	.absolute-table {
+		display: none;
+	}
 	.modal-holder .modal-content .container .absolute-table {
 		position: static;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 		height: auto !important;
 		width: 90% !important;
+		opacity: 1 !important;
 	}
 	.modal-holder .modal-content .modal-container {
 		overflow: hidden;

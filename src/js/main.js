@@ -206,6 +206,7 @@ var preloader = {
 
 				$modal.addClass('opened');
 				$modal.parent().addClass('opened');
+				// $modal.parent().addClass('opened').find('[data-table="' + $modal.attr('id') + '"]').addClass('opened');
 
 				$('#main-navigation').addClass('disabled');
 
@@ -249,6 +250,7 @@ var preloader = {
 
 					$modal.removeClass('opened');
 					$modal.parent().removeClass('opened');
+					// $modal.parent().removeClass('opened').find('.opened').removeClass('opened');
 					$('#horizontal-viewport').removeClass('translating');
 					setTimeout(function () {
 
