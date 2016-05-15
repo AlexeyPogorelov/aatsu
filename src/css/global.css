@@ -7,7 +7,7 @@
 body {
 	background: #111;
 	color: white;
-	font: 1.4vh/1.4em 'Bender', Arial, sans-serif;
+	font: 1.6vh/1.4em 'Bender', Arial, sans-serif;
 	overflow: hidden;
 	/*letter-spacing: 9px;*/
 	letter-spacing: 0.5em;
@@ -165,7 +165,7 @@ textarea {
 }
 textarea::-webkit-input-placeholder {
 	color: #A9A9A9;
-	font-size: 18px;
+	/*font-size: 18px;*/
 }
 textarea:-moz-placeholder {
 	color: #A9A9A9;

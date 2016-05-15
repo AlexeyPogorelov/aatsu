@@ -8,6 +8,14 @@
 	user-select: none;
 }
 
+#scrollEmulator {
+	height: 200vh;
+	pointer-events: none;
+}
+#scrollEmulator.active {
+	pointer-events: all;
+}
+
 .absolute-table {
 	position: absolute;
 	top: -13vh;
@@ -387,8 +395,8 @@
 }
 
 .gallery-slider {
-	cursor: grab;
-	cursor: -webkit-grab;
+	/*cursor: grab;*/
+	/*cursor: -webkit-grab;*/
 	position: absolute;
 	top: 61%;
 	left: 0;
@@ -410,8 +418,8 @@
 	/*pointer-events: none;*/
 }
 .gallery-slider .slider-holder.touched {
-	cursor: grabbing;
-	cursor: -webkit-grabbing;
+	/*cursor: grabbing;*/
+	/*cursor: -webkit-grabbing;*/
 	-webkit-transition: none;
 	transition: none;
 }
@@ -610,7 +618,7 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	line-height: 1.6em;
 	/*min-height: 100%;*/
 	color: #d1cdc0;
-	font-size: 1.4vh;
+	/*font-size: 1.4vh;*/
 	line-height: 1.3em;
 }
 .modal-holder .modal-content {
@@ -695,7 +703,7 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 @media screen and (max-width: 900px) {
 
 	body {
-		font: 3.6vh/1.4em 'Bender', Arial, sans-serif;
+		font: 3.4vh/1.4em 'Bender', Arial, sans-serif;
 	}
 
 	.content-holder {
@@ -733,10 +741,15 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 	section.screen-1 .container, section.screen-2 .container, section.screen-3 .container {
 		/*padding: 0;*/
 	}
-
+	#application-holder {
+		position: fixed;
+	}
 	.modal-holder {
 		top: 20vh;
 		bottom: 10vh;
+		overflow: hidden;
+		height: 70vh;
+		position: fixed;
 	}
 	.modal-holder .modal-content {
 		overflow: hidden;
@@ -761,21 +774,34 @@ section.screen-3 .container .col-right p:nth-of-type(even) {
 		width: 90% !important;
 		opacity: 1 !important;
 	}
+	.modal-holder .modal-content .container .absolute-table img {
+		width: 100% !important;
+	}
 	.modal-holder .modal-content .modal-container {
 		overflow: hidden;
 	}
 
-	.modal-container .container p {
+/*	.modal-container .container p {
 		font-size: 3vh;
+	}*/
+	#main-navigation ul li {
+		margin-left: 3.2vw;
+		margin-right: 3.2vw;
+	}
+	#main-navigation ul li:nth-child(2) {
+		margin-right: 3.5vw;
 	}
 	#main-navigation ul li a {
-		font-size: 1.5vw;
+		font-size: 2vw;
 	}
 
 	.socials-holder a {
 		font-size: 3.2vw;
 	}
-
+	.modal-holder .modal-content .container * {
+		max-height: 100%;
+		width: auto;
+	}
 }
 @media screen and (min-width: 900px) {
 	.modal-container .container img,

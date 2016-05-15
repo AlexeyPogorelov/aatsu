@@ -357,6 +357,8 @@ var scrollPages = (function () {
 
 			this.blockScroll(true);
 
+			pagesState.targetPage = id;
+
 			cacheDom.$verticalViewport
 				.off(transitionPrefix)
 				.css({
@@ -514,7 +516,11 @@ var scrollPages = (function () {
 
 			}
 
-			plg.toPage(pagesState.currentPage, true);
+			this.blockScroll(false);
+			plg.toPage(pagesState.targetPage);
+			// setTimeout(function () {
+			// 	plg.toPage(pagesState.targetPage);
+			// }, 1300)
 			// this.blockScroll(false);
 
 		}

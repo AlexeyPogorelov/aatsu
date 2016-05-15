@@ -8,11 +8,18 @@ backgrounds = [
 	[12, 11],
 	[14, 13]
 ];
-if ($.browser.safari) {
+
+// $('body').on('click', function (e) {
+// 	alert(e.target.className)
+// })
+
+if ( $.browser.mobile ) {
 
 	// $('html').css({
 	// 	'position': 'fixed'
 	// });
+	var $emulateScroll = $('<div>').attr('id', 'scrollEmulator').addClass('active');
+	$('body').append( $emulateScroll );
 
 }
 // $(window).on('touchend', function (e) {
