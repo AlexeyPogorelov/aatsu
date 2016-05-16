@@ -395,8 +395,8 @@
 }
 
 .gallery-slider {
-	/*cursor: grab;*/
-	/*cursor: -webkit-grab;*/
+	cursor: grab;
+	cursor: -webkit-grab;
 	position: absolute;
 	top: 61%;
 	left: 0;
@@ -418,10 +418,17 @@
 	/*pointer-events: none;*/
 }
 .gallery-slider .slider-holder.touched {
-	/*cursor: grabbing;*/
-	/*cursor: -webkit-grabbing;*/
+	cursor: grabbing;
+	cursor: -webkit-grabbing;
 	-webkit-transition: none;
 	transition: none;
+}
+.presentation .slider-viewport .slide img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
 }
 
 /*noinspection CssInvalidPropertyValue*/

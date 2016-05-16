@@ -745,8 +745,57 @@ $(document).on('ready', function () {
 
 	});
 
-	// modals
+	// drag blocks
+	(function () {
 
+		// var $elements = $('.presentation .slider-holder, .modal-holder .modal-content .container'),
+		var $elements = $('.presentation .slider-holder'),
+			_status = {
+				'touched': false,
+				'sx': null,
+				'sy': null,
+				'x': null,
+				'y': null
+			};
+
+		$elements.on('mousedown', function (e) {
+
+			_status.$this = $(this);
+			_status.sx = e.originalEvent.clientX;
+			_status.sy = e.originalEvent.clientY;
+			_status.touched = true;
+
+			_status.$this.addClass('touched');
+
+		}).on('mousemove', function (e) {
+
+			if (!_status.touched) return;
+			_status.x = e.originalEvent.clientX;
+			_status.y = e.originalEvent.clientY;
+
+			this.scrollLeft += _status.sx - _status.x;
+			this.scrollTop += _status.sy - _status.y;
+
+			_status.sx = e.originalEvent.clientX;
+			_status.sy = e.originalEvent.clientY;
+
+			// console.log( _status.sx - _status.x );
+			// console.log( _status.y );
+
+		}).on('mouseup mouseleave mouseout', function (e) {
+
+			_status.x = null;
+			_status.y = null;
+			_status.sx = null;
+			_status.sy = null;
+			_status.touched = false;
+			_status.$this.removeClass('touched');
+
+		});
+
+	})();
+
+	// modals
 	$('[data-modal]').on('mousedown', function (e) {
 
 		e.preventDefault();
@@ -1164,8 +1213,7 @@ $(document).on('ready', function () {
 				state.touchStart.yPos = e.originalEvent.touches[0].clientY;
 				state.touchStart.trfX = -parseInt( DOM.$sliderHolder.css('transform').split(',')[4] );
 
-			});
-			DOM.$slider.on('touchmove', function (e) {
+			}).on('touchmove', function (e) {
 
 				if (state.touchStart.xPos) {
 
@@ -1179,9 +1227,7 @@ $(document).on('ready', function () {
 
 				}
 
-			});
-
-			DOM.$slider.on('touchend touchcancel', function (e) {
+			}).on('touchend touchcancel', function (e) {
 				if ( Math.abs(state.shiftD) > 40 ) {
 					if (state.shiftD > 0) {
 						plg.nextSlide();
