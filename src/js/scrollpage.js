@@ -460,7 +460,7 @@ var scrollPages = (function () {
 			pagesAnimation( id );
 			pagesState.currentPage = id;
 			clearTimeout( pagesState.animatedBoolTimeout );
-			history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
+			// history.pushState({id: pagesState.pages[id].id}, pagesState.pages[id].id, '#' + pagesState.pages[id].id);
 
 			setTimeout(function () {
 
